@@ -19,7 +19,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        this.saveProfile();
+//        this.saveProfile();
     }
 
     public void loadProfile() {
@@ -46,6 +46,12 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     public void onLaunchSaveClicked(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        saveProfile();
+    }
+
+    public void onLaunchExitButtonClicked(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
