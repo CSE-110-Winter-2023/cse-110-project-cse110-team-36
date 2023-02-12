@@ -23,7 +23,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void loadProfile() {
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("coordinates", MODE_PRIVATE);
 
         String latitudeString = preferences.getString("latitudeString", "");
         String longitudeString = preferences.getString("longitudeString", "");
@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void saveProfile() {
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("coordinates", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         TextView latitude = this.findViewById(R.id.latitude);
         TextView longitude = this.findViewById(R.id.longitude);

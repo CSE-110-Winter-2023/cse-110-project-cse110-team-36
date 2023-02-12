@@ -14,8 +14,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="176dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="43dp"
-        app:layout_constraintBottom_toTopOf="@+id/orientationView"
+        android:layout_marginBottom="108dp"
+        app:layout_constraintBottom_toTopOf="@+id/locationView"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,5 +55,37 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/compass"
         app:layout_constraintTop_toBottomOf="@+id/compass" />
+
+    <TextView
+        android:id="@+id/locationView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="75dp"
+        android:text="10"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/orientationView"
+        app:layout_constraintTop_toBottomOf="@+id/compass" />
+
+    <TextView
+        android:id="@+id/latView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/longView"
+        app:layout_constraintTop_toBottomOf="@+id/locationView" />
+
+    <TextView
+        android:id="@+id/longView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/latView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
