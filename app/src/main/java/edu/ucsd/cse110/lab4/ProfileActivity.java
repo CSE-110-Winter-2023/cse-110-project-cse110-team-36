@@ -2,6 +2,8 @@ package edu.ucsd.cse110.lab4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -34,21 +36,41 @@ public class ProfileActivity extends AppCompatActivity {
         longitude.setText(longitudeString);
     }
 
-    public void saveProfile() {
+    public boolean saveProfile() {
+        double lat = 0;
+        double longt = 0;
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         TextView latitude = this.findViewById(R.id.latitude);
         TextView longitude = this.findViewById(R.id.longitude);
-        editor.putString("latitudeString", latitude.getText().toString());
-        editor.putString("longitudeString", longitude.getText().toString());
+
+        // Check valid input longitude and latitude
+        if (!(latitude.getText().toString().isEmpty() ||
+                longitude.getText().toString().isEmpty())) {
+            editor.putString("latitudeString", latitude.getText().toString());
+            editor.putString("longitudeString", longitude.getText().toString());
+
+            // Convert latitude and longitude to double
+            lat = Double.parseDouble(latitude.getText().toString());
+            longt = Double.parseDouble(longitude.getText().toString());
+
+        } else {
+
+            // If invalid, profile won't be saved
+            Utilities.showAlert(this,
+                    "Value for latitude/longitude cannot be empty!");
+            return false;
+        }
         editor.apply();
+        return true;
     }
 
 
     public void onLaunchSaveClicked(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        saveProfile();
+        if (saveProfile()) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void onLaunchExitButtonClicked(View view) {
