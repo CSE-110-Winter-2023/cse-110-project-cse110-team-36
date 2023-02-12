@@ -23,6 +23,7 @@ public class LocationService implements LocationListener {
     private Activity activity;
 
     private MutableLiveData<Pair<Double, Double>> locationValue;
+    private Location realLocation;
 
     private final LocationManager locationManager;
 
@@ -38,6 +39,13 @@ public class LocationService implements LocationListener {
         this.activity = activity;
         this.locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
         this.registerLocationListener();
+    }
+
+    public float getBearing(float latitude, float longitude) {
+        Location toLocation = new Location(LocationManager.GPS_PROVIDER);
+        toLocation.setLatitude(latitude);
+        toLocation.setLongitude(longitude);
+        return realLocation.bearingTo(toLocation);
     }
 
     private void registerLocationListener() {
@@ -61,6 +69,7 @@ public class LocationService implements LocationListener {
     @Override
     public void onLocationChanged(@NonNull Location location) {
         this.locationValue.postValue(new Pair<Double, Double>(location.getLatitude(), location.getLongitude()));
+        this.realLocation = location;
     }
 
     @Override
