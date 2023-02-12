@@ -2,6 +2,7 @@ package edu.ucsd.cse110.lab4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mResultView = (TextView) findViewById(R.id.coordinateTextView);
-        imageView = findViewById(R.id.rotatingImageView1);
+        imageView = findViewById(R.id.compassImage);
         // initialize your android device sensor capabilities
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -97,10 +98,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         DegreeStart = -degree;
     }
 
+    public void onLaunchListClicked(View view) {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
 
-//    public void onLaunchListClicked(View view) {
-//        Intent intent = new Intent(this, ProfileActivity.class);
-//        startActivity(intent);
-//        finish();
-//    }
+
