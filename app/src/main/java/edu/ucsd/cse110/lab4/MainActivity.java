@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void OnCheckPermission() {
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                Toast.makeText(this, "앱 설정 웅앵 권한 설정 웅앵웅", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "You need to set permissions for app", Toast.LENGTH_LONG).show();
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_REQUEST);
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_REQUEST);
@@ -131,9 +131,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         switch (requestCode) {
             case PERMISSIONS_REQUEST:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "앱 실행 권한 설정됨", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "set the permission", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(this, "앱 실행 권한 취소됨", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "cancel the permission", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
