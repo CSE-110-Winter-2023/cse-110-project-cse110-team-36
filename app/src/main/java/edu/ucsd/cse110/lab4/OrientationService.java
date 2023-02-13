@@ -16,7 +16,7 @@ public class OrientationService implements SensorEventListener {
     private final SensorManager sensorManager;
     private float[] accelerometerReading;
     private float[] magnetometerReading;
-    private MutableLiveData<Float> azimuth;
+    MutableLiveData<Float> azimuth;
 
     public OrientationService(Activity activity) {
         this.sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
