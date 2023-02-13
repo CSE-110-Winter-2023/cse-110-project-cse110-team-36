@@ -1,8 +1,12 @@
 package edu.ucsd.cse110.lab4;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
     private SensorManager mSensorManager;
@@ -24,6 +29,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float DegreeStart = 0f;
     private ImageView compassimage;
 
+//    시작
+    int nCurrentPermission = 0;
+    static final int PERMISSIONS_REQUEST = 0x0000001;
+//     끝
     float[] mGravity;
     float[] mGeomagnetic;
 
@@ -38,8 +47,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mMagneticField = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         compassimage = (ImageView) findViewById(R.id.compassImage);
+        //    시작
+        OnCheckPermission();
     }
+    public void OnCheckPermission() {
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                Toast.makeText(this, "앱 설정 웅앵 권한 설정 웅앵웅", Toast.LENGTH_LONG).show();
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_REQUEST);
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_REQUEST);
+            }
 
+        }
+    }
+    // 끝
     protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
@@ -102,6 +124,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
         finish();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "앱 실행 권한 설정됨", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "앱 실행 권한 취소됨", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
     }
 }
 
