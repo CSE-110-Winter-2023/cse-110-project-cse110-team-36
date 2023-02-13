@@ -25,8 +25,8 @@ public class ProfileActivity extends AppCompatActivity {
     public void loadProfile() {
         SharedPreferences preferences = getSharedPreferences("coordinates", MODE_PRIVATE);
 
-        String latitudeString = preferences.getString("latitudeString", "");
-        String longitudeString = preferences.getString("longitudeString", "");
+        String latitudeString = preferences.getString("latitudeString", "0");
+        String longitudeString = preferences.getString("longitudeString", "0");
         TextView latitude = this.findViewById(R.id.latitude);
         TextView longitude = this.findViewById(R.id.longitude);
 
