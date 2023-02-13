@@ -43,15 +43,56 @@ public class sensorUnitTests {
     private MutableLiveData<Float> azimuth;
 
     @Test
-    public void test_orientation_service() {
+    public void test_set_mock_orientation_service() {
         ActivityScenario<ProfileActivity> scenario = ActivityScenario.launch(ProfileActivity.class);
         scenario.moveToState(Lifecycle.State.CREATED);
         scenario.moveToState(Lifecycle.State.STARTED);
         scenario.onActivity(activity -> {
             SensorEventListener sensorEvent = new OrientationService(activity);
+
+            // Check a dummy value
             MutableLiveData<Float> actualMultableLiveData = new MutableLiveData<>();
             ((OrientationService) sensorEvent).setMockOrientationSource(actualMultableLiveData);
             assertEquals(((OrientationService) sensorEvent).azimuth, actualMultableLiveData);
+
+            // Check a non-negative minimum MutableLiveData<Float> value (0.0)
+            actualMultableLiveData.postValue(0.0F);
+            ((OrientationService) sensorEvent).setMockOrientationSource(actualMultableLiveData);
+            assertEquals(((OrientationService) sensorEvent).azimuth, actualMultableLiveData);
+
+            // Check a positive half-way maximum MutableLiveData<Float> value (90.0)
+            actualMultableLiveData.postValue(90.0F);
+            ((OrientationService) sensorEvent).setMockOrientationSource(actualMultableLiveData);
+            assertEquals(((OrientationService) sensorEvent).azimuth, actualMultableLiveData);
+
+            // Check a positive maximum MutableLiveData<Float> value (180.0)
+            actualMultableLiveData.postValue(180.0F);
+            ((OrientationService) sensorEvent).setMockOrientationSource(actualMultableLiveData);
+            assertEquals(((OrientationService) sensorEvent).azimuth, actualMultableLiveData);
+
+            // Check a negative MutableLiveData<Float> value (-45.5)
+            actualMultableLiveData.postValue(-45.5F);
+            ((OrientationService) sensorEvent).setMockOrientationSource(actualMultableLiveData);
+            assertEquals(((OrientationService) sensorEvent).azimuth, actualMultableLiveData);
+
         });
+    }
+
+    @Test
+    public void test_constructor() {
+        ActivityScenario<ProfileActivity> scenario = ActivityScenario.launch(ProfileActivity.class);
+        scenario.moveToState(Lifecycle.State.CREATED);
+        scenario.moveToState(Lifecycle.State.STARTED);
+        scenario.onActivity(activity -> {
+            SensorEventListener sensorEvent = new OrientationService(activity);
+            //((OrientationService) sensorEvent).sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
+
+
+        });
+    }
+
+    @Test
+    public void test_() {
+        //
     }
 }
