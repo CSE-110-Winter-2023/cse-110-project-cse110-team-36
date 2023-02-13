@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
     public void loadProfile() {
         SharedPreferences preferences = getSharedPreferences("coordinates", MODE_PRIVATE);
 
-        String latitudeString = preferences.getString("latitudeString", "default");
-        String longitudeString = preferences.getString("longitudeString", "default");
+        String latitudeString = preferences.getString("latitudeString", "0");
+        String longitudeString = preferences.getString("longitudeString", "0");
         TextView latView = this.findViewById(R.id.latView);
         TextView longView = this.findViewById(R.id.longView);
 
