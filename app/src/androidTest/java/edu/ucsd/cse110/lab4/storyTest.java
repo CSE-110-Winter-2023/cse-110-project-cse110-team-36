@@ -8,6 +8,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import android.content.Intent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.view.View;
@@ -40,12 +41,13 @@ import androidx.test.rule.GrantPermissionRule;
 
 //@RunWith(RobolectricTestRunner.class)
 public class storyTest {
+    //View view;
 
     @Rule
     public GrantPermissionRule mRuntimePermissionRule = GrantPermissionRule
             .grant(android.Manifest.permission.ACCESS_FINE_LOCATION); // grant the permission
     @Test
-    public void test_user_story_main_page() {
+    public void test_main_page_to_next_page() {
         ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class);
         scenario.moveToState(Lifecycle.State.CREATED);
         scenario.moveToState(Lifecycle.State.STARTED);
@@ -65,8 +67,23 @@ public class storyTest {
             // perform click
             Button btn;
             btn = (Button) activity.findViewById(R.id.listButton);
-            btn.performClick();
+            boolean clicked = btn.performClick();
 
+            assertTrue(clicked); // assert if clicked
+
+            // launch next screen
+            Intent intent = new Intent(activity, ProfileActivity.class);
+            activity.startActivity(intent);
+
+//            intent.loadProfile();
+//            TextView lat_1  = (TextView) activity.findViewById(R.id.latitude);
+//            TextView lon_1  = (TextView) activity.findViewById(R.id.longitude);
+//
+//            lat_1.setText("0.05");
+//            lon_1.setText("-0.01");
+
+//            assertEquals("0.05", lat_1.getText().toString()); // initial long/lat
+//            assertEquals("-0.01", lon_1.getText().toString());
         });
     }
 
@@ -86,6 +103,8 @@ public class storyTest {
 
             assertEquals("0.05", lat_1.getText().toString()); // initial long/lat
             assertEquals("-0.01", lon_1.getText().toString());
+
+
 
         });
     }
