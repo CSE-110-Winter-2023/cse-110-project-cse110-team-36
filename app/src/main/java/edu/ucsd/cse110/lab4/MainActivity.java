@@ -8,6 +8,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Matrix;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             layoutParams1.circleAngle = (northRotateVal + dotRotateVal);
             label.setLayoutParams(layoutParams1);
             //redDot.setRotation(northRotateVal + dotRotateVal);
+            label.setRotation(northRotateVal + dotRotateVal);
         });
     }
 
