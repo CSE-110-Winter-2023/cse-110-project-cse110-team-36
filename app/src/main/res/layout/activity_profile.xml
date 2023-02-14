@@ -7,27 +7,29 @@
     tools:context=".ProfileActivity">
 
     <EditText
-        android:id="@+id/latitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="81dp"
-        android:ems="10"
-        android:hint="latitude"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
         android:id="@+id/longitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="longitude"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/latitude"
         app:layout_constraintTop_toBottomOf="@+id/latitude" />
+
+    <EditText
+        android:id="@+id/latitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="176dp"
+        android:ems="10"
+        android:hint="latitude"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/label"
+        app:layout_constraintTop_toBottomOf="@id/label"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/saveButton"
@@ -52,4 +54,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
+
+    <EditText
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="93dp"
+        android:ems="10"
+        android:hint="label"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
