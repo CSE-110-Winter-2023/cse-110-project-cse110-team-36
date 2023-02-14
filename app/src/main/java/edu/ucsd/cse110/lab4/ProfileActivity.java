@@ -31,11 +31,14 @@ public class ProfileActivity extends AppCompatActivity {
 
         String latitudeString = preferences.getString("latitudeString", "0");
         String longitudeString = preferences.getString("longitudeString", "0");
+        String labelString = preferences.getString("labelString", "Label");
         TextView latitude = this.findViewById(R.id.latitude);
         TextView longitude = this.findViewById(R.id.longitude);
+        TextView label = this.findViewById(R.id.label);
 
         latitude.setText(latitudeString);
         longitude.setText(longitudeString);
+        label.setText(labelString);
     }
 
     public boolean saveProfile() {
@@ -45,6 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         TextView latitude = this.findViewById(R.id.latitude);
         TextView longitude = this.findViewById(R.id.longitude);
+        TextView label = this.findViewById(R.id.label);
 
         // Check valid input longitude and latitude
         if (!(latitude.getText().toString().isEmpty()) &&
@@ -64,6 +68,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             editor.putString("latitudeString", latitude.getText().toString());
             editor.putString("longitudeString", longitude.getText().toString());
+            editor.putString("labelString", label.getText().toString());
 
 
         } else {
