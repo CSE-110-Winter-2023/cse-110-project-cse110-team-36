@@ -69,14 +69,17 @@ public class MainActivity extends AppCompatActivity {
 
         String latitudeString = preferences.getString("latitudeString", "0");
         String longitudeString = preferences.getString("longitudeString", "0");
+        String labelString = preferences.getString("labelString", "label");
         TextView latView = this.findViewById(R.id.latView);
         TextView longView = this.findViewById(R.id.longView);
+        TextView labelView = this.findViewById(R.id.labelView);
 
         latVal = Float.parseFloat(latitudeString);
         longVal = Float.parseFloat(longitudeString);
 
         latView.setText(Float.toString(latVal));
         longView.setText(Float.toString(longVal));
+        labelView.setText(labelString);
     }
 
     @Override
