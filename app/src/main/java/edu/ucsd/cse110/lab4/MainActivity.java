@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
         TextView location = findViewById(R.id.locationView);
         TextView bearing = findViewById(R.id.bearing);
         ImageView redDot = findViewById(R.id.coordDot);
+        TextView label = findViewById(R.id.labelView);
         ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) redDot.getLayoutParams();
+        ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) label.getLayoutParams();
 
         this.loadProfile();
 
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             northRotateVal = 360 - (float) (Math.toDegrees(angle));
             layoutParams.circleAngle = (northRotateVal + dotRotateVal);
             redDot.setLayoutParams(layoutParams);
+            layoutParams1.circleAngle = (northRotateVal + dotRotateVal);
+            label.setLayoutParams(layoutParams1);
         });
 
         locationService.getLocation().observe(this, coords -> {
@@ -60,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
             dotRotateVal = locationService.getBearing(latVal, longVal);
             layoutParams.circleAngle = (northRotateVal + dotRotateVal);
             redDot.setLayoutParams(layoutParams);
+            layoutParams1.circleAngle = (northRotateVal + dotRotateVal);
+            label.setLayoutParams(layoutParams1);
             //redDot.setRotation(northRotateVal + dotRotateVal);
         });
     }
