@@ -67,14 +67,12 @@ public class MainActivity extends AppCompatActivity {
         latVal = Float.parseFloat(latitudeString);
         longVal = Float.parseFloat(longitudeString);
 
-        // Start of the new code
         ImageView coordDot = findViewById(R.id.coordDot);
         if (latVal == 0.0 || longVal == 0.0) {
             coordDot.setVisibility(View.INVISIBLE);
         } else {
             coordDot.setVisibility(View.VISIBLE);
         }
-// End of the new code
     }
 
     @Override
