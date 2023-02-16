@@ -2,6 +2,10 @@ package edu.ucsd.cse110.lab4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,10 +27,10 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void loadProfile() {
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("coordinates", MODE_PRIVATE);
 
-        String latitudeString = preferences.getString("latitudeString", "");
-        String longitudeString = preferences.getString("longitudeString", "");
+        String latitudeString = preferences.getString("latitudeString", "0");
+        String longitudeString = preferences.getString("longitudeString", "0");
         TextView latitude = this.findViewById(R.id.latitude);
         TextView longitude = this.findViewById(R.id.longitude);
 
@@ -34,21 +38,73 @@ public class ProfileActivity extends AppCompatActivity {
         longitude.setText(longitudeString);
     }
 
-    public void saveProfile() {
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+    public boolean saveProfile() {
+        double lat = 0;
+        double longt = 0;
+        SharedPreferences preferences = getSharedPreferences("coordinates", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         TextView latitude = this.findViewById(R.id.latitude);
         TextView longitude = this.findViewById(R.id.longitude);
-        editor.putString("latitudeString", latitude.getText().toString());
-        editor.putString("longitudeString", longitude.getText().toString());
+
+        // Check valid input longitude and latitude
+        if (!(latitude.getText().toString().isEmpty()) &&
+                !(longitude.getText().toString().isEmpty())) {
+
+
+            // Convert latitude and longitude to double
+            try {
+                lat = Double.parseDouble(latitude.getText().toString());
+                longt = Double.parseDouble(longitude.getText().toString());
+            } catch (Exception e) {
+                this.showAlert(this, "Please enter a valid number.");
+                latitude.setText("0");
+                longitude.setText("0");
+                return false;
+            }
+
+            editor.putString("latitudeString", latitude.getText().toString());
+            editor.putString("longitudeString", longitude.getText().toString());
+
+
+        } else {
+
+            // If invalid, profile won't be saved
+            this.showAlert(this,
+                    "Value for latitude/longitude cannot be empty!");
+            latitude.setText("0");
+            longitude.setText("0");
+            return false;
+        }
+
         editor.apply();
+        return true;
+
+        //editor.putString("latitudeString", latitude.getText().toString());
+        //editor.putString("longitudeString", longitude.getText().toString());
+
+    }
+
+    public static void showAlert(Activity activity, String message) {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(activity);
+
+        alertBuilder
+                .setTitle("Alert!")
+                .setMessage(message)
+                .setPositiveButton("Ok",(dialog, id) -> {
+                    dialog.cancel();
+                })
+                .setCancelable(true);
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
     }
 
 
     public void onLaunchSaveClicked(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        saveProfile();
+        if (saveProfile()) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void onLaunchExitButtonClicked(View view) {
