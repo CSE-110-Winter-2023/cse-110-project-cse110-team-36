@@ -12,10 +12,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="108dp"
-        app:layout_constraintBottom_toTopOf="@+id/locationView"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,9 +27,11 @@
             android:layout_height="0dp"
             android:rotation="0"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4"
             app:srcCompat="@drawable/compass_base" />
 
         <ImageView
@@ -37,7 +39,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:rotation="0"
-            app:layout_constraintCircle="@+id/compass_base"
+            app:layout_constraintCircle="@+id/compass"
             app:layout_constraintCircleAngle="0"
             app:layout_constraintCircleRadius="130dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,6 +58,10 @@
             app:layout_constraintCircleRadius="155dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/compass_base" />
+            app:layout_constraintCircleRadius="140dp"
+            app:srcCompat="@drawable/coord_dot"
+            tools:layout_editor_absoluteX="174dp"
+            tools:layout_editor_absoluteY="174dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
@@ -68,57 +74,5 @@
         android:text="list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/orientationView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="114dp"
-        android:text="10"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/compass"
-        app:layout_constraintTop_toBottomOf="@+id/compass" />
-
-    <TextView
-        android:id="@+id/locationView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="75dp"
-        android:text="10"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/orientationView"
-        app:layout_constraintTop_toBottomOf="@+id/compass" />
-
-    <TextView
-        android:id="@+id/latView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/longView"
-        app:layout_constraintTop_toBottomOf="@+id/locationView" />
-
-    <TextView
-        android:id="@+id/longView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/latView" />
-
-    <TextView
-        android:id="@+id/bearing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="95dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
