@@ -34,6 +34,11 @@ public class LocationService implements LocationListener {
         return instance;
     }
 
+    /**
+     * Constructor for LocationService
+     *
+     * @param activity Context needed to initiate LocationManager
+     */
     public LocationService(Activity activity) {
         this.locationValue = new MutableLiveData<>();
         this.activity = activity;
