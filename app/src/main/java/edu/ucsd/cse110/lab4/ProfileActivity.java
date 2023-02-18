@@ -31,14 +31,17 @@ public class ProfileActivity extends AppCompatActivity {
 
         String latitudeString = preferences.getString("latitudeString", "0");
         String longitudeString = preferences.getString("longitudeString", "0");
-        String labelString = preferences.getString("labelString", "Label");
+        String labelString = preferences.getString("labelString", "");
+        String orientationString = preferences.getString("mockOrientation", "");
         TextView latitude = this.findViewById(R.id.latitude);
         TextView longitude = this.findViewById(R.id.longitude);
         TextView label = this.findViewById(R.id.label);
+        TextView mockOrientation = this.findViewById(R.id.editMockOrientation);
 
         latitude.setText(latitudeString);
         longitude.setText(longitudeString);
         label.setText(labelString);
+        mockOrientation.setText(orientationString);
     }
 
     public boolean saveProfile() {
@@ -49,6 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
         TextView latitude = this.findViewById(R.id.latitude);
         TextView longitude = this.findViewById(R.id.longitude);
         TextView label = this.findViewById(R.id.label);
+        TextView mockOrientation = this.findViewById(R.id.editMockOrientation);
 
         // Check valid input longitude and latitude
         if (!(latitude.getText().toString().isEmpty()) &&
@@ -69,6 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
             editor.putString("latitudeString", latitude.getText().toString());
             editor.putString("longitudeString", longitude.getText().toString());
             editor.putString("labelString", label.getText().toString());
+            editor.putString("mockOrientation", mockOrientation.getText().toString());
 
 
         } else {

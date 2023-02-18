@@ -3,6 +3,7 @@ package edu.ucsd.cse110.lab4;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.MutableLiveData;
 
 import android.Manifest;
 import android.content.Context;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     float longVal;
     float northRotateVal;
     float dotRotateVal;
+    boolean mockedOrientation = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +63,14 @@ public class MainActivity extends AppCompatActivity {
         this.loadProfile();
 
         orientationService.getOrientation().observe(this, angle -> {
-            compass.setRotation(360 - (float) (Math.toDegrees(angle)));
-            northRotateVal = 360 - (float) (Math.toDegrees(angle));
+            if (!mockedOrientation) {
+                compass.setRotation(360 - (float) (Math.toDegrees(angle)));
+                northRotateVal = 360 - (float) (Math.toDegrees(angle));
+            } else {
+                compass.setRotation(angle);
+                northRotateVal = (angle);
+            }
+
             layoutParams.circleAngle = (northRotateVal + dotRotateVal);
             redDot.setLayoutParams(layoutParams);
             layoutParams1.circleAngle = (northRotateVal + dotRotateVal);
@@ -89,6 +97,17 @@ public class MainActivity extends AppCompatActivity {
 
         String labelString = preferences.getString("labelString", "label");
         TextView labelView = this.findViewById(R.id.labelView);
+
+        String mockOrientationString = preferences.getString("mockOrientation", "");
+        if (!mockOrientationString.equals("")) {
+            Float mockOrientationNum = Float.parseFloat(mockOrientationString);
+            MutableLiveData<Float> mockOrientation = new MutableLiveData<Float>();
+            if ((mockOrientationNum < 360) && (mockOrientationNum > -1)) {
+                mockOrientation.postValue(mockOrientationNum);
+                orientationService.setMockOrientationSource(mockOrientation);
+                mockedOrientation = true;
+            }
+        }
 
         latVal = Float.parseFloat(latitudeString);
         longVal = Float.parseFloat(longitudeString);
