@@ -5,6 +5,7 @@ package edu.ucsd.cse110.lab4;
 import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ActivityScenario;
 
+import org.junit.Rule;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -29,72 +30,43 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.rule.GrantPermissionRule;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import java.util.List;
 
 import android.hardware.SensorEventListener;
 
 @RunWith(RobolectricTestRunner.class)
 public class unitTests {
+    @Rule
+    public ActivityScenarioRule<MainActivity> mActivityScenarioRule =
+            new ActivityScenarioRule<>(MainActivity.class);
 
-    private static OrientationService instance;
-
-    //private final SensorManager sensorManager;
-    private float[] accelerometerReading;
-    private float[] magnetometerReading;
-    private MutableLiveData<Float> azimuth;
-
+    @Rule
+    public GrantPermissionRule mGrantPermissionRule =
+            GrantPermissionRule.grant(
+                    "android.permission.ACCESS_FINE_LOCATION");
+    
     @Test
-    public void test_set_mock_orientation_service() {
+    public void test_singleton() {
         ActivityScenario<ProfileActivity> scenario = ActivityScenario.launch(ProfileActivity.class);
         scenario.moveToState(Lifecycle.State.CREATED);
         scenario.moveToState(Lifecycle.State.STARTED);
         scenario.onActivity(activity -> {
-            SensorEventListener sensorEvent = new OrientationService(activity);
 
-            // Check a dummy value
-            MutableLiveData<Float> actualMultableLiveData = new MutableLiveData<>();
-            ((OrientationService) sensorEvent).setMockOrientationSource(actualMultableLiveData);
-            assertEquals(((OrientationService) sensorEvent).azimuth, actualMultableLiveData);
+            LocationService instance = null;
+            assertEquals(null, instance);
 
-            // Check a non-negative minimum MutableLiveData<Float> value (0.0)
-            actualMultableLiveData.postValue(0.0F);
-            ((OrientationService) sensorEvent).setMockOrientationSource(actualMultableLiveData);
-            assertEquals(((OrientationService) sensorEvent).azimuth, actualMultableLiveData);
+            instance = new LocationService(activity);
+            assertNotEquals(null, instance);
+            assertTrue(instance instanceof LocationService);
 
-            // Check a positive half-way maximum MutableLiveData<Float> value (90.0)
-            actualMultableLiveData.postValue(90.0F);
-            ((OrientationService) sensorEvent).setMockOrientationSource(actualMultableLiveData);
-            assertEquals(((OrientationService) sensorEvent).azimuth, actualMultableLiveData);
-
-            // Check a positive maximum MutableLiveData<Float> value (180.0)
-            actualMultableLiveData.postValue(180.0F);
-            ((OrientationService) sensorEvent).setMockOrientationSource(actualMultableLiveData);
-            assertEquals(((OrientationService) sensorEvent).azimuth, actualMultableLiveData);
-
-            // Check a negative MutableLiveData<Float> value (-45.5)
-            actualMultableLiveData.postValue(-45.5F);
-            ((OrientationService) sensorEvent).setMockOrientationSource(actualMultableLiveData);
-            assertEquals(((OrientationService) sensorEvent).azimuth, actualMultableLiveData);
-
+            LocationService old_instance = instance;
+            instance = instance.singleton(activity);
+            assertNotEquals(null, instance);
+            assertTrue(instance instanceof LocationService);
+            assertNotEquals(old_instance, instance);
         });
-    }
-
-    @Test
-    public void test_constructor() {
-        ActivityScenario<ProfileActivity> scenario = ActivityScenario.launch(ProfileActivity.class);
-        scenario.moveToState(Lifecycle.State.CREATED);
-        scenario.moveToState(Lifecycle.State.STARTED);
-        scenario.onActivity(activity -> {
-            SensorEventListener sensorEvent = new OrientationService(activity);
-            //((OrientationService) sensorEvent).sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
-
-
-        });
-    }
-
-    @Test
-    public void test_() {
-        //
     }
 }
