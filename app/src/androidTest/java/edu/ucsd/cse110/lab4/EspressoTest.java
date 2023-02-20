@@ -31,9 +31,9 @@ public class EspressoTest {
             new ActivityScenarioRule<>(MainActivity.class);
 
     @Rule
-    public GrantPermissionRule mGrantPermissionRule =
-            GrantPermissionRule.grant(
-                    "android.permission.ACCESS_FINE_LOCATION");
+    public GrantPermissionRule mRuntimePermissionRule = GrantPermissionRule
+            .grant(android.Manifest.permission.ACCESS_FINE_LOCATION);
+
 
     @Test
     public void espressoTest() {
