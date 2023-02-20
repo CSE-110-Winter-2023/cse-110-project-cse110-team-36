@@ -36,7 +36,6 @@ public class testLocationService {
                     "android.permission.ACCESS_FINE_LOCATION");
 
     private static final String PROVIDER_NAME = "provider_name";
-    //private static final String UNKNOWN_PROVIDER_NAME = "unknown_provider_name";
     @Mock LocationListener ListenerMock;// = mock(LocationListener.class);
 
     @Test
@@ -145,24 +144,6 @@ public class testLocationService {
             instance.setMockOrientationSource(mockDataSource);
             assertEquals(mockDataSource, instance.locationValue);
             assertEquals(pair, instance.locationValue.getValue());
-        });
-    }
-
-    @Test
-    public void testOnLocationChanged() { // test
-        ActivityScenario<ProfileActivity> scenario = ActivityScenario.launch(ProfileActivity.class);
-        scenario.moveToState(Lifecycle.State.CREATED);
-        scenario.moveToState(Lifecycle.State.STARTED);
-        scenario.onActivity(activity -> {
-//            Pair<Double, Double> pair = new Pair<Double, Double>(-0.1, 0.2);
-//            MutableLiveData<Pair<Double, Double>> mockDataSource = new MutableLiveData<>(pair);
-//            LocationService instance = new LocationService(activity);
-//            Location location = new Location();
-
-
-//            public void onLocationChanged(@NonNull Location location) {
-//                this.locationValue.postValue(new Pair<Double, Double>(location.getLatitude(), location.getLongitude()));
-//                this.realLocation = location;
         });
     }
 

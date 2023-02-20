@@ -38,7 +38,7 @@ import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class UILabelTest {
+public class UITests {
     @Rule
     public ActivityScenarioRule<ProfileActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(ProfileActivity.class);
