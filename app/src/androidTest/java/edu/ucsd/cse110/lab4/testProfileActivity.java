@@ -12,10 +12,21 @@ import org.junit.runner.RunWith;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.GrantPermissionRule;
 
 @RunWith(AndroidJUnit4.class)
-public class ExampleUnitTest {
+public class testProfileActivity {
+    @Rule
+    public ActivityScenarioRule<MainActivity> mActivityScenarioRule =
+            new ActivityScenarioRule<>(MainActivity.class);
+
+    @Rule
+    public GrantPermissionRule mGrantPermissionRule =
+            GrantPermissionRule.grant(
+                    "android.permission.ACCESS_FINE_LOCATION");
+
     @Test
     public void testLoadProfile() {
         ActivityScenario<ProfileActivity> scenario = ActivityScenario.launch(ProfileActivity.class);
