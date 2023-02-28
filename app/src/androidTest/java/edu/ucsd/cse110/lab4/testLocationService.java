@@ -37,7 +37,6 @@ public class testLocationService {
 
     private static final String PROVIDER_NAME = "provider_name";
     //private static final String UNKNOWN_PROVIDER_NAME = "unknown_provider_name";
-    @Mock LocationListener ListenerMock;// = mock(LocationListener.class);
 
     @Test
     public void testSingleton() {
