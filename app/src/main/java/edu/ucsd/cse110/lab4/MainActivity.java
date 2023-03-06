@@ -6,22 +6,19 @@ import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.MutableLiveData;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Matrix;
-import android.hardware.SensorManager;
-import android.media.Image;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import java.lang.Math;
-import java.lang.invoke.ConstantCallSite;
-import java.util.prefs.Preferences;
+import java.util.UUID;
 
 /*
  * Main page, displays a compass that points north, as well as a red dot that points towards user inputted values.
@@ -43,6 +40,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //추가
+        // Generate UUID and store it in SharedPreferences
+        String uuid = UUID.randomUUID().toString();
+        SharedPreferences prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+        prefs.edit().putString("MY_UUID", uuid).apply();
+
+        // Set the UUID in a TextView
+        TextView textView = findViewById(R.id.uid);
+        textView.setText("UID : " + uuid);
+
+        //끝
 
         //get values from profileActivity
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);

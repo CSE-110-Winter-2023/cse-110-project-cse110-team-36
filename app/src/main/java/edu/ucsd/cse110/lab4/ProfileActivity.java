@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.UUID;
+
 /*
  * Input page. User inputs coordinates and label to appear on mainActivity
  * (also can set a mock orientation for testing purposes)
@@ -23,6 +25,17 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         this.loadProfile();
+
+        //시작
+        // Retrieve UUID from SharedPreferences
+        SharedPreferences prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+        String uuid = prefs.getString("MY_UUID", null);
+
+        // Set the UUID in a TextView
+        TextView textView = findViewById(R.id.uid);
+        textView.setText(uuid);
+        //끝
+
     }
 
     @Override
