@@ -19,6 +19,8 @@ import androidx.test.rule.GrantPermissionRule;
 
 import android.content.SharedPreferences;
 
+import edu.ucsd.cse110.lab4.activity.MainActivity;
+
 @RunWith(AndroidJUnit4.class)
 public class testMainActivity {
     @Rule

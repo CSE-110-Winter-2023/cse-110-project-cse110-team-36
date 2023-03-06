@@ -32,6 +32,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import edu.ucsd.cse110.lab4.activity.ProfileActivity;
+
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)

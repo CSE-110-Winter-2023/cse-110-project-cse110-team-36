@@ -1,4 +1,4 @@
-package edu.ucsd.cse110.lab4;
+package edu.ucsd.cse110.lab4.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -6,29 +6,26 @@ import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.MutableLiveData;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Matrix;
-import android.hardware.SensorManager;
-import android.media.Image;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.lang.Math;
-import java.lang.invoke.ConstantCallSite;
-import java.util.prefs.Preferences;
+
+import edu.ucsd.cse110.lab4.LocationService;
+import edu.ucsd.cse110.lab4.OrientationService;
+import edu.ucsd.cse110.lab4.R;
 
 /*
  * Main page, displays a compass that points north, as well as a red dot that points towards user inputted values.
  */
 public class MainActivity extends AppCompatActivity {
 
-    OrientationService orientationService;
+    public OrientationService orientationService;
     LocationService locationService;
     float latVal;
     float longVal;

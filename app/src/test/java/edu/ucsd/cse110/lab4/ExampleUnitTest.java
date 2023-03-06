@@ -3,7 +3,6 @@ package edu.ucsd.cse110.lab4;
 import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ActivityScenario;
 
-import org.junit.Rule;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import edu.ucsd.cse110.lab4.activity.ProfileActivity;
 
 @RunWith(AndroidJUnit4.class)
 public class ExampleUnitTest {

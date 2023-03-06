@@ -1,16 +1,17 @@
-package edu.ucsd.cse110.lab4;
+package edu.ucsd.cse110.lab4.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import edu.ucsd.cse110.lab4.R;
+import edu.ucsd.cse110.lab4.activity.MainActivity;
 
 /*
  * Input page. User inputs coordinates and label to appear on mainActivity
