@@ -22,6 +22,7 @@ public abstract class UserDao {
     @Query("SELECT * FROM `users` ORDER BY `uniqueID`")
     public abstract LiveData<List<User>> getAll();
 
+
     @Delete
     public abstract int delete(User user);
 }

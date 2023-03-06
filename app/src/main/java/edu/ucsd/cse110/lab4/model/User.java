@@ -72,11 +72,25 @@ public class User {
     @SerializedName(value = "updated_at", alternate = "updatedAt")
     public long updatedAt = 0;
 
+    /**
+     * List of friends
+     */
+    public List<User> friends;
+
     @Ignore
     public User(@NotNull String uniqueID, String label, @NotNull String latitude,
-                @NotNull String longitude, long updatedAt) {
+                @NotNull String longitude, long updatedAt, List<User> friends) {
         this.uniqueID = uniqueID;
         this.label = label;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.updatedAt = updatedAt;
+        this.friends = friends;
+    }
+
+    public User(@NotNull String uniqueID, @NotNull String latitude, @NotNull String longitude,
+                long updatedAt) {
+        this.uniqueID = uniqueID;
         this.latitude = latitude;
         this.longitude = longitude;
         this.updatedAt = updatedAt;
