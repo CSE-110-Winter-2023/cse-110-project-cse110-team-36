@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Social Compass</string>
     <string name="is_accessed">false</string>
-    <string name="uuid">UUID</string>
+    <string name="uid">UID</string>
+    <string name="add">Add</string>
+    <string name="name">Name</string>
+    <string name="exit">Exit</string>
 </resources>
