@@ -75,7 +75,7 @@ public class User {
     /**
      * List of friends
      */
-    public List<User> friends;
+//    public List<User> friends;
 
     @Ignore
     public User(@NotNull String uniqueID, String label, @NotNull String latitude,
@@ -85,7 +85,7 @@ public class User {
         this.latitude = latitude;
         this.longitude = longitude;
         this.updatedAt = updatedAt;
-        this.friends = friends;
+//        this.friends = friends;
     }
 
     public User(@NotNull String uniqueID, @NotNull String latitude, @NotNull String longitude,
