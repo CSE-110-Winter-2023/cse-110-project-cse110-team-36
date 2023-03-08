@@ -58,8 +58,7 @@ public class UserRepository {
     }
 
     public void upsertLocal(User user) {
-        //note.updatedAt = System.currentTimeMillis();
-        //user.updatedAt = Instant.now().getEpochSecond();
+        user.updatedAt = Instant.now().getEpochSecond();
         dao.upsert(user);
     }
 
