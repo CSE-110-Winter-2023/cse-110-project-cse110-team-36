@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, UserActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, UserActivity.class);
+//        startActivity(intent);
 
         //get values from profileActivity
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -57,10 +57,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //get permissions
-        if ((ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-                && (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 200);
-        }
+        getPermissions();
 
         orientationService = new OrientationService(this);
         locationService = new LocationService(this);
@@ -73,7 +70,27 @@ public class MainActivity extends AppCompatActivity {
         //load values from profileActivity
         this.loadProfile();
 
-        //update compass by orientation
+        this.orientationUpdate(compass, layoutParams, redDot, label, layoutParams1);
+
+        this.locationUpdate(layoutParams, layoutParams1, redDot, label);
+
+    }
+
+    private void locationUpdate(ConstraintLayout.LayoutParams layoutParams, ConstraintLayout.LayoutParams layoutParams1, ImageView redDot, TextView label) {
+        locationService.getLocation().observe(this, coords -> {
+            //get "bearing" - angle between phone's location and destination
+            dotRotateVal = locationService.getBearing(latVal, longVal);
+            //update red dot's rotation by north's rotation + bearing
+            layoutParams.circleAngle = (northRotateVal + dotRotateVal);
+            redDot.setLayoutParams(layoutParams);
+            layoutParams1.circleAngle = (northRotateVal + dotRotateVal);
+            //update label's rotation same as red dot's
+            label.setLayoutParams(layoutParams1);
+            label.setRotation(northRotateVal + dotRotateVal);
+        });
+    }
+
+    private void orientationUpdate(ImageView compass, ConstraintLayout.LayoutParams layoutParams, ImageView redDot, TextView label, ConstraintLayout.LayoutParams layoutParams1) {
         orientationService.getOrientation().observe(this, angle -> {
             //if orientation hasn't been mocked, use real orientation, otherwise, use mocked orientation
             if (!mockedOrientation) {
@@ -91,21 +108,15 @@ public class MainActivity extends AppCompatActivity {
             //rotate label same as dot
             label.setLayoutParams(layoutParams1);
         });
-
-        //update compass by location
-        locationService.getLocation().observe(this, coords -> {
-            //get "bearing" - angle between phone's location and destination
-            dotRotateVal = locationService.getBearing(latVal, longVal);
-            //update red dot's rotation by north's rotation + bearing
-            layoutParams.circleAngle = (northRotateVal + dotRotateVal);
-            redDot.setLayoutParams(layoutParams);
-            layoutParams1.circleAngle = (northRotateVal + dotRotateVal);
-            //update label's rotation same as red dot's
-            label.setLayoutParams(layoutParams1);
-            label.setRotation(northRotateVal + dotRotateVal);
-        });
-
     }
+
+    private void getPermissions() {
+        if ((ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                && (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 200);
+        }
+    }
+
 
     /*
      * Loads values from profileActivity
