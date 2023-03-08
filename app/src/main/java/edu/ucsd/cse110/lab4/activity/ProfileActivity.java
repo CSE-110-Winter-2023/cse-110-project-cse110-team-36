@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import edu.ucsd.cse110.lab4.MainPageActivity;
 import edu.ucsd.cse110.lab4.R;
 import edu.ucsd.cse110.lab4.activity.MainActivity;
 
@@ -141,6 +142,11 @@ public class ProfileActivity extends AppCompatActivity {
      */
     public void onLaunchExitButtonClicked(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    public void onLaunchMainButtonClicked(View view) {
+        Intent intent = new Intent(this, MainPageActivity.class);
         startActivity(intent);
         finish();
     }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.lang.Math;
 
 import edu.ucsd.cse110.lab4.LocationService;
+import edu.ucsd.cse110.lab4.MainPageActivity;
 import edu.ucsd.cse110.lab4.OrientationService;
 import edu.ucsd.cse110.lab4.R;
 
@@ -156,6 +157,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onLaunchListClicked(View view) {
         Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    public void onLaunchMainClicked(View view) {
+        Intent intent = new Intent(this, MainPageActivity.class);
         startActivity(intent);
         finish();
     }

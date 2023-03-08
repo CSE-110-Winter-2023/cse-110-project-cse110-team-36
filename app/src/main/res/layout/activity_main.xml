@@ -75,4 +75,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onLaunchMainClicked"
+        android:text="main"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="38dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
