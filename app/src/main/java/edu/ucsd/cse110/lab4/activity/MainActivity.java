@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = new Intent(this, UserActivity.class);
+        startActivity(intent);
+
+
         //get values from profileActivity
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isAccessed = sharedPreferences.getBoolean(getString(R.string.is_accessed), false);
@@ -155,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
      * Begins profileActivity when "list" is clicked
      */
     public void onLaunchListClicked(View view) {
-        Intent intent = new Intent(this, ProfileActivity.class);
+        Intent intent = new Intent(this, UserActivity.class);
         startActivity(intent);
         finish();
     }

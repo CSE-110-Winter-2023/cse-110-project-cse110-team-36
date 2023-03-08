@@ -78,22 +78,21 @@ public class User {
 //    public List<User> friends;
 
     @Ignore
-    public User(@NotNull String uniqueID, String label, @NotNull String latitude,
-                @NotNull String longitude, long updatedAt, List<User> friends) {
-        this.uniqueID = uniqueID;
-        this.label = label;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.updatedAt = updatedAt;
-//        this.friends = friends;
-    }
+//    public User(@NotNull String uniqueID, String label, @NotNull String latitude,
+//                @NotNull String longitude, long updatedAt, List<User> friends) {
+//        this.uniqueID = uniqueID;
+//        this.label = label;
+//        this.latitude = latitude;
+//        this.longitude = longitude;
+//        this.updatedAt = 0;
+////        this.friends = friends;
+//    }
 
-    public User(@NotNull String uniqueID, @NotNull String latitude, @NotNull String longitude,
-                long updatedAt) {
+    public User(@NotNull String uniqueID, @NotNull String latitude, @NotNull String longitude) {
         this.uniqueID = uniqueID;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.updatedAt = updatedAt;
+        this.updatedAt = 0;
     }
 
     public User() {
