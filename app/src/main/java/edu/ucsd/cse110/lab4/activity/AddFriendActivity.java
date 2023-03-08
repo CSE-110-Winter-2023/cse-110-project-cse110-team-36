@@ -34,7 +34,7 @@ public class AddFriendActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_addfriend);
 
         // This one is for testing purpose
 //        List<User> users = User.loadJSON(this, "db_demo.json");

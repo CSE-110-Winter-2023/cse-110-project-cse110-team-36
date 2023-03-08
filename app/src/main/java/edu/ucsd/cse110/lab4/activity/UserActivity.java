@@ -27,7 +27,7 @@ public class UserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_info);
+        setContentView(R.layout.activity_user);
 
         labelView = findViewById(R.id.user_info_label);
         latView = findViewById(R.id.user_info_latitude);
