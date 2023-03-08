@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, UserActivity.class);
+        Intent intent = new Intent(this, AddFriendActivity.class);
         startActivity(intent);
 
 
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
      * Begins profileActivity when "list" is clicked
      */
     public void onLaunchListClicked(View view) {
-        Intent intent = new Intent(this, UserActivity.class);
+        Intent intent = new Intent(this, AddFriendActivity.class);
         startActivity(intent);
         finish();
     }

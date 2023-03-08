@@ -103,6 +103,7 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
+    @Ignore
     public User() {
     }
 
