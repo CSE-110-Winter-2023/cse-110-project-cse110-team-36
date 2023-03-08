@@ -13,6 +13,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -36,9 +37,9 @@ public class UserActivity extends AppCompatActivity {
 //        List<User> users = User.loadJSON(this, "db_demo.json");
 //        Log.d("UserActivity", users.toString());
 
-        var viewModel = setupViewModel();
-        var userViewModel = setupUserViewModel();
-        var adapter = setupAdapter(viewModel);
+        ListViewModel viewModel = setupViewModel();
+        UserViewModel userViewModel = setupUserViewModel();
+        UsersAdapter adapter = setupAdapter(viewModel);
 
         setupViews(viewModel, adapter, userViewModel);
     }
@@ -70,13 +71,13 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void setupAddButton(ListViewModel viewModel, UserViewModel userViewModel) {
-        var addBtn = findViewById(R.id.user_add_btn);
+        Button addBtn = findViewById(R.id.user_add_btn);
         addBtn.setOnClickListener((View v) -> {
-            var input = (EditText) findViewById(R.id.user_input_uid);
+            EditText input = (EditText) findViewById(R.id.user_input_uid);
             assert input != null;
-            var uid = input.getText().toString();
+            String uid = input.getText().toString();
             //Log.d("UID", uid);
-            var user = viewModel.getOrCreateUser(uid);
+            LiveData<User> user = viewModel.getOrCreateUser(uid);
 //            Log.d("Add", user.getValue().uniqueID);
             user.observe(this, userEntity -> {
                 user.removeObservers(this);
@@ -94,7 +95,7 @@ public class UserActivity extends AppCompatActivity {
     }
 
     void onAddButtonClicked(UserViewModel viewModel, LiveData<User> user) {
-        var localUser = user.getValue();
+        User localUser = user.getValue();
 //        Log.d("onAddButtonClicked", localUser.toString());
         viewModel.add(localUser);
     }

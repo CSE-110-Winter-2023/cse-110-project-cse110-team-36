@@ -11,6 +11,7 @@ import java.util.List;
 
 import edu.ucsd.cse110.lab4.model.User;
 import edu.ucsd.cse110.lab4.model.UserAPI;
+import edu.ucsd.cse110.lab4.model.UserDao;
 import edu.ucsd.cse110.lab4.model.UserDatabase;
 import edu.ucsd.cse110.lab4.model.UserRepository;
 
@@ -21,8 +22,8 @@ public class ListViewModel extends AndroidViewModel {
     public ListViewModel(@NonNull Application application) {
         super(application);
         android.content.Context context = application.getApplicationContext();
-        var db = UserDatabase.provide(context);
-        var dao = db.getDao();
+        UserDatabase db = UserDatabase.provide(context);
+        UserDao dao = db.getDao();
         this.repo = new UserRepository(dao);
     }
 
@@ -35,7 +36,7 @@ public class ListViewModel extends AndroidViewModel {
 
     public LiveData<User> getOrCreateUser(String public_code) {
         if (!repo.existsLocal(public_code)) {
-            var user = new  User(public_code, "0", "0");
+            User user = new  User(public_code, "0", "0");
             Log.d("getOrCreate", user.toString());
             repo.upsertLocal(user);
         }

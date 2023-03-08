@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, UserActivity.class);
         startActivity(intent);
 
-
         //get values from profileActivity
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isAccessed = sharedPreferences.getBoolean(getString(R.string.is_accessed), false);
