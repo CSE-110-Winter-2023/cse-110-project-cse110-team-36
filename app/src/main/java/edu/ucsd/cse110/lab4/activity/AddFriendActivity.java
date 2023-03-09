@@ -10,11 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.lab4.R;
 import edu.ucsd.cse110.lab4.model.User;
@@ -26,10 +29,6 @@ public class AddFriendActivity extends AppCompatActivity {
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     public RecyclerView recyclerView;
-//    private LiveData<User> liveUser;
-//    private UserDao dao;
-//    private TextView labelView;
-//    private TextView uidView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class AddFriendActivity extends AppCompatActivity {
         var userViewModel = setupUserViewModel();
         var adapter = setupAdapter(viewModel);
 
-        setupViews(viewModel, adapter, userViewModel);
+        setupViews(viewModel, adapter);
     }
 
     private ListViewModel setupViewModel() {
@@ -64,17 +63,17 @@ public class AddFriendActivity extends AppCompatActivity {
         return adapter;
     }
 
-    private void onLabelClicked(User note, UserViewModel viewModel) {
-    }
 
-    private void setupViews(ListViewModel viewModel, UsersAdapter adapter,
-                            UserViewModel userViewModel) {
+    private void setupViews(ListViewModel viewModel, UsersAdapter adapter) {
         setupRecycler(adapter);
-        setupAddButton(viewModel, userViewModel);
+        setupAddButton(viewModel);
     }
 
-    private void setupAddButton(ListViewModel viewModel, UserViewModel userViewModel) {
+    private void setupAddButton(ListViewModel viewModel) {
         var addBtn = findViewById(R.id.user_add_btn);
+//        TextView labelView = findViewById(R.id.user_item_label);
+//        TextView uidView = findViewById(R.id.user_item_label);
+
         addBtn.setOnClickListener((View v) -> {
             var input = (EditText) findViewById(R.id.user_input_uid);
             assert input != null;
@@ -84,11 +83,13 @@ public class AddFriendActivity extends AppCompatActivity {
 //            Log.d("Add", user.getValue().uniqueID);
             user.observe(this, userEntity -> {
                 user.removeObservers(this);
+//                labelView.setText(.label);
+//                uidView.setText(user.getValue().uniqueID);
                 //var liveUser = userViewModel.getUser(uid);
                 //onAddButtonClicked(userViewModel, userEntity);
 //               Log.d("After Add", userEntity.toString());
-                var intent = UserActivity.intentFor(this, userEntity);
-                startActivity(intent);
+//                var intent = UserActivity.intentFor(this, userEntity);
+//                startActivity(intent);
 //                labelView = findViewById(R.id.user_item_label);
 //                uidView = findViewById(R.id.user_item_uid);
 //                liveUser = userViewModel.getUser(uid);
@@ -110,17 +111,17 @@ public class AddFriendActivity extends AppCompatActivity {
 //        uidView.setText(user.uniqueID);
 //    }
 
-    void onAddButtonClicked(UserViewModel viewModel, User user) {
-//        Log.d("onAddButtonClicked", localUser.toString());
-        LiveData<User> userLiveData = viewModel.getUser(user.uniqueID);
-        //userLiveData.observe(this, this::onUserChanged);
-        TextView labelView = findViewById(R.id.user_item_label);
-        TextView uidView = findViewById(R.id.user_item_uid);
-        labelView.setText("Label");
-        //String uid = user.uniqueID;
-        //uidView.setText(uid);
-        Log.d("Add", user.toString());
-    }
+//    void onAddButtonClicked(UserViewModel viewModel, User user) {
+////        Log.d("onAddButtonClicked", localUser.toString());
+//        LiveData<User> userLiveData = viewModel.getUser(user.uniqueID);
+//        //userLiveData.observe(this, this::onUserChanged);
+//        TextView labelView = findViewById(R.id.user_item_label);
+//        TextView uidView = findViewById(R.id.user_item_uid);
+//        labelView.setText("Label");
+//        //String uid = user.uniqueID;
+//        //uidView.setText(uid);
+//        Log.d("Add", user.toString());
+//    }
 
     @SuppressLint("RestrictedApi")
     private void setupRecycler(UsersAdapter adapter) {
@@ -134,6 +135,12 @@ public class AddFriendActivity extends AppCompatActivity {
         // Delete the user
         Log.d("UsersAdapter", "Deleted user " + user.uniqueID);
         viewModel.delete(user);
+    }
+
+    public void onExitClicked (View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 

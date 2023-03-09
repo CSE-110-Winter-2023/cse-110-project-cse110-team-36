@@ -21,7 +21,7 @@ public abstract class UserDatabase extends RoomDatabase {
     }
 
     private static UserDatabase make(Context context) {
-        return Room.databaseBuilder(context, UserDatabase.class, "users.db")
+        return Room.databaseBuilder(context, UserDatabase.class, "user_db.db")
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
