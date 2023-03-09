@@ -84,7 +84,8 @@ public class OrientationService implements SensorEventListener {
         float[] i = new float[9];
 
         //check if orientation calculates properly
-        boolean success = SensorManager.getRotationMatrix(r, i, accelerometerReading, magnetometerReading);
+        boolean success = SensorManager.getRotationMatrix(r, i,
+                accelerometerReading, magnetometerReading);
 
         if (success) {
             //get and set orientation of device

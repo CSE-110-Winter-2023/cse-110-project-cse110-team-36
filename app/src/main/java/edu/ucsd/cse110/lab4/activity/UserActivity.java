@@ -25,11 +25,7 @@ public class UserActivity extends AppCompatActivity {
     private TextView labelView;
     private TextView latView;
     private TextView longView;
-
-
-
-
-
+    
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +36,11 @@ public class UserActivity extends AppCompatActivity {
         latView = findViewById(R.id.user_info_latitude);
         longView = findViewById(R.id.user_info_longitude);
 
-
         var intent = getIntent();
         var uid = intent.getStringExtra("user_uniqueId");
 
         var viewModel = setupViewModel();
         user = viewModel.getUser(uid);
-
-        //setupToolbar(uid);
-
         user.observe(this, this::onUserChanged);
     }
 
@@ -64,18 +56,6 @@ public class UserActivity extends AppCompatActivity {
     private UserViewModel setupViewModel() {
         return new ViewModelProvider(this).get(UserViewModel.class);
     }
-
-//    private void setupToolbar(String uid) {
-//
-//        // Get the action bar (note this is type ActionBar, not Toolbar).
-//        var actionBar = getSupportActionBar();
-//        assert actionBar != null;
-//        actionBar.setTitle(uid);
-//
-//        // Enable the home button, and set it to be an "up" (back) button.
-//        actionBar.setDisplayShowHomeEnabled(true);
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//    }
 
     public static Intent intentFor(Context context, User user) {
         var intent = new Intent(context, UserActivity.class);

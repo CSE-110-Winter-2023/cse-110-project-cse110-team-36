@@ -21,7 +21,8 @@ import edu.ucsd.cse110.lab4.OrientationService;
 import edu.ucsd.cse110.lab4.R;
 
 /*
- * Main page, displays a compass that points north, as well as a red dot that points towards user inputted values.
+ * Main page, displays a compass that points north,
+ * as well as a red dot that points towards user inputted values.
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //get values from profileActivity
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
         boolean isAccessed = sharedPreferences.getBoolean(getString(R.string.is_accessed), false);
 
         //on first start up, go to profileActivity
@@ -58,9 +60,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //get permissions
-        if ((ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-                && (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 200);
+        if ((ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                && (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 200);
         }
 
         orientationService = new OrientationService(this);
@@ -68,15 +73,18 @@ public class MainActivity extends AppCompatActivity {
         ImageView compass = findViewById(R.id.compass_base);
         ImageView redDot = findViewById(R.id.coordDot);
         TextView label = findViewById(R.id.labelView);
-        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) redDot.getLayoutParams();
-        ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) label.getLayoutParams();
+        ConstraintLayout.LayoutParams layoutParams =
+                (ConstraintLayout.LayoutParams) redDot.getLayoutParams();
+        ConstraintLayout.LayoutParams layoutParams1 =
+                (ConstraintLayout.LayoutParams) label.getLayoutParams();
 
         //load values from profileActivity
         this.loadProfile();
 
         //update compass by orientation
         orientationService.getOrientation().observe(this, angle -> {
-            //if orientation hasn't been mocked, use real orientation, otherwise, use mocked orientation
+            //if orientation hasn't been mocked, use real orientation,
+            // otherwise, use mocked orientation
             if (!mockedOrientation) {
                 //update north's rotation by orientation
                 compass.setRotation(360 - (float) (Math.toDegrees(angle)));
@@ -112,26 +120,26 @@ public class MainActivity extends AppCompatActivity {
      * Loads values from profileActivity
      */
     public void loadProfile() {
-        //get shared values with profileActivity
+        // get shared values with profileActivity
         SharedPreferences preferences = getSharedPreferences("coordinates", MODE_PRIVATE);
 
-        //get entered lat/long
+        // get entered lat/long
         String latitudeString = preferences.getString("latitudeString", "0");
         String longitudeString = preferences.getString("longitudeString", "0");
 
-        //get entered label
+        // get entered label
         String labelString = preferences.getString("labelString", "label");
         TextView labelView = this.findViewById(R.id.labelView);
 
-        //get entered orientation
+        // get entered orientation
         String mockOrientationString = preferences.getString("mockOrientation", "");
 
-        //check orientation validity
-        //if no orientation entered, do not mock orientation
+        // check orientation validity
+        // if no orientation entered, do not mock orientation
         if (!mockOrientationString.equals("")) {
             Float mockOrientationNum = Float.parseFloat(mockOrientationString);
             MutableLiveData<Float> mockOrientation = new MutableLiveData<Float>();
-            //if invalid orientation, do not mock orientation
+            // if invalid orientation, do not mock orientation
             if ((mockOrientationNum < 360) && (mockOrientationNum > -1)) {
                 mockOrientation.postValue(mockOrientationNum);
                 orientationService.setMockOrientationSource(mockOrientation);

@@ -37,7 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void loadProfile() {
         SharedPreferences preferences = getSharedPreferences("coordinates", MODE_PRIVATE);
 
-        //load from preferences
+        // load from preferences
         String latitudeString = preferences.getString("latitudeString", "0");
         String longitudeString = preferences.getString("longitudeString", "0");
         String labelString = preferences.getString("labelString", "");
@@ -48,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
         TextView label = this.findViewById(R.id.label);
         TextView mockOrientation = this.findViewById(R.id.editMockOrientation);
 
-        //set values into textViews
+        // set values into textViews
         latitude.setText(latitudeString);
         longitude.setText(longitudeString);
         label.setText(labelString);
@@ -86,7 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
                 return false;
             }
 
-            //save values to preferences
+            // save values to preferences
             editor.putString("latitudeString", latitude.getText().toString());
             editor.putString("longitudeString", longitude.getText().toString());
             editor.putString("labelString", label.getText().toString());

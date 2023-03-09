@@ -18,12 +18,8 @@ import edu.ucsd.cse110.lab4.model.User;
 public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
 
     private List<User> users = Collections.emptyList();
-   // private Consumer<User> onLabelClickedHandler;
-    private Consumer<User> onDeleteClickedHandler;
 
-//    public void setOnLabelClickedHandler(Consumer<User> onLabelClicked) {
-//        this.onLabelClickedHandler = onLabelClicked;
-//    }
+    private Consumer<User> onDeleteClickedHandler;
 
     public void setOnUserDeleteClickListener(Consumer<User> onDeleteClicked) {
         this.onDeleteClickedHandler = onDeleteClicked;

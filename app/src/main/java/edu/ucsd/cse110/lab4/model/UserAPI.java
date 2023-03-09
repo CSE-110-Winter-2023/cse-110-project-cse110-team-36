@@ -50,7 +50,8 @@ public class UserAPI {
         String public_code = user.uniqueID;
         public_code = public_code.replace(" ", "%20");
         String json = "{\"label\":\"" + user.label + "\",\"latitude\":\"" + user.latitude +
-                "\",\"longitude\":\"" + user.longitude + "\",\"updated_at\":\"" + Instant.now().getEpochSecond()
+                "\",\"longitude\":\"" + user.longitude + "\",\"updated_at\":\""
+                + Instant.now().getEpochSecond()
                 +"\"}";
 
         MediaType JSON = MediaType.get("application/json; charset=utf-8");

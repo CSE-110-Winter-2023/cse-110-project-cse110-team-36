@@ -18,7 +18,6 @@ public class UserViewModel extends AndroidViewModel {
     private LiveData<List<User>> users;
     private final UserRepository repo;
 
-
     public UserViewModel(@NonNull Application application) {
         super(application);
         var context = application.getApplicationContext();
