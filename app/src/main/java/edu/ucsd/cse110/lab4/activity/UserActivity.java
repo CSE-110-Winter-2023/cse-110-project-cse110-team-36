@@ -1,92 +1,118 @@
 package edu.ucsd.cse110.lab4.activity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-
-import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.lab4.R;
 import edu.ucsd.cse110.lab4.model.User;
-import edu.ucsd.cse110.lab4.model.UserDao;
+import edu.ucsd.cse110.lab4.view.UsersAdapter;
+import edu.ucsd.cse110.lab4.viewmodel.ListViewModel;
 import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
 public class UserActivity extends AppCompatActivity {
-    private LiveData<User> user;
-    private UserDao dao;
-    private TextView labelView;
-    private TextView latView;
-    private TextView longView;
 
+    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    public RecyclerView recyclerView;
 
-
-
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        labelView = findViewById(R.id.user_info_label);
-        latView = findViewById(R.id.user_info_latitude);
-        longView = findViewById(R.id.user_info_longitude);
+        // This one is for testing purpose
+//        List<User> users = User.loadJSON(this, "db_demo.json");
+//        Log.d("UserActivity", users.toString());
 
+        ListViewModel viewModel = setupViewModel();
+        UserViewModel userViewModel = setupUserViewModel();
+        UsersAdapter adapter = setupAdapter(viewModel);
 
-        var intent = getIntent();
-        var uid = intent.getStringExtra("user_uniqueId");
-
-        var viewModel = setupViewModel();
-        user = viewModel.getUser(uid);
-
-        //setupToolbar(uid);
-
-        user.observe(this, this::onUserChanged);
+        setupViews(viewModel, adapter, userViewModel);
     }
 
-    private void onUserChanged(User user) {
-        labelView.setText(user.label);
-        latView.setText(user.latitude);
-        longView.setText(user.longitude);
-        Log.d("Label", labelView.getText().toString());
-        Log.d("Lat", latView.getText().toString());
-        Log.d("Long", longView.getText().toString());
+    private ListViewModel setupViewModel() {
+        return new ViewModelProvider(this).get(ListViewModel.class);
     }
 
-    private UserViewModel setupViewModel() {
+    private UserViewModel setupUserViewModel() {
         return new ViewModelProvider(this).get(UserViewModel.class);
     }
 
-//    private void setupToolbar(String uid) {
-//
-//        // Get the action bar (note this is type ActionBar, not Toolbar).
-//        var actionBar = getSupportActionBar();
-//        assert actionBar != null;
-//        actionBar.setTitle(uid);
-//
-//        // Enable the home button, and set it to be an "up" (back) button.
-//        actionBar.setDisplayShowHomeEnabled(true);
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//    }
-
-    public static Intent intentFor(Context context, User user) {
-        var intent = new Intent(context, UserActivity.class);
-        intent.putExtra("user_uniqueId", user.uniqueID);
-        return intent;
+    @NonNull
+    private UsersAdapter setupAdapter(ListViewModel viewModel) {
+        UsersAdapter adapter = new UsersAdapter();
+        adapter.setHasStableIds(true);
+        //adapter.setOnLabelClickedHandler(note -> onLabelClicked(note, viewModel));
+        adapter.setOnUserDeleteClickListener(note -> onUserDeleteClicked(note, viewModel));
+        return adapter;
     }
 
-    public void onExitClicked (View view) {
-        Intent intent = new Intent(this, AddFriendActivity.class);
-        startActivity(intent);
-        finish();
+    private void onLabelClicked(User note, UserViewModel viewModel) {
     }
+
+    private void setupViews(ListViewModel viewModel, UsersAdapter adapter,
+                            UserViewModel userViewModel) {
+        setupRecycler(adapter);
+        setupAddButton(viewModel, userViewModel);
+    }
+
+    private void setupAddButton(ListViewModel viewModel, UserViewModel userViewModel) {
+        Button addBtn = findViewById(R.id.user_add_btn);
+        addBtn.setOnClickListener((View v) -> {
+            EditText input = (EditText) findViewById(R.id.user_input_uid);
+            assert input != null;
+            String uid = input.getText().toString();
+            //Log.d("UID", uid);
+            LiveData<User> user = viewModel.getOrCreateUser(uid);
+//            Log.d("Add", user.getValue().uniqueID);
+            user.observe(this, userEntity -> {
+                user.removeObservers(this);
+            });
+//            var liveUser = userViewModel.getUser(uid);
+//            Log.d("Live User", liveUser.toString());
+//            onAddButtonClicked(userViewModel, liveUser);
+//             user.observe(this, this::onUserChanged);
+        });
+
+    }
+
+    private void onUserChanged(User user) {
+
+    }
+
+    void onAddButtonClicked(UserViewModel viewModel, LiveData<User> user) {
+        User localUser = user.getValue();
+//        Log.d("onAddButtonClicked", localUser.toString());
+        viewModel.add(localUser);
+    }
+
+    @SuppressLint("RestrictedApi")
+    private void setupRecycler(UsersAdapter adapter) {
+        recyclerView = findViewById(R.id.recycle_user);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void onUserDeleteClicked(User user, ListViewModel viewModel) {
+        // Delete the user
+        Log.d("UsersAdapter", "Deleted user " + user.uniqueID);
+        viewModel.delete(user);
+    }
+
 
 }
