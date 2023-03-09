@@ -3,7 +3,9 @@ package edu.ucsd.cse110.lab4.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
 import android.content.Intent;
@@ -11,14 +13,22 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.service.autofill.UserData;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.lang.Math;
+import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.lab4.LocationService;
 import edu.ucsd.cse110.lab4.OrientationService;
 import edu.ucsd.cse110.lab4.R;
+import edu.ucsd.cse110.lab4.model.User;
+import edu.ucsd.cse110.lab4.model.UserDao;
+import edu.ucsd.cse110.lab4.model.UserDao_Impl;
+import edu.ucsd.cse110.lab4.model.UserDatabase;
+import edu.ucsd.cse110.lab4.model.UserRepository;
+import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
 /*
  * Main page, displays a compass that points north, as well as a red dot that points towards user inputted values.
@@ -32,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     float northRotateVal;
     float dotRotateVal;
     boolean mockedOrientation = false;
+    String label;
 
     /*
      * Updates compass according to orientation, location, and entered values on profileActivity
@@ -43,21 +54,17 @@ public class MainActivity extends AppCompatActivity {
 
 //        Intent intent = new Intent(this, UserActivity.class);
 //        startActivity(intent);
-
-        //get values from profileActivity
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isAccessed = sharedPreferences.getBoolean(getString(R.string.is_accessed), false);
-
-        //on first start up, go to profileActivity
-        if (!isAccessed) {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean(getString(R.string.is_accessed), Boolean.TRUE);
-            editor.commit();
-            startActivity(new Intent(this, ProfileActivity.class));
+        UserViewModel viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        LiveData<User> user = viewModel.getUser("test37");
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
-        //get permissions
-        getPermissions();
+        user.observe(this, this::onUserChanged);
+
+
 
         orientationService = new OrientationService(this);
         locationService = new LocationService(this);
@@ -67,12 +74,48 @@ public class MainActivity extends AppCompatActivity {
         ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) redDot.getLayoutParams();
         ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) label.getLayoutParams();
 
-        //load values from profileActivity
-        this.loadProfile();
-
         this.orientationUpdate(compass, layoutParams, redDot, label, layoutParams1);
 
         this.locationUpdate(layoutParams, layoutParams1, redDot, label);
+
+//        Float userLat = Float.parseFloat(user.latitude);
+//        Float userLong = Float.parseFloat(user.longitude);
+//        String userLabel = user.label;
+//
+//        latVal = userLat;
+//        longVal = userLong;
+//        label = userLabel;
+
+//        //get values from profileActivity
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        boolean isAccessed = sharedPreferences.getBoolean(getString(R.string.is_accessed), false);
+
+        //on first start up, go to profileActivity
+//        if (!isAccessed) {
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putBoolean(getString(R.string.is_accessed), Boolean.TRUE);
+//            editor.commit();
+//            startActivity(new Intent(this, ProfileActivity.class));
+//        }
+
+        //get permissions
+        getPermissions();
+
+
+
+//        //load values from profileActivity
+//        this.loadProfile();
+
+
+
+
+
+    }
+
+    private void onUserChanged(User user) {
+        latVal = Float.parseFloat(user.latitude);
+        longVal = Float.parseFloat(user.longitude);
+        label = user.label;
 
     }
 

@@ -31,9 +31,7 @@ public class UserRepository {
         Observer<User> updateFromRemote = theirUser -> {
             if (theirUser == null) return;
             User ourUser = user.getValue();
-            if (ourUser == null || ourUser.updatedAt < theirUser.updatedAt)  {
-                upsertLocal(theirUser);
-            }
+            upsertLocal(theirUser);
         };
 
         // If we get a local update, pass it on.

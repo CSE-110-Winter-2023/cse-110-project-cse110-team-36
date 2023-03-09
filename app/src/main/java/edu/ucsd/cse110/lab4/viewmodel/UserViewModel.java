@@ -31,7 +31,7 @@ public class UserViewModel extends AndroidViewModel {
 
     public LiveData<User> getUser(String public_code) {
         if (user == null) {
-            user = repo.getSynced(public_code);
+            user = repo.getRemote(public_code);
         }
         return user;
     }
