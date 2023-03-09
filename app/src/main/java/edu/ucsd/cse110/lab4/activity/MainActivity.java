@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //get permissions
+        getPermissions();
 
 //        Intent intent = new Intent(this, UserActivity.class);
 //        startActivity(intent);
@@ -98,8 +100,6 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(new Intent(this, ProfileActivity.class));
 //        }
 
-        //get permissions
-        getPermissions();
 
 
 
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
      * Begins profileActivity when "list" is clicked
      */
     public void onLaunchListClicked(View view) {
-        Intent intent = new Intent(this, UserActivity.class);
+        Intent intent = new Intent(this, AddFriendActivity.class);
         startActivity(intent);
         finish();
     }

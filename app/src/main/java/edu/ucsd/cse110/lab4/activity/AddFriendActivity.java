@@ -88,8 +88,8 @@ public class AddFriendActivity extends AppCompatActivity {
                 //var liveUser = userViewModel.getUser(uid);
                 //onAddButtonClicked(userViewModel, userEntity);
 //               Log.d("After Add", userEntity.toString());
-                var intent = UserActivity.intentFor(this, userEntity);
-                startActivity(intent);
+//                var intent = UserActivity.intentFor(this, userEntity);
+//                startActivity(intent);
 //                labelView = findViewById(R.id.user_item_label);
 //                uidView = findViewById(R.id.user_item_uid);
 //                liveUser = userViewModel.getUser(uid);
