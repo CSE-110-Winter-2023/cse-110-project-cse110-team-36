@@ -21,6 +21,9 @@
             android:name=".activity.AddFriendActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.CompassActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.ProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait">
