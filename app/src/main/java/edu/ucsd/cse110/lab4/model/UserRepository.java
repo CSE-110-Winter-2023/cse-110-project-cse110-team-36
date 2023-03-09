@@ -29,11 +29,11 @@ public class UserRepository {
         MediatorLiveData<User> user = new MediatorLiveData<User>();
 
         Observer<User> updateFromRemote = theirUser -> {
-            if (theirUser == null) return;
-            User ourUser = user.getValue();
-            if (ourUser == null || ourUser.updatedAt < theirUser.updatedAt)  {
+//            if (theirUser == null) return;
+              User ourUser = user.getValue();
+              if (ourUser == null)  {
                 upsertLocal(theirUser);
-            }
+              }
         };
 
         // If we get a local update, pass it on.

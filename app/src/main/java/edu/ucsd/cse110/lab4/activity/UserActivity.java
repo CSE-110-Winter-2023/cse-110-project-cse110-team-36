@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+
+import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.lab4.R;
 import edu.ucsd.cse110.lab4.model.User;
@@ -24,6 +28,9 @@ public class UserActivity extends AppCompatActivity {
 
 
 
+
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +40,14 @@ public class UserActivity extends AppCompatActivity {
         latView = findViewById(R.id.user_info_latitude);
         longView = findViewById(R.id.user_info_longitude);
 
+
         var intent = getIntent();
         var uid = intent.getStringExtra("user_uniqueId");
 
         var viewModel = setupViewModel();
         user = viewModel.getUser(uid);
 
-        setupToolbar(uid);
+        //setupToolbar(uid);
 
         user.observe(this, this::onUserChanged);
     }
@@ -57,21 +65,28 @@ public class UserActivity extends AppCompatActivity {
         return new ViewModelProvider(this).get(UserViewModel.class);
     }
 
-    private void setupToolbar(String uid) {
-
-        // Get the action bar (note this is type ActionBar, not Toolbar).
-        var actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setTitle(uid);
-
-        // Enable the home button, and set it to be an "up" (back) button.
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-    }
+//    private void setupToolbar(String uid) {
+//
+//        // Get the action bar (note this is type ActionBar, not Toolbar).
+//        var actionBar = getSupportActionBar();
+//        assert actionBar != null;
+//        actionBar.setTitle(uid);
+//
+//        // Enable the home button, and set it to be an "up" (back) button.
+//        actionBar.setDisplayShowHomeEnabled(true);
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+//    }
 
     public static Intent intentFor(Context context, User user) {
         var intent = new Intent(context, UserActivity.class);
         intent.putExtra("user_uniqueId", user.uniqueID);
         return intent;
     }
+
+    public void onExitClicked (View view) {
+        Intent intent = new Intent(this, AddFriendActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }
