@@ -61,4 +61,23 @@ public class UserDatabaseTest {
         assertEquals(user1.uniqueID, getUser1.uniqueID);
     }
 
+    @Test
+    public void testGetAll() {
+        User user1 = new User("test-db", "-41", "-10");
+        dao.upsert(user1);
+
+        LiveData<User> getUser1 = dao.get(user1.uniqueID);
+
+        assertEquals(user1.uniqueID, getUser1.uniqueID);
+    }
+
+    @Test
+    public void testGetAll() {
+        User user1 = new User("test-db", "-41", "-10");
+        dao.upsert(user1);
+
+        LiveData<User> getUser1 = dao.get(user1.uniqueID);
+
+        assertEquals(user1.uniqueID, getUser1.uniqueID);
+    }
 }
