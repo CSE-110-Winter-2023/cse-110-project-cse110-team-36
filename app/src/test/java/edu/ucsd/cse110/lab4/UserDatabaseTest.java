@@ -1,9 +1,11 @@
 package edu.ucsd.cse110.lab4;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -47,6 +49,16 @@ public class UserDatabaseTest {
         long id2 = dao.upsert(user2);
 
         assertNotEquals(id1, id2);
+    }
+
+    @Test
+    public void testGet() {
+        User user1 = new User("test-db", "-41", "-10");
+        dao.upsert(user1);
+
+        LiveData<User> getUser1 = dao.get(user1.uniqueID);
+
+        assertEquals(user1.uniqueID, getUser1.uniqueID);
     }
 
 }
