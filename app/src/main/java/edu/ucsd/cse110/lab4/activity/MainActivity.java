@@ -42,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
     float northRotateVal;
     float dotRotateVal;
     boolean mockedOrientation = false;
-    String label;
+    String userlabel;
+    String UID;
+    LiveData<User> user;
+    UserViewModel viewModel;
 
     /*
      * Updates compass according to orientation, location, and entered values on profileActivity
@@ -51,11 +54,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        UID = "test";
+
+        getPermissions();
 
 //        Intent intent = new Intent(this, UserActivity.class);
 //        startActivity(intent);
-        UserViewModel viewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        LiveData<User> user = viewModel.getUser("test37");
+        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        user = viewModel.getUser(UID);
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
@@ -99,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
         //get permissions
-        getPermissions();
+
 
 
 
@@ -115,7 +121,9 @@ public class MainActivity extends AppCompatActivity {
     private void onUserChanged(User user) {
         latVal = Float.parseFloat(user.latitude);
         longVal = Float.parseFloat(user.longitude);
-        label = user.label;
+        userlabel = user.label;
+        TextView labelView = this.findViewById(R.id.labelView);
+        labelView.setText(userlabel);
 
     }
 
@@ -195,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         latVal = Float.parseFloat(latitudeString);
         longVal = Float.parseFloat(longitudeString);
 
-        labelView.setText(labelString);
+
     }
 
     /*
@@ -215,5 +223,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, UserActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void onLaunchViewClicked(View view) {
+        TextView UIDView = this.findViewById(R.id.TextViewUID);
+        UID = UIDView.getText().toString();
     }
 }
