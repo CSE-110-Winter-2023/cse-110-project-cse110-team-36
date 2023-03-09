@@ -34,7 +34,7 @@ import edu.ucsd.cse110.lab4.R;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class EspressoTest {
+public class EspressoTestUS2 {
 
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityScenarioRule =
@@ -46,7 +46,7 @@ public class EspressoTest {
                     "android.permission.ACCESS_FINE_LOCATION");
 
     @Test
-    public void espressoTest() {
+    public void espressoTestUS2() {
         ViewInteraction textView = onView(
                 allOf(withId(R.id.labelView), withText("TextView"),
                         withParent(allOf(withId(R.id.compass),
@@ -54,12 +54,19 @@ public class EspressoTest {
                         isDisplayed()));
         textView.check(matches(withText("TextView")));
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.labelView), withText("TextView"),
+        ViewInteraction imageView = onView(
+                allOf(withId(R.id.coordDot),
                         withParent(allOf(withId(R.id.compass),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
-        textView2.check(matches(withText("TextView")));
+        imageView.check(matches(isDisplayed()));
+
+        ViewInteraction imageView2 = onView(
+                allOf(withId(R.id.coordDot),
+                        withParent(allOf(withId(R.id.compass),
+                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
+                        isDisplayed()));
+        imageView2.check(matches(isDisplayed()));
 
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.listButton), withText("ADD FRIEND"),
@@ -79,37 +86,7 @@ public class EspressoTest {
                                         0),
                                 1),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("test"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.user_input_uid), withText("test"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatEditText2.perform(click());
-
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.user_input_uid), withText("test"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatEditText3.perform(replaceText("test37"));
-
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.user_input_uid), withText("test37"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatEditText4.perform(closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("test37"), closeSoftKeyboard());
 
         ViewInteraction materialButton2 = onView(
                 allOf(withId(R.id.user_add_btn), withText("Add"),
@@ -122,16 +99,6 @@ public class EspressoTest {
         materialButton2.perform(click());
 
         ViewInteraction materialButton3 = onView(
-                allOf(withId(R.id.user_add_btn), withText("Add"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        materialButton3.perform(click());
-
-        ViewInteraction materialButton4 = onView(
                 allOf(withId(R.id.user_exit_btn), withText("Exit"),
                         childAtPosition(
                                 childAtPosition(
@@ -139,7 +106,67 @@ public class EspressoTest {
                                         0),
                                 3),
                         isDisplayed()));
+        materialButton3.perform(click());
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.labelView), withText("TextView"),
+                        withParent(allOf(withId(R.id.compass),
+                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
+                        isDisplayed()));
+        textView2.check(matches(withText("TextView")));
+
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.labelView), withText("TextView"),
+                        withParent(allOf(withId(R.id.compass),
+                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
+                        isDisplayed()));
+        textView3.check(matches(withText("TextView")));
+
+        ViewInteraction materialButton4 = onView(
+                allOf(withId(R.id.listButton), withText("ADD FRIEND"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
+                        isDisplayed()));
         materialButton4.perform(click());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.user_input_uid),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
+                        isDisplayed()));
+        appCompatEditText2.perform(replaceText("friend2"), closeSoftKeyboard());
+
+        ViewInteraction materialButton5 = onView(
+                allOf(withId(R.id.user_add_btn), withText("Add"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                2),
+                        isDisplayed()));
+        materialButton5.perform(click());
+
+        ViewInteraction materialButton6 = onView(
+                allOf(withId(R.id.user_exit_btn), withText("Exit"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                3),
+                        isDisplayed()));
+        materialButton6.perform(click());
+
+        ViewInteraction viewGroup = onView(
+                allOf(withParent(allOf(withId(android.R.id.content),
+                                withParent(withId(androidx.appcompat.R.id.decor_content_parent)))),
+                        isDisplayed()));
+        viewGroup.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
