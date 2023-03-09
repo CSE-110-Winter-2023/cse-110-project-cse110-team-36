@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UID = "test";
+        UID = "test36";
 
         getPermissions();
 
@@ -133,6 +133,15 @@ public class MainActivity extends AppCompatActivity {
             dotRotateVal = locationService.getBearing(latVal, longVal);
             //update red dot's rotation by north's rotation + bearing
             layoutParams.circleAngle = (northRotateVal + dotRotateVal);
+            //CALCULATE DISTANCE FROM CENTER (make separate method)
+            float distance = locationService.getDistance(latVal,longVal);
+            //100 miles in meters
+            if (distance > 160934) {
+                distance = 160934;
+            }
+            float distanceFrac = distance / 160934;
+            layoutParams.circleRadius = (int)((distanceFrac) * 350);
+            //end calc distance
             redDot.setLayoutParams(layoutParams);
             layoutParams1.circleAngle = (northRotateVal + dotRotateVal);
             //update label's rotation same as red dot's
