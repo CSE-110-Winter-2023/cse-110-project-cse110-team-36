@@ -216,4 +216,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    public void onLaunchMyInfoClicked(View view) {
+        Intent intent = new Intent(this, MyInfoActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

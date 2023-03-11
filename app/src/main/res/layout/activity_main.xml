@@ -58,10 +58,10 @@
             app:layout_constraintCircleRadius="155dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/compass_base" />
-            app:layout_constraintCircleRadius="140dp"
-            app:srcCompat="@drawable/coord_dot"
-            tools:layout_editor_absoluteX="174dp"
-            tools:layout_editor_absoluteY="174dp" />
+        app:layout_constraintCircleRadius="140dp"
+        app:srcCompat="@drawable/coord_dot"
+        tools:layout_editor_absoluteX="174dp"
+        tools:layout_editor_absoluteY="174dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
@@ -73,6 +73,18 @@
         android:onClick="onLaunchListClicked"
         android:text="ADD FRIEND"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/myinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:onClick="onLaunchMyInfoClicked"
+        android:text="MY INFO"
+        app:layout_constraintEnd_toStartOf="@+id/listButton"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

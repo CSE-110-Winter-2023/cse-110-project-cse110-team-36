@@ -79,7 +79,7 @@ public class EspressoTestUS2 {
         materialButton.perform(click());
 
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.user_input_uid),
+                allOf(withId(R.id.user_input_name),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -99,7 +99,7 @@ public class EspressoTestUS2 {
         materialButton2.perform(click());
 
         ViewInteraction materialButton3 = onView(
-                allOf(withId(R.id.user_exit_btn), withText("Exit"),
+                allOf(withId(R.id.user_clear_btn), withText("Exit"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -133,7 +133,7 @@ public class EspressoTestUS2 {
         materialButton4.perform(click());
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.user_input_uid),
+                allOf(withId(R.id.user_input_name),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -153,7 +153,7 @@ public class EspressoTestUS2 {
         materialButton5.perform(click());
 
         ViewInteraction materialButton6 = onView(
-                allOf(withId(R.id.user_exit_btn), withText("Exit"),
+                allOf(withId(R.id.user_clear_btn), withText("Exit"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),

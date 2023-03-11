@@ -4,27 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AddFriendActivity">
+    tools:context=".activity.MyInfoActivity">
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_user"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layoutManager="LinearLayoutManager"
         app:layout_constraintVertical_bias="0.0" />
-
 
     <EditText
         android:id="@+id/user_input_name"
         android:layout_width="280dp"
         android:layout_height="56dp"
         android:autofillHints=""
-        android:hint="@string/uid"
+        android:hint="NAME"
         android:inputType="text"
         android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="@+id/recycle_user"
@@ -50,21 +50,13 @@
         android:id="@+id/user_clear_btn"
         android:layout_width="118dp"
         android:layout_height="52dp"
-        android:onClick="onExitClicked"
-        android:text="@string/exit"
+        android:onClick="onClearClicked"
+        android:text="clear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.774"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.917" />
-
-    <TextView
-        android:id="@+id/uid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="294dp"
-        tools:layout_editor_absoluteY="40dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

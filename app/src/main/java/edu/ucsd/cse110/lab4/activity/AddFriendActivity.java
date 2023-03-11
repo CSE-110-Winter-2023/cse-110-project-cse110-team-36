@@ -3,7 +3,6 @@ package edu.ucsd.cse110.lab4.activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,9 +14,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.lab4.R;
 import edu.ucsd.cse110.lab4.model.User;
@@ -75,7 +71,7 @@ public class AddFriendActivity extends AppCompatActivity {
 //        TextView uidView = findViewById(R.id.user_item_label);
 
         addBtn.setOnClickListener((View v) -> {
-            var input = (EditText) findViewById(R.id.user_input_uid);
+            var input = (EditText) findViewById(R.id.user_input_name);
             assert input != null;
             var uid = input.getText().toString();
             //Log.d("UID", uid);
