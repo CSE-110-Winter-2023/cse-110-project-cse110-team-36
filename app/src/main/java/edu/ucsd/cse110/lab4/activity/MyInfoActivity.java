@@ -2,6 +2,7 @@ package edu.ucsd.cse110.lab4.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +52,7 @@ public class MyInfoActivity extends AppCompatActivity {
         userInput.setText("");
     }
     public void onAddClicked (View view) {
+//        Log.d("MyInfoActivity", "onAddClicked called");
         EditText userInput = findViewById(R.id.user_input_name);
         String name = userInput.getText().toString();
 
@@ -62,7 +64,7 @@ public class MyInfoActivity extends AppCompatActivity {
 
         // pass the name and uid as extras in the intent
         intent.putExtra("name", name);
-        intent.putExtra("uid", uid);
+//        intent.putExtra("uid", uid);
 
         // start the new activity
         startActivity(intent);
