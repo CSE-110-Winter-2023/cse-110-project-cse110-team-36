@@ -132,7 +132,7 @@ public class EspressoTestUS1 {
         materialButton3.perform(click());
 
         ViewInteraction materialButton4 = onView(
-                allOf(withId(R.id.user_clear_btn), withText("Exit"),
+                allOf(withId(R.id.user_exit_btn), withText("Exit"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),

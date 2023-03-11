@@ -4,23 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AddFriendActivity">
+    tools:context=".activity.DisplayUserActivity">
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_user"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layoutManager="LinearLayoutManager"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0" >
 
+    </androidx.recyclerview.widget.RecyclerView>
 
     <EditText
         android:id="@+id/user_input_name"
+        android:layout_width="280dp"
+        android:layout_height="56dp"
+        android:autofillHints=""
+        android:hint="NAME"
+        android:inputType="text"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@+id/recycle_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.485" />
+
+    <EditText
+        android:id="@+id/user_uid"
         android:layout_width="280dp"
         android:layout_height="56dp"
         android:autofillHints=""
@@ -31,20 +48,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.825" />
+        app:layout_constraintTop_toBottomOf="@+id/user_input_name"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/user_add_btn"
-        android:layout_width="118dp"
+        android:id="@+id/edit_button"
+        android:layout_width="110dp"
         android:layout_height="52dp"
-        android:text="@string/add"
+        android:text="EDIT"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.221"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.917" />
+        app:layout_constraintTop_toBottomOf="@+id/user_uid" />
 
     <Button
         android:id="@+id/user_exit_btn"
@@ -54,17 +69,9 @@
         android:text="@string/exit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.774"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.917" />
-
-    <TextView
-        android:id="@+id/uid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="294dp"
-        tools:layout_editor_absoluteY="40dp" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_button"
+        app:layout_constraintVertical_bias="0.461" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
