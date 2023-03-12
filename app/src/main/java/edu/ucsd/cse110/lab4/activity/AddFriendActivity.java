@@ -40,7 +40,6 @@ public class AddFriendActivity extends AppCompatActivity {
 //        Log.d("UserActivity", users.toString());
 
         var viewModel = setupViewModel();
-        var userViewModel = setupUserViewModel();
         var adapter = setupAdapter(viewModel);
 
         setupViews(viewModel, adapter);
@@ -60,6 +59,7 @@ public class AddFriendActivity extends AppCompatActivity {
         adapter.setHasStableIds(true);
         //adapter.setOnLabelClickedHandler(note -> onLabelClicked(note, viewModel));
         adapter.setOnUserDeleteClickListener(note -> onUserDeleteClicked(note, viewModel));
+        viewModel.getUsers().observe(this, adapter::setUsers);
         return adapter;
     }
 
