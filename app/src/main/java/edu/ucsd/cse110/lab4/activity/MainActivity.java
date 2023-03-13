@@ -1,5 +1,7 @@
 package edu.ucsd.cse110.lab4.activity;
 
+import static java.lang.String.valueOf;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -14,10 +16,16 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.service.autofill.UserData;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.lang.Math;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.lab4.LocationService;
@@ -131,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
             label.setLayoutParams(layoutParams1);
             label.setRotation(northRotateVal + dotRotateVal);
         });
+
     }
 
     private void orientationUpdate(ImageView compass, ConstraintLayout.LayoutParams layoutParams, ImageView redDot, TextView label, ConstraintLayout.LayoutParams layoutParams1) {
@@ -215,5 +224,35 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddFriendActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    //function to track how long user has been inactive
+    public long inactiveDuration(User user){
+        //first get date from updatedAt
+        //get epoch time to string
+        String updatedAtString = valueOf(user.updatedAt);
+        //covert seconds to milliseconds
+        long seconds = Long.parseLong(updatedAtString);
+        //make date
+        Date dateUpdatedAt = new Date(seconds * 1000);
+        //simple date format
+        //SimpleDateFormat updatedAtDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //String updatedAtString = simpleDate.format(date);
+
+        //get current time and date
+        //LocalDateTime dateObj = LocalDateTime.now();
+        //DateTimeFormatter currentDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        Date dateCurrent = new Date();
+        //String currentTimeString = dateObj.format(formatDateObj);
+
+        //find time since this date
+        long diff = dateCurrent.getTime() - dateUpdatedAt.getTime();
+
+        //convert distance to minutes
+        long inactiveDurationMinutes = TimeUnit.MINUTES.convert(diff, TimeUnit.MILLISECONDS);
+
+        Log.d("inactive minutes", valueOf(inactiveDurationMinutes));
+
+        return inactiveDurationMinutes;
     }
 }
