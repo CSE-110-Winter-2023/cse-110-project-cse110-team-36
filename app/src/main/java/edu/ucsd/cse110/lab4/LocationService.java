@@ -54,6 +54,13 @@ public class LocationService implements LocationListener {
         return realLocation.bearingTo(toLocation);
     }
 
+    public float getDistance(float latitude, float longitude) {
+        Location toLocation = new Location(LocationManager.GPS_PROVIDER);
+        toLocation.setLatitude(latitude);
+        toLocation.setLongitude(longitude);
+        return realLocation.distanceTo(toLocation);
+    }
+
     private void registerLocationListener() {
         if ((ActivityCompat.checkSelfPermission(activity,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)

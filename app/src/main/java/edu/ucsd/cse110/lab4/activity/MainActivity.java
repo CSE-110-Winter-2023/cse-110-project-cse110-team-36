@@ -23,6 +23,8 @@ import java.util.concurrent.TimeUnit;
 import edu.ucsd.cse110.lab4.LocationService;
 import edu.ucsd.cse110.lab4.OrientationService;
 import edu.ucsd.cse110.lab4.R;
+import edu.ucsd.cse110.lab4.model.Compass;
+import edu.ucsd.cse110.lab4.model.Dot;
 import edu.ucsd.cse110.lab4.model.User;
 import edu.ucsd.cse110.lab4.model.UserDao;
 import edu.ucsd.cse110.lab4.model.UserDao_Impl;
@@ -42,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
     float northRotateVal;
     float dotRotateVal;
     boolean mockedOrientation = false;
-    String label;
+    String userlabel;
+    String UID;
+    LiveData<User> user;
+    UserViewModel viewModel;
 
     /*
      * Updates compass according to orientation, location, and entered values on profileActivity
@@ -51,60 +56,39 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //get permissions
+
+        UID = "test36";
+
         getPermissions();
 
 //        Intent intent = new Intent(this, UserActivity.class);
 //        startActivity(intent);
-        UserViewModel viewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        LiveData<User> user = viewModel.getUser("test37");
+        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        user = viewModel.getUser(UID);
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        user.observe(this, this::onUserChanged);
+//        user.observe(this, this::onUserChanged);
 
 
 
         orientationService = new OrientationService(this);
         locationService = new LocationService(this);
-        ImageView compass = findViewById(R.id.compass_base);
+        ImageView compass1 = findViewById(R.id.compass_base);
         ImageView redDot = findViewById(R.id.coordDot);
         TextView label = findViewById(R.id.labelView);
-        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) redDot.getLayoutParams();
-        ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) label.getLayoutParams();
+//        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) redDot.getLayoutParams();
+//        ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) label.getLayoutParams();
 
-        this.orientationUpdate(compass, layoutParams, redDot, label, layoutParams1);
+        Compass compass = new Compass(locationService, orientationService, this, 1, compass1);
+        Dot dot = new Dot(user, locationService, compass, this, redDot, label);
 
-        this.locationUpdate(layoutParams, layoutParams1, redDot, label);
-
-//        Float userLat = Float.parseFloat(user.latitude);
-//        Float userLong = Float.parseFloat(user.longitude);
-//        String userLabel = user.label;
+//        this.orientationUpdate(compass, layoutParams, redDot, label, layoutParams1);
 //
-//        latVal = userLat;
-//        longVal = userLong;
-//        label = userLabel;
 
-//        //get values from profileActivity
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        boolean isAccessed = sharedPreferences.getBoolean(getString(R.string.is_accessed), false);
-
-        //on first start up, go to profileActivity
-//        if (!isAccessed) {
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
-//            editor.putBoolean(getString(R.string.is_accessed), Boolean.TRUE);
-//            editor.commit();
-//            startActivity(new Intent(this, ProfileActivity.class));
-//        }
-
-
-
-
-//        //load values from profileActivity
-//        this.loadProfile();
 
 
 
@@ -115,22 +99,33 @@ public class MainActivity extends AppCompatActivity {
     private void onUserChanged(User user) {
         latVal = Float.parseFloat(user.latitude);
         longVal = Float.parseFloat(user.longitude);
-        label = user.label;
+        userlabel = user.label;
+        TextView labelView = this.findViewById(R.id.labelView);
+        labelView.setText(userlabel);
 
     }
 
     private void locationUpdate(ConstraintLayout.LayoutParams layoutParams, ConstraintLayout.LayoutParams layoutParams1, ImageView redDot, TextView label) {
-        locationService.getLocation().observe(this, coords -> {
-            //get "bearing" - angle between phone's location and destination
-            dotRotateVal = locationService.getBearing(latVal, longVal);
-            //update red dot's rotation by north's rotation + bearing
-            layoutParams.circleAngle = (northRotateVal + dotRotateVal);
-            redDot.setLayoutParams(layoutParams);
-            layoutParams1.circleAngle = (northRotateVal + dotRotateVal);
-            //update label's rotation same as red dot's
-            label.setLayoutParams(layoutParams1);
-            label.setRotation(northRotateVal + dotRotateVal);
-        });
+//        locationService.getLocation().observe(this, coords -> {
+//            //get "bearing" - angle between phone's location and destination
+//            dotRotateVal = locationService.getBearing(latVal, longVal);
+//            //update red dot's rotation by north's rotation + bearing
+//            layoutParams.circleAngle = (northRotateVal + dotRotateVal);
+//            //CALCULATE DISTANCE FROM CENTER (make separate method)
+//            float distance = locationService.getDistance(latVal,longVal);
+//            //100 miles in meters
+//            if (distance > 160934) {
+//                distance = 160934;
+//            }
+//            float distanceFrac = distance / 160934;
+//            layoutParams.circleRadius = (int)((distanceFrac) * 350);
+//            //end calc distance
+//            redDot.setLayoutParams(layoutParams);
+//            layoutParams1.circleAngle = (northRotateVal + dotRotateVal);
+//            //update label's rotation same as red dot's
+//            label.setLayoutParams(layoutParams1);
+//            label.setRotation(northRotateVal + dotRotateVal);
+//        });
     }
 
     private void orientationUpdate(ImageView compass, ConstraintLayout.LayoutParams layoutParams, ImageView redDot, TextView label, ConstraintLayout.LayoutParams layoutParams1) {
@@ -195,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
         latVal = Float.parseFloat(latitudeString);
         longVal = Float.parseFloat(longitudeString);
 
-        labelView.setText(labelString);
+
     }
 
     /*
@@ -215,5 +210,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddFriendActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void onLaunchViewClicked(View view) {
+        TextView UIDView = this.findViewById(R.id.TextViewUID);
+        UID = UIDView.getText().toString();
     }
 }
