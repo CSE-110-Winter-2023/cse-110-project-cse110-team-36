@@ -31,13 +31,13 @@ public class UserViewModel extends AndroidViewModel {
 
     public LiveData<User> getUser(String public_code) {
         if (user == null) {
-            user = repo.getRemote(public_code);
+            user = repo.getSynced(public_code);
         }
         return user;
     }
 
     public void add(User user) {
-        repo.upsertLocal(user);
+        repo.upsertSynced(user);
     }
 
 }

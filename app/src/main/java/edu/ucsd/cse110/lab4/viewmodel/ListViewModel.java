@@ -48,4 +48,6 @@ public class ListViewModel extends AndroidViewModel {
     public void delete(User user) {
         repo.deleteLocal(user);
     }
+
+
 }

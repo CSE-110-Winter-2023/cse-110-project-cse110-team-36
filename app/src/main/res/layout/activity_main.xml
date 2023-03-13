@@ -71,7 +71,7 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="35dp"
         android:onClick="onLaunchListClicked"
-        android:text="list"
+        android:text="ADD FRIEND"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

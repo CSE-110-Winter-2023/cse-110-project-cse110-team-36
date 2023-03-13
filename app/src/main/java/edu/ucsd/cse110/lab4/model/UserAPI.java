@@ -2,6 +2,8 @@ package edu.ucsd.cse110.lab4.model;
 
 import android.util.Log;
 
+import java.time.Instant;
+
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -48,7 +50,8 @@ public class UserAPI {
         String public_code = user.uniqueID;
         public_code = public_code.replace(" ", "%20");
         String json = "{\"label\":\"" + user.label + "\",\"latitude\":\"" + user.latitude +
-                "\",\"longitude\":\"" + user.longitude + "\",\"updated_at\":\"" + user.updatedAt +"\"}";
+                "\",\"longitude\":\"" + user.longitude + "\",\"updated_at\":\"" + Instant.now().getEpochSecond()
+                +"\"}";
 
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(json, JSON);
