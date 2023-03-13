@@ -2,6 +2,8 @@ package edu.ucsd.cse110.lab4.model;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -47,7 +49,6 @@ public class User {
     @SerializedName("public_code")
     @NotNull
     public String uniqueID;
-
     /**
      * The name of the user (label on the cloud)
      */

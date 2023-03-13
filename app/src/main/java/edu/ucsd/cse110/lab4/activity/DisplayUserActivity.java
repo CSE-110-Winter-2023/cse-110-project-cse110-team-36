@@ -9,15 +9,21 @@ import android.widget.TextView;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import edu.ucsd.cse110.lab4.R;
+import edu.ucsd.cse110.lab4.model.User;
+import edu.ucsd.cse110.lab4.model.UserDatabase;
 
 public class DisplayUserActivity extends AppCompatActivity {
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     public RecyclerView recyclerView;
+    private UserDatabase userDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,4 +49,5 @@ public class DisplayUserActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }

@@ -1,5 +1,14 @@
 package edu.ucsd.cse110.lab4.activity;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -7,27 +16,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.service.autofill.UserData;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import java.lang.Math;
 import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.lab4.LocationService;
 import edu.ucsd.cse110.lab4.OrientationService;
 import edu.ucsd.cse110.lab4.R;
 import edu.ucsd.cse110.lab4.model.User;
-import edu.ucsd.cse110.lab4.model.UserDao;
-import edu.ucsd.cse110.lab4.model.UserDao_Impl;
-import edu.ucsd.cse110.lab4.model.UserDatabase;
-import edu.ucsd.cse110.lab4.model.UserRepository;
 import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
 /*

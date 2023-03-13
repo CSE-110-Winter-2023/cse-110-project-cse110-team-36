@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Upsert;
 
@@ -14,7 +15,7 @@ public abstract class UserDao {
     @Upsert
     public abstract long upsert(User user);
 
-    @Query("SELECT EXISTS(SELECT 1 FROM `users` WHERE `uniqueID` = :uniqueID)")
+    @Query("SELECT EXISTS(SELECT * FROM `users` WHERE `uniqueID` = :uniqueID)")
     public abstract boolean exists(String uniqueID);
 
     @Query("SELECT * FROM `users` WHERE `uniqueID` = :uniqueID")
@@ -26,10 +27,15 @@ public abstract class UserDao {
     @Query("SELECT * FROM `users` ORDER BY `uniqueID`")
     public abstract List<User> getAllLocal();
 
-
     @Delete
     public abstract int delete(User user);
 
     @Insert
     public abstract List<Long> insertAll(List<User> users);
+
+    //start
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public abstract void insertUser(User user);
+
+
 }
