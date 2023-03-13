@@ -49,7 +49,7 @@
             app:srcCompat="@drawable/compass_circle" />
 
         <ImageView
-            android:id="@+id/compass_base5"
+            android:id="@+id/compass_base3"
             android:layout_width="197dp"
             android:layout_height="156dp"
             android:rotation="0"
@@ -62,7 +62,7 @@
             app:srcCompat="@drawable/compass_circle" />
 
         <ImageView
-            android:id="@+id/compass_base6"
+            android:id="@+id/compass_base4"
             android:layout_width="108dp"
             android:layout_height="85dp"
             android:rotation="0"
