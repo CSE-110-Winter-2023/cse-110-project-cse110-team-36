@@ -82,13 +82,6 @@ public class LocationService implements LocationListener {
         this.locationValue = mockDataSource;
     }
 
-    public float getDistance(float latitude, float longitude) {
-        Location toLocation = new Location(LocationManager.GPS_PROVIDER);
-        toLocation.setLatitude(latitude);
-        toLocation.setLongitude(longitude);
-        return realLocation.distanceTo(toLocation);
-    }
-
     @Override
     public void onLocationChanged(@NonNull Location location) {
         this.locationValue.postValue(new Pair<Double, Double>(location.getLatitude(),

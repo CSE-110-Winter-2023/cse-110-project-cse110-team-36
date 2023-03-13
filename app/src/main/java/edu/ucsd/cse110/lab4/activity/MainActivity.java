@@ -26,8 +26,6 @@ import edu.ucsd.cse110.lab4.R;
 import edu.ucsd.cse110.lab4.model.Compass;
 import edu.ucsd.cse110.lab4.model.Dot;
 import edu.ucsd.cse110.lab4.model.User;
-import edu.ucsd.cse110.lab4.model.UserDao;
-import edu.ucsd.cse110.lab4.model.UserDao_Impl;
 import edu.ucsd.cse110.lab4.model.UserDatabase;
 import edu.ucsd.cse110.lab4.model.UserRepository;
 import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
