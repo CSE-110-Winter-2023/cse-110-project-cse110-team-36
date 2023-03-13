@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lab4">
         <activity
+            android:name=".activity.CompassActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.AddFriendActivity"
             android:exported="false" />
         <activity
