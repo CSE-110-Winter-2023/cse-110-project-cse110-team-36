@@ -29,10 +29,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.518"
+            app:layout_constraintHorizontal_bias="0.513"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.268"
             app:srcCompat="@drawable/compass_circle" />
 
         <ImageView
@@ -43,7 +42,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintHorizontal_bias="0.513"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/compass_circle" />
@@ -58,7 +57,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.501"
+            app:layout_constraintHorizontal_bias="0.513"
             app:srcCompat="@drawable/compass_circle" />
 
         <ImageView
@@ -68,6 +67,7 @@
             android:rotation="0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
+            app:layout_constraintHorizontal_bias="0.513"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -166,5 +166,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/compass" />
+
+    <ImageView
+        android:id="@+id/zoomOutBtn"
+        android:layout_width="99dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zoomInBtn"
+        android:onClick="onZoomOutClicked"
+        app:srcCompat="@android:drawable/btn_minus" />
+
+    <ImageView
+        android:id="@+id/zoomInBtn"
+        android:layout_width="100dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="-20dp"
+        android:layout_marginEnd="-25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/compass"
+        android:onClick="onZoomInClicked"
+        app:srcCompat="@android:drawable/btn_plus" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

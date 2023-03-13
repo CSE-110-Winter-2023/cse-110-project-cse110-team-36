@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -209,5 +210,38 @@ public class CompassActivity extends AppCompatActivity {
     public void onLaunchViewClicked(View view) {
         TextView UIDView = this.findViewById(R.id.TextViewUID);
         UID = UIDView.getText().toString();
+    }
+
+    public void onZoomInClicked(View view) {
+        var animationZoomIn =
+                AnimationUtils.loadAnimation(this, R.anim.zoom_in);
+        var image = findViewById(R.id.compass_base);
+        image.startAnimation(animationZoomIn);
+
+        image = findViewById(R.id.compass_base2);
+        image.startAnimation(animationZoomIn);
+
+//        image = findViewById(R.id.compass_base3);
+//        image.startAnimation(animationZoomIn);
+//
+//        image = findViewById(R.id.compass_base4);
+//        image.startAnimation(animationZoomIn);
+    }
+
+
+    public void onZoomOutClicked(View view) {
+        var animationZoomOut =
+                AnimationUtils.loadAnimation(this, R.anim.zoom_out);
+        var image = findViewById(R.id.compass_base);
+        image.startAnimation(animationZoomOut);
+
+        image = findViewById(R.id.compass_base2);
+        image.startAnimation(animationZoomOut);
+
+//        image = findViewById(R.id.compass_base3);
+//        image.startAnimation(animationZoomOut);
+//
+//        image = findViewById(R.id.compass_base4);
+//        image.startAnimation(animationZoomOut);
     }
 }
