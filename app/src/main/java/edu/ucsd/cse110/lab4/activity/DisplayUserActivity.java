@@ -1,7 +1,9 @@
 package edu.ucsd.cse110.lab4.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
@@ -35,8 +37,10 @@ public class DisplayUserActivity extends AppCompatActivity {
 
         uidTextView.setText("UID : " + uuid);
 
-
-
-
+    }
+    public void onExitClicked (View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
