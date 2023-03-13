@@ -23,6 +23,8 @@ import java.util.concurrent.TimeUnit;
 import edu.ucsd.cse110.lab4.LocationService;
 import edu.ucsd.cse110.lab4.OrientationService;
 import edu.ucsd.cse110.lab4.R;
+import edu.ucsd.cse110.lab4.model.Compass;
+import edu.ucsd.cse110.lab4.model.Dot;
 import edu.ucsd.cse110.lab4.model.User;
 import edu.ucsd.cse110.lab4.model.UserDao;
 import edu.ucsd.cse110.lab4.model.UserDao_Impl;
@@ -68,49 +70,24 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        user.observe(this, this::onUserChanged);
+//        user.observe(this, this::onUserChanged);
 
 
 
         orientationService = new OrientationService(this);
         locationService = new LocationService(this);
-        ImageView compass = findViewById(R.id.compass_base);
+        ImageView compass1 = findViewById(R.id.compass_base);
         ImageView redDot = findViewById(R.id.coordDot);
         TextView label = findViewById(R.id.labelView);
-        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) redDot.getLayoutParams();
-        ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) label.getLayoutParams();
+//        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) redDot.getLayoutParams();
+//        ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) label.getLayoutParams();
 
-        this.orientationUpdate(compass, layoutParams, redDot, label, layoutParams1);
+        Compass compass = new Compass(locationService, orientationService, this, 1, compass1);
+        Dot dot = new Dot(user, locationService, compass, this, redDot, label);
 
-        this.locationUpdate(layoutParams, layoutParams1, redDot, label);
-
-//        Float userLat = Float.parseFloat(user.latitude);
-//        Float userLong = Float.parseFloat(user.longitude);
-//        String userLabel = user.label;
+//        this.orientationUpdate(compass, layoutParams, redDot, label, layoutParams1);
 //
-//        latVal = userLat;
-//        longVal = userLong;
-//        label = userLabel;
-
-//        //get values from profileActivity
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        boolean isAccessed = sharedPreferences.getBoolean(getString(R.string.is_accessed), false);
-
-        //on first start up, go to profileActivity
-//        if (!isAccessed) {
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
-//            editor.putBoolean(getString(R.string.is_accessed), Boolean.TRUE);
-//            editor.commit();
-//            startActivity(new Intent(this, ProfileActivity.class));
-//        }
-
-        //get permissions
-
-
-
-
-//        //load values from profileActivity
-//        this.loadProfile();
+//        this.locationUpdate(layoutParams, layoutParams1, redDot, label);
 
 
 
