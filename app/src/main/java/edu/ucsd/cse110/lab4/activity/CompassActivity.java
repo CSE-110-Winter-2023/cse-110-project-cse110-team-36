@@ -104,11 +104,34 @@ public class CompassActivity extends AppCompatActivity {
             layoutParams.circleAngle = (northRotateVal + dotRotateVal);
             // CALCULATE DISTANCE FROM CENTER (make separate method)
             float distance = locationService.getDistance(latVal, longVal);
+            /*
             // 100 miles in meters
             if (distance > 160934) {
                 distance = 160934;
             }
             float distanceFrac = distance / 160934;
+             */
+
+            //first ring 0-1 miles
+            if(distance < 1609.34){
+                //float distanceFrac = distance
+            }
+
+            //second ring 1-10 miles
+            else if(distance < 16093.4){
+                //float distanceFrac = distance
+            }
+
+            //third ring 10-500 miles
+            else if (distance < 804672){
+                //float distanceFrac = distance
+            }
+
+            //forth ring 500+ miles
+            else{
+                //float distanceFrac = distance
+            }
+
             layoutParams.circleRadius = (int) ((distanceFrac) * 350);
             // end calc distance
             redDot.setLayoutParams(layoutParams);
