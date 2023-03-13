@@ -167,4 +167,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/compass" />
 
+    <ImageView
+        android:id="@+id/zoomOutBtn"
+        android:layout_width="99dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zoomInBtn"
+        app:srcCompat="@android:drawable/btn_minus" />
+
+    <ImageView
+        android:id="@+id/zoomInBtn"
+        android:layout_width="100dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="-20dp"
+        android:layout_marginEnd="-25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/compass"
+        app:srcCompat="@android:drawable/btn_plus" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
