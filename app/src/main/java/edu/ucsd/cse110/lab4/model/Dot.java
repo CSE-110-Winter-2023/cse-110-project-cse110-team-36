@@ -142,7 +142,7 @@ public class Dot {
     public long inactiveDuration(){
         //first get date from updatedAt
         //get epoch time to string
-        String updatedAtString = valueOf(user.updatedAt);
+        String updatedAtString = valueOf(user.getValue().updatedAt);
         //covert seconds to milliseconds
         long seconds = Long.parseLong(updatedAtString);
         //make date
