@@ -53,7 +53,7 @@ public class FourZoomActivity extends AppCompatActivity {
         locationService = new LocationService(this);
         ImageView compass1 = findViewById(R.id.compass_base);
 
-        Compass compass = new Compass(locationService, orientationService, this, 1, compass1);
+        Compass compass = new Compass(locationService, orientationService, this, 4, compass1);
         //addUsers();
     }
 
