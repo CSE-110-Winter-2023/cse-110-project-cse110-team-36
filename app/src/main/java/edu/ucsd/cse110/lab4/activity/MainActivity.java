@@ -55,62 +55,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        UID = "test36";
-
-        getPermissions();
-
-//        Intent intent = new Intent(this, UserActivity.class);
-//        startActivity(intent);
-        viewModel = new ViewModelProvider(this).get(ListViewModel.class);
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-//        user = viewModel.getUser(UID);
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-//        user.observe(this, this::onUserChanged);
-
-
-
-        orientationService = new OrientationService(this);
-        locationService = new LocationService(this);
-        ImageView compass1 = findViewById(R.id.compass_base);
-//        ImageView redDot = findViewById(R.id.coordDot);
-//        TextView label = findViewById(R.id.labelView);
-//        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) redDot.getLayoutParams();
-//        ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) label.getLayoutParams();
-//
-        Compass compass = new Compass(locationService, orientationService, this, 1, compass1);
-        addUsers();
-//        Dot dot = new Dot(user, locationService, compass, this, redDot, label);
-
-//        this.orientationUpdate(compass, layoutParams, redDot, label, layoutParams1);
-//        ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
-//        LayoutInflater inflater = getLayoutInflater();
-//        View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
-//        ImageView dotID = myLayout.findViewById(R.id.coordDot);
-//        TextView label = myLayout.findViewById(R.id.labelView);
-//        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) dotID.getLayoutParams();
-//        layoutParams.circleRadius = 350;
-//        layoutParams.circleAngle = 180;
-//        dotID.setLayoutParams(layoutParams);
-//        label.setLayoutParams(layoutParams);
-//        mainLayout.addView(myLayout);
-//
-//        View myLayout2 = inflater.inflate(R.layout.dot_layout, mainLayout, false);
-//        ImageView dotID2 = myLayout2.findViewById(R.id.coordDot);
-//        TextView label2 = myLayout2.findViewById(R.id.labelView);
-//        ConstraintLayout.LayoutParams layoutParams2 = (ConstraintLayout.LayoutParams) dotID2.getLayoutParams();
-//        layoutParams2.circleRadius = 350;
-//        layoutParams2.circleAngle = 100;
-//        dotID2.setLayoutParams(layoutParams2);
-//        label2.setLayoutParams(layoutParams2);
-//        mainLayout.addView(myLayout2);
-
-
+        Intent intent = new Intent(this, OneZoomActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 
