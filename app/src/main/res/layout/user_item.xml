@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="64dp">
+    android:layout_height="70dp">
 
     <TextView
         android:id="@+id/user_item_label"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
+        android:layout_width="332dp"
+        android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:ellipsize="end"
@@ -34,8 +34,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/user_item_delete"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_item_label" />
+        app:layout_constraintTop_toBottomOf="@+id/user_item_label"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/user_item_delete"

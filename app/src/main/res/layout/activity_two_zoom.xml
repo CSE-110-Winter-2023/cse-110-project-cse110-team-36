@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:rotation="0"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.TwoZoomActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/include"
@@ -46,7 +46,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="224dp"
+            android:layout_height="222dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/circle" /><![CDATA[
+
         >
+    ]]>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
@@ -60,8 +72,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/ZoomInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="27dp"
+        android:onClick="onZoomInClicked"
+        android:text="+"
+        app:layout_constraintBottom_toTopOf="@+id/ZoomOutButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include" />
+
+    <Button
+        android:id="@+id/ZoomOutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="37dp"
+        android:onClick="onZoomOutClicked"
+        android:text="-"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ZoomInButton"
+        app:layout_constraintTop_toBottomOf="@+id/ZoomInButton" />
+
     <ImageView
-        android:id="@+id/online_main"
+        android:id="@+id/online_two_zoom"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +107,7 @@
         app:srcCompat="@drawable/online" />
 
     <ImageView
-        android:id="@+id/offline_main"
+        android:id="@+id/offline_two_zoom"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -85,7 +119,7 @@
         app:srcCompat="@drawable/offline" />
 
     <TextView
-        android:id="@+id/status_main"
+        android:id="@+id/status_two_zoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time"

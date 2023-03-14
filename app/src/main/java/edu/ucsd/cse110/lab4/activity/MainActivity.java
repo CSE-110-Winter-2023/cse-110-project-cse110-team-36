@@ -12,12 +12,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.service.autofill.UserData;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.lang.Math;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.lab4.LocationService;
@@ -26,8 +26,7 @@ import edu.ucsd.cse110.lab4.R;
 import edu.ucsd.cse110.lab4.model.Compass;
 import edu.ucsd.cse110.lab4.model.Dot;
 import edu.ucsd.cse110.lab4.model.User;
-import edu.ucsd.cse110.lab4.model.UserDatabase;
-import edu.ucsd.cse110.lab4.model.UserRepository;
+import edu.ucsd.cse110.lab4.viewmodel.ListViewModel;
 import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
 /*
@@ -45,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
     String userlabel;
     String UID;
     LiveData<User> user;
-    UserViewModel viewModel;
+    ListViewModel viewModel;
+    UserViewModel userViewModel;
+    Compass compass;
 
     /*
      * Updates compass according to orientation, location, and entered values on profileActivity
@@ -54,44 +55,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = new Intent(this, OneZoomActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
-        UID = "test36";
 
-        getPermissions();
-
-//        Intent intent = new Intent(this, UserActivity.class);
-//        startActivity(intent);
-        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        user = viewModel.getUser(UID);
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    private void addUsers() {
+        LiveData<List<User>> userList = viewModel.getUsers();
+        List<User> users = userList.getValue();
+        if (users == null) {
+            return;
         }
-
-//        user.observe(this, this::onUserChanged);
-
-
-
-        orientationService = new OrientationService(this);
-        locationService = new LocationService(this);
-        ImageView compass1 = findViewById(R.id.compass_base);
-        ImageView redDot = findViewById(R.id.coordDot);
-        TextView label = findViewById(R.id.labelView);
-//        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) redDot.getLayoutParams();
-//        ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) label.getLayoutParams();
-
-        Compass compass = new Compass(locationService, orientationService, this, 1, compass1);
-        Dot dot = new Dot(user, locationService, compass, this, redDot, label);
-
-//        this.orientationUpdate(compass, layoutParams, redDot, label, layoutParams1);
-//
-
-
-
-
-
-
+        for (User thisUser : users) {
+            String UID = thisUser.uniqueID;
+            LiveData<User> currUser = userViewModel.getUser(UID);
+            ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
+            LayoutInflater inflater = getLayoutInflater();
+            View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
+            ImageView dotID = myLayout.findViewById(R.id.coordDot);
+            TextView label = myLayout.findViewById(R.id.labelView);
+            Dot dot = new Dot(currUser, locationService, compass, this, dotID, label);
+            mainLayout.addView(myLayout);
+        }
+        return;
     }
 
     private void onUserChanged(User user) {

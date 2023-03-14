@@ -49,14 +49,14 @@ public class EspressoTestUS1 {
     public void espressoTest() {
         ViewInteraction textView = onView(
                 allOf(withId(R.id.labelView), withText("TextView"),
-                        withParent(allOf(withId(R.id.compass),
+                        withParent(allOf(withId(R.id.include),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
         textView.check(matches(withText("TextView")));
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.labelView), withText("TextView"),
-                        withParent(allOf(withId(R.id.compass),
+                        withParent(allOf(withId(R.id.include),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
         textView2.check(matches(withText("TextView")));

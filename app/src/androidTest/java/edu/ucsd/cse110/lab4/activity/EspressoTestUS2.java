@@ -49,21 +49,21 @@ public class EspressoTestUS2 {
     public void espressoTestUS2() {
         ViewInteraction textView = onView(
                 allOf(withId(R.id.labelView), withText("TextView"),
-                        withParent(allOf(withId(R.id.compass),
+                        withParent(allOf(withId(R.id.include),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
         textView.check(matches(withText("TextView")));
 
         ViewInteraction imageView = onView(
                 allOf(withId(R.id.coordDot),
-                        withParent(allOf(withId(R.id.compass),
+                        withParent(allOf(withId(R.id.include),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
         imageView.check(matches(isDisplayed()));
 
         ViewInteraction imageView2 = onView(
                 allOf(withId(R.id.coordDot),
-                        withParent(allOf(withId(R.id.compass),
+                        withParent(allOf(withId(R.id.include),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
         imageView2.check(matches(isDisplayed()));
@@ -110,14 +110,14 @@ public class EspressoTestUS2 {
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.labelView), withText("TextView"),
-                        withParent(allOf(withId(R.id.compass),
+                        withParent(allOf(withId(R.id.include),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
         textView2.check(matches(withText("TextView")));
 
         ViewInteraction textView3 = onView(
                 allOf(withId(R.id.labelView), withText("TextView"),
-                        withParent(allOf(withId(R.id.compass),
+                        withParent(allOf(withId(R.id.include),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
         textView3.check(matches(withText("TextView")));

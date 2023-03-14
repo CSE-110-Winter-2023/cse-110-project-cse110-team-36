@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:rotation="0"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.OneZoomActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/include"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="176dp"
-        android:layout_marginBottom="150dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/ZoomInButton"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,8 +60,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/ZoomInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="27dp"
+        android:enabled="false"
+        android:text="+"
+        app:layout_constraintBottom_toTopOf="@+id/ZoomOutButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include" />
+
+    <Button
+        android:id="@+id/ZoomOutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="37dp"
+        android:text="-"
+        android:onClick="onZoomOutClicked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ZoomInButton"
+        app:layout_constraintTop_toBottomOf="@+id/ZoomInButton" />
+
     <ImageView
-        android:id="@+id/online_main"
+        android:id="@+id/online_one_zoom"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +95,7 @@
         app:srcCompat="@drawable/online" />
 
     <ImageView
-        android:id="@+id/offline_main"
+        android:id="@+id/offline_one_zoom"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -85,7 +107,7 @@
         app:srcCompat="@drawable/offline" />
 
     <TextView
-        android:id="@+id/status_main"
+        android:id="@+id/status_one_zoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time"
