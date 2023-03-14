@@ -17,12 +17,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.lang.Math;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.lab4.LocationService;
 import edu.ucsd.cse110.lab4.OrientationService;
 import edu.ucsd.cse110.lab4.R;
+import edu.ucsd.cse110.lab4.model.Compass;
+import edu.ucsd.cse110.lab4.model.Dot;
 import edu.ucsd.cse110.lab4.model.User;
+import edu.ucsd.cse110.lab4.viewmodel.ListViewModel;
 import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
 /*
@@ -40,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
     String userlabel;
     String UID;
     LiveData<User> user;
-    UserViewModel viewModel;
+    ListViewModel viewModel;
+    UserViewModel userViewModel;
+    Compass compass;
 
     /*
      * Updates compass according to orientation, location, and entered values on profileActivity
@@ -56,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        Intent intent = new Intent(this, UserActivity.class);
 //        startActivity(intent);
-        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        user = viewModel.getUser(UID);
+        viewModel = new ViewModelProvider(this).get(ListViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+//        user = viewModel.getUser(UID);
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
@@ -68,42 +75,64 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        orientationService = new OrientationService(this);
-//        locationService = new LocationService(this);
-//        ImageView compass1 = findViewById(R.id.compass_base);
+        orientationService = new OrientationService(this);
+        locationService = new LocationService(this);
+        ImageView compass1 = findViewById(R.id.compass_base);
 //        ImageView redDot = findViewById(R.id.coordDot);
 //        TextView label = findViewById(R.id.labelView);
 //        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) redDot.getLayoutParams();
 //        ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) label.getLayoutParams();
 //
-//        Compass compass = new Compass(locationService, orientationService, this, 1, compass1);
+        Compass compass = new Compass(locationService, orientationService, this, 1, compass1);
+        addUsers();
 //        Dot dot = new Dot(user, locationService, compass, this, redDot, label);
 
 //        this.orientationUpdate(compass, layoutParams, redDot, label, layoutParams1);
+//        ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
+//        LayoutInflater inflater = getLayoutInflater();
+//        View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
+//        ImageView dotID = myLayout.findViewById(R.id.coordDot);
+//        TextView label = myLayout.findViewById(R.id.labelView);
+//        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) dotID.getLayoutParams();
+//        layoutParams.circleRadius = 350;
+//        layoutParams.circleAngle = 180;
+//        dotID.setLayoutParams(layoutParams);
+//        label.setLayoutParams(layoutParams);
+//        mainLayout.addView(myLayout);
 //
-
-        ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
-        LayoutInflater inflater = getLayoutInflater();
-        View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
-        ImageView dotID = myLayout.findViewById(R.id.coordDot);
-        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) dotID.getLayoutParams();
-        layoutParams.circleRadius = 350;
-        layoutParams.circleAngle = 180;
-        dotID.setLayoutParams(layoutParams);
-        mainLayout.addView(myLayout);
-
-        View myLayout2 = inflater.inflate(R.layout.dot_layout, mainLayout, false);
-        ImageView dotID2 = myLayout2.findViewById(R.id.coordDot);
-        ConstraintLayout.LayoutParams layoutParams2 = (ConstraintLayout.LayoutParams) dotID2.getLayoutParams();
-        layoutParams2.circleRadius = 350;
-        layoutParams2.circleAngle = 100;
-        dotID2.setLayoutParams(layoutParams2);
-        mainLayout.addView(myLayout2);
+//        View myLayout2 = inflater.inflate(R.layout.dot_layout, mainLayout, false);
+//        ImageView dotID2 = myLayout2.findViewById(R.id.coordDot);
+//        TextView label2 = myLayout2.findViewById(R.id.labelView);
+//        ConstraintLayout.LayoutParams layoutParams2 = (ConstraintLayout.LayoutParams) dotID2.getLayoutParams();
+//        layoutParams2.circleRadius = 350;
+//        layoutParams2.circleAngle = 100;
+//        dotID2.setLayoutParams(layoutParams2);
+//        label2.setLayoutParams(layoutParams2);
+//        mainLayout.addView(myLayout2);
 
 
     }
 
 
+    private void addUsers() {
+        LiveData<List<User>> userList = viewModel.getUsers();
+        List<User> users = userList.getValue();
+        if (users == null) {
+            return;
+        }
+        for (User thisUser : users) {
+            String UID = thisUser.uniqueID;
+            LiveData<User> currUser = userViewModel.getUser(UID);
+            ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
+            LayoutInflater inflater = getLayoutInflater();
+            View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
+            ImageView dotID = myLayout.findViewById(R.id.coordDot);
+            TextView label = myLayout.findViewById(R.id.labelView);
+            Dot dot = new Dot(currUser, locationService, compass, this, dotID, label);
+            mainLayout.addView(myLayout);
+        }
+        return;
+    }
 
     private void onUserChanged(User user) {
         latVal = Float.parseFloat(user.latitude);
