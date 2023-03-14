@@ -8,18 +8,17 @@
     tools:context=".activity.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/compass"
+        android:id="@+id/include"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="176dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="108dp"
-        app:layout_constraintBottom_toTopOf="@+id/viewUIDbtn"
+        android:layout_marginBottom="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ExtraText">
 
         <ImageView
             android:id="@+id/compass_base"
@@ -29,39 +28,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/compass_base" />
-
-        <ImageView
-            android:id="@+id/coordDot"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:rotation="0"
-            app:layout_constraintCircle="@+id/compass"
-            app:layout_constraintCircleAngle="0"
-            app:layout_constraintCircleRadius="130dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/coord_dot" />
-
-        <TextView
-            android:id="@+id/labelView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="144dp"
-            android:rotation="0"
-            android:text="TextView"
-            app:layout_constraintCircle="@+id/compass_base"
-            app:layout_constraintCircleAngle="0"
-            app:layout_constraintCircleRadius="155dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/compass_base" />
-        app:layout_constraintCircleRadius="140dp"
-        app:srcCompat="@drawable/coord_dot"
-        tools:layout_editor_absoluteX="174dp"
-        tools:layout_editor_absoluteY="174dp" />
+    >
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
@@ -75,28 +47,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/TextViewUID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="73dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/compass" />
-
-    <Button
-        android:id="@+id/viewUIDbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:onClick="onLaunchViewClicked"
-        android:text="View"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/compass" />
+    <include
+        android:id="@+id/dotInclude"
+        layout="@layout/dot_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="176dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,8 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.service.autofill.UserData;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,11 +22,7 @@ import java.util.concurrent.TimeUnit;
 import edu.ucsd.cse110.lab4.LocationService;
 import edu.ucsd.cse110.lab4.OrientationService;
 import edu.ucsd.cse110.lab4.R;
-import edu.ucsd.cse110.lab4.model.Compass;
-import edu.ucsd.cse110.lab4.model.Dot;
 import edu.ucsd.cse110.lab4.model.User;
-import edu.ucsd.cse110.lab4.model.UserDatabase;
-import edu.ucsd.cse110.lab4.model.UserRepository;
 import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
 /*
@@ -73,26 +68,35 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        orientationService = new OrientationService(this);
-        locationService = new LocationService(this);
-        ImageView compass1 = findViewById(R.id.compass_base);
-        ImageView redDot = findViewById(R.id.coordDot);
-        TextView label = findViewById(R.id.labelView);
+//        orientationService = new OrientationService(this);
+//        locationService = new LocationService(this);
+//        ImageView compass1 = findViewById(R.id.compass_base);
+//        ImageView redDot = findViewById(R.id.coordDot);
+//        TextView label = findViewById(R.id.labelView);
 //        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) redDot.getLayoutParams();
 //        ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) label.getLayoutParams();
-
-        Compass compass = new Compass(locationService, orientationService, this, 1, compass1);
-        Dot dot = new Dot(user, locationService, compass, this, redDot, label);
+//
+//        Compass compass = new Compass(locationService, orientationService, this, 1, compass1);
+//        Dot dot = new Dot(user, locationService, compass, this, redDot, label);
 
 //        this.orientationUpdate(compass, layoutParams, redDot, label, layoutParams1);
 //
 
-
-
-
+        ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
+        LayoutInflater inflater = getLayoutInflater();
+        View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
+        TextView labelID = myLayout.findViewById(R.id.labelView);
+        ImageView dotID = myLayout.findViewById(R.id.coordDot);
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) dotID.getLayoutParams();
+        labelID.setText("two");
+        layoutParams.circleAngle = 100;
+        dotID.setLayoutParams(layoutParams);
+        mainLayout.addView(myLayout);
 
 
     }
+
+
 
     private void onUserChanged(User user) {
         latVal = Float.parseFloat(user.latitude);
