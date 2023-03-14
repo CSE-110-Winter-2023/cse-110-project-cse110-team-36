@@ -69,9 +69,9 @@ public class Dot {
         label.setText(userlabel);
 
         //if inactive for more than 10 minutes, make dot invisible
-        if(inactiveDuration() > 10){
-            dot.setVisibility(View.INVISIBLE);
-        }
+//        if(inactiveDuration() > 10){
+//            dot.setVisibility(View.INVISIBLE);
+//        }
 
     }
 
@@ -139,7 +139,7 @@ public class Dot {
     }
 
     //function to track how long user has been inactive
-    public long inactiveDuration(){
+    public long inactiveDuration(User user){
         //first get date from updatedAt
         //get epoch time to string
         String updatedAtString = valueOf(user.updatedAt);
