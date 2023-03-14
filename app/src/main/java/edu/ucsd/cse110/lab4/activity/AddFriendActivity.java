@@ -94,10 +94,7 @@ public class AddFriendActivity extends AppCompatActivity {
                 userLiveData.observe(this, this::onUserChanged);
 
                 // Display friend's name and uid
-                TextView labelView = findViewById(R.id.user_item_label);
-                TextView uidView = findViewById(R.id.user_item_uid);
-                labelView.setText(label);
-                uidView.setText(uniqueId);
+                displayUser(label, uniqueId);
             });
         });
 
@@ -106,6 +103,13 @@ public class AddFriendActivity extends AppCompatActivity {
     private void onUserChanged(User user) {
         label = user.label;
         uniqueId = user.uniqueID;
+    }
+
+    private void displayUser(String name, String uid) {
+        TextView labelView = findViewById(R.id.user_item_label);
+        TextView uidView = findViewById(R.id.user_item_uid);
+        labelView.setText(label);
+        uidView.setText(uniqueId);
     }
 
     @SuppressLint("RestrictedApi")
