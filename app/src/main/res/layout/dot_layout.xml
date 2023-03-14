@@ -28,19 +28,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/coord_dot" />
 
-    <TextView
-        android:id="@+id/labelView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:rotation="0"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@id/coordDot"
-        app:layout_constraintCircle="@+id/include"
-        app:layout_constraintCircleAngle="0"
-        app:layout_constraintCircleRadius="110dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

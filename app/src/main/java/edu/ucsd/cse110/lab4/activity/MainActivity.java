@@ -85,13 +85,20 @@ public class MainActivity extends AppCompatActivity {
         ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
         LayoutInflater inflater = getLayoutInflater();
         View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
-        TextView labelID = myLayout.findViewById(R.id.labelView);
         ImageView dotID = myLayout.findViewById(R.id.coordDot);
         ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) dotID.getLayoutParams();
-        labelID.setText("two");
-        layoutParams.circleAngle = 100;
+        layoutParams.circleRadius = 350;
+        layoutParams.circleAngle = 180;
         dotID.setLayoutParams(layoutParams);
         mainLayout.addView(myLayout);
+
+        View myLayout2 = inflater.inflate(R.layout.dot_layout, mainLayout, false);
+        ImageView dotID2 = myLayout2.findViewById(R.id.coordDot);
+        ConstraintLayout.LayoutParams layoutParams2 = (ConstraintLayout.LayoutParams) dotID2.getLayoutParams();
+        layoutParams2.circleRadius = 350;
+        layoutParams2.circleAngle = 100;
+        dotID2.setLayoutParams(layoutParams2);
+        mainLayout.addView(myLayout2);
 
 
     }

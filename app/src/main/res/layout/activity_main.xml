@@ -33,7 +33,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/compass_base" />
-    >
+
+        <include
+            android:id="@+id/dotInclude"
+            layout="@layout/dot_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintCircle="@+id/include"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+        >
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
@@ -46,14 +59,5 @@
         android:text="ADD FRIEND"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <include
-        android:id="@+id/dotInclude"
-        layout="@layout/dot_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="176dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
