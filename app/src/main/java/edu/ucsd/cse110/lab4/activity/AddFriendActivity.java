@@ -26,6 +26,8 @@ import edu.ucsd.cse110.lab4.viewmodel.ListViewModel;
 import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
 public class AddFriendActivity extends AppCompatActivity {
+    String label;
+    String uniqueId;
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     public RecyclerView recyclerView;
@@ -71,57 +73,44 @@ public class AddFriendActivity extends AppCompatActivity {
 
     private void setupAddButton(ListViewModel viewModel) {
         var addBtn = findViewById(R.id.user_add_btn);
-//        TextView labelView = findViewById(R.id.user_item_label);
-//        TextView uidView = findViewById(R.id.user_item_label);
 
         addBtn.setOnClickListener((View v) -> {
             var input = (EditText) findViewById(R.id.user_input_uid);
             assert input != null;
             var uid = input.getText().toString();
-            //Log.d("UID", uid);
+
             var user = viewModel.getOrCreateUser(uid);
-//            Log.d("Add", user.getValue().uniqueID);
+
             user.observe(this, userEntity -> {
                 user.removeObservers(this);
-//                labelView.setText(.label);
-//                uidView.setText(user.getValue().uniqueID);
-                //var liveUser = userViewModel.getUser(uid);
-                //onAddButtonClicked(userViewModel, userEntity);
-//               Log.d("After Add", userEntity.toString());
-//                var intent = UserActivity.intentFor(this, userEntity);
-//                startActivity(intent);
-//                labelView = findViewById(R.id.user_item_label);
-//                uidView = findViewById(R.id.user_item_uid);
-//                liveUser = userViewModel.getUser(uid);
-//                //labelView.setText(userEntity.label);
-//                uidView.setText(userEntity.uniqueID);
+                UserViewModel userViewModel = setupUserViewModel();
+                LiveData<User> userLiveData = userViewModel.getUser(uid);
+                // Wait for the data to update from remote
+                try {
+                    TimeUnit.SECONDS.sleep(3);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                userLiveData.observe(this, this::onUserChanged);
+
+                // Display friend's name and uid
+                displayUser(label, uniqueId);
             });
-//            var liveUser = userViewModel.getUser(uid);
-//            Log.d("Live User", liveUser.toString());
-//            onAddButtonClicked(userViewModel, liveUser);
-//             user.observe(this, this::onUserChanged);
         });
 
     }
 
-//    private void onUserChanged(User user) {
-//        TextView labelView = findViewById(R.id.user_item_label);
-//        TextView uidView = findViewById(R.id.user_item_uid);
-//        labelView.setText(user.label);
-//        uidView.setText(user.uniqueID);
-//    }
+    private void onUserChanged(User user) {
+        label = user.label;
+        uniqueId = user.uniqueID;
+    }
 
-//    void onAddButtonClicked(UserViewModel viewModel, User user) {
-////        Log.d("onAddButtonClicked", localUser.toString());
-//        LiveData<User> userLiveData = viewModel.getUser(user.uniqueID);
-//        //userLiveData.observe(this, this::onUserChanged);
-//        TextView labelView = findViewById(R.id.user_item_label);
-//        TextView uidView = findViewById(R.id.user_item_uid);
-//        labelView.setText("Label");
-//        //String uid = user.uniqueID;
-//        //uidView.setText(uid);
-//        Log.d("Add", user.toString());
-//    }
+    private void displayUser(String name, String uid) {
+        TextView labelView = findViewById(R.id.user_item_label);
+        TextView uidView = findViewById(R.id.user_item_uid);
+        labelView.setText(label);
+        uidView.setText(uniqueId);
+    }
 
     @SuppressLint("RestrictedApi")
     private void setupRecycler(UsersAdapter adapter) {

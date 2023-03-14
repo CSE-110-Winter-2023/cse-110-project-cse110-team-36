@@ -1,5 +1,9 @@
 package edu.ucsd.cse110.lab4.model;
+import static java.lang.String.valueOf;
+
 import android.app.Activity;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -8,6 +12,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.LiveData;
 
 import java.time.Instant;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.lab4.LocationService;
 import edu.ucsd.cse110.lab4.R;
@@ -61,6 +67,11 @@ public class Dot {
         label.setLayoutParams(layoutParams);
         label.setRotation(getAngle());
         label.setText(userlabel);
+
+        //if inactive for more than 10 minutes, make dot invisible
+        if(inactiveDuration() > 10){
+            dot.setVisibility(View.INVISIBLE);
+        }
 
     }
 
@@ -125,6 +136,36 @@ public class Dot {
             distanceVal = OUTER;
             updateDot();
         });
+    }
+
+    //function to track how long user has been inactive
+    public long inactiveDuration(){
+        //first get date from updatedAt
+        //get epoch time to string
+        String updatedAtString = valueOf(user.getValue().updatedAt);
+        //covert seconds to milliseconds
+        long seconds = Long.parseLong(updatedAtString);
+        //make date
+        Date dateUpdatedAt = new Date(seconds * 1000);
+        //simple date format
+        //SimpleDateFormat updatedAtDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //String updatedAtString = simpleDate.format(date);
+
+        //get current time and date
+        //LocalDateTime dateObj = LocalDateTime.now();
+        //DateTimeFormatter currentDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        Date dateCurrent = new Date();
+        //String currentTimeString = dateObj.format(formatDateObj);
+
+        //find time since this date
+        long diff = dateCurrent.getTime() - dateUpdatedAt.getTime();
+
+        //convert distance to minutes
+        long inactiveDurationMinutes = TimeUnit.MINUTES.convert(diff, TimeUnit.MILLISECONDS);
+
+        Log.d("inactive minutes", valueOf(inactiveDurationMinutes));
+
+        return inactiveDurationMinutes;
     }
 
 
