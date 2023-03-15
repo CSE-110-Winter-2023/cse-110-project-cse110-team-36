@@ -87,6 +87,7 @@ public class Dot {
     private void listenAngle() {
         locationService.getLocation().observe(activity, coords -> {
             dotRotateVal = locationService.getBearing(latVal, longVal);
+            updateDot();
         });
     }
 

@@ -75,12 +75,41 @@ public class OneZoomActivity extends AppCompatActivity {
         if (userList == null) {
             return;
         }
-
+//        String UID = "test36";
+//        String UID2 = "test37";
+//        LiveData<User> testUser = userViewModel.getUser(UID);
+//        UserViewModel userViewModel2 = new ViewModelProvider(this).get(UserViewModel.class);
+//        LiveData<User> testUser2 = userViewModel2.getUser(UID2);
+//        try {
+//            TimeUnit.SECONDS.sleep(5);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
+        LayoutInflater inflater = getLayoutInflater();
+//        View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
+//        TextView labelID = myLayout.findViewById(R.id.labelView);
+//        ImageView dotID = myLayout.findViewById(R.id.coordDot);
+//        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) dotID.getLayoutParams();
+//        labelID.setText("two");
+//        layoutParams.circleRadius = 350;
+//        layoutParams.circleAngle = 180;
+//        dotID.setLayoutParams(layoutParams);
+//        Dot dot = new Dot(testUser, locationService, compass, this, dotID, labelID);
+//        mainLayout.addView(myLayout);
+//
+//        View myLayout2 = inflater.inflate(R.layout.dot_layout, mainLayout, false);
+//        ImageView dotID2 = myLayout2.findViewById(R.id.coordDot);
+//        TextView labelID2 = myLayout2.findViewById(R.id.labelView);
+//        ConstraintLayout.LayoutParams layoutParams2 = (ConstraintLayout.LayoutParams) dotID2.getLayoutParams();
+//        layoutParams2.circleRadius = 350;
+//        layoutParams2.circleAngle = 100;
+//        dotID2.setLayoutParams(layoutParams2);
+//        Dot dot2 = new Dot(testUser2, locationService, compass, this, dotID2, labelID2);
+//        mainLayout.addView(myLayout2);
         for (User thisUser : userList) {
             String UID = thisUser.uniqueID;
             LiveData<User> currUser = userViewModel.getUser(UID);
-            ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
-            LayoutInflater inflater = getLayoutInflater();
             View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
             ImageView dotID = myLayout.findViewById(R.id.coordDot);
             TextView label = myLayout.findViewById(R.id.labelView);
