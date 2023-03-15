@@ -69,9 +69,9 @@ public class Dot {
         label.setText(userlabel);
 
         //if inactive for more than 10 minutes, make dot invisible
-        if(inactiveDuration() > 10){
-            dot.setVisibility(View.INVISIBLE);
-        }
+//        if(inactiveDuration() > 10){
+//            dot.setVisibility(View.INVISIBLE);
+//        }
 
     }
 

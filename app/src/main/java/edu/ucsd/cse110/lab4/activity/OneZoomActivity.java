@@ -1,10 +1,13 @@
 package edu.ucsd.cse110.lab4.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
@@ -15,6 +18,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 
 import java.util.List;
@@ -37,6 +41,7 @@ public class OneZoomActivity extends AppCompatActivity {
     ListViewModel viewModel;
     UserViewModel userViewModel;
     Compass compass;
+    List<User> userList;
 
     /*
      * Updates compass according to orientation, location, and entered values on profileActivity
@@ -56,18 +61,22 @@ public class OneZoomActivity extends AppCompatActivity {
         locationService = new LocationService(this);
         ImageView compass1 = findViewById(R.id.compass_base);
 
-        Compass compass = new Compass(locationService, orientationService, this, 1, compass1);
-        //addUsers();
+        compass = new Compass(locationService, orientationService, this, 1, compass1);
+        addUsers();
     }
 
 
     private void addUsers() {
-        LiveData<List<User>> userList = viewModel.getUsers();
-        List<User> users = userList.getValue();
-        if (users == null) {
+//        viewModel.getUsers().observe(this, users -> {
+//            userList = viewModel.getUsers().getValue();
+//        });
+        List<User> userList = viewModel.getAllUsers();
+
+        if (userList == null) {
             return;
         }
-        for (User thisUser : users) {
+
+        for (User thisUser : userList) {
             String UID = thisUser.uniqueID;
             LiveData<User> currUser = userViewModel.getUser(UID);
             ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);

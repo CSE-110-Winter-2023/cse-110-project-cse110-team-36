@@ -57,8 +57,16 @@ public class UserRepository {
         return dao.getAll();
     }
 
+    public List<User> getAllLocalUsers() {
+        return dao.getAllLocal();
+    }
+
+
     public void upsertLocal(User user) {
         user.updatedAt = Instant.now().getEpochSecond();
+        if (user.uniqueID == null) {
+            return;
+        }
         dao.upsert(user);
     }
 

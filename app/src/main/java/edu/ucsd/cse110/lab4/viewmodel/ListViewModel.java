@@ -34,6 +34,11 @@ public class ListViewModel extends AndroidViewModel {
         return users;
     }
 
+    public List<User> getAllUsers() {
+        return repo.getAllLocalUsers();
+    }
+
+
     public LiveData<User> getOrCreateUser(String public_code) {
         if (!repo.existsLocal(public_code)) {
             User user = new  User(public_code, "0", "0");
