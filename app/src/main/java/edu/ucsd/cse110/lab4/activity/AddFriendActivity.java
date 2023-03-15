@@ -75,7 +75,7 @@ public class AddFriendActivity extends AppCompatActivity {
         var addBtn = findViewById(R.id.user_add_btn);
 
         addBtn.setOnClickListener((View v) -> {
-            var input = (EditText) findViewById(R.id.user_input_uid);
+            var input = (EditText) findViewById(R.id.user_input_name);
             assert input != null;
             var uid = input.getText().toString();
 

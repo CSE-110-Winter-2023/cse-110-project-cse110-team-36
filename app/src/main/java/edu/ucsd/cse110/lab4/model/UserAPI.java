@@ -42,16 +42,15 @@ public class UserAPI {
             e.printStackTrace();
         }
 
-        return new User(public_code, "", "");
+        return new User(public_code," ", "", "");
     }
 
     public void putByPublicCode (User user) {
         //URLs cannot contain spaces, so we replace them with %20.
         String public_code = user.uniqueID;
         public_code = public_code.replace(" ", "%20");
-        String json = "{\"label\":\"" + user.label + "\",\"latitude\":\"" + user.latitude +
-                "\",\"longitude\":\"" + user.longitude + "\",\"updated_at\":\"" + Instant.now().getEpochSecond()
-                +"\"}";
+        String json = "{\"private_code\":\"" + user.uniqueID + "\",\"label\":\""
+                + user.label + "\",\"longitude\":\"" + user.longitude + "\"}";
 
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(json, JSON);

@@ -72,7 +72,7 @@ public class EspressoTestUS1 {
         materialButton.perform(click());
 
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.user_input_uid),
+                allOf(withId(R.id.user_input_name),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -82,7 +82,7 @@ public class EspressoTestUS1 {
         appCompatEditText.perform(replaceText("test"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.user_input_uid), withText("test"),
+                allOf(withId(R.id.user_input_name), withText("test"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -92,7 +92,7 @@ public class EspressoTestUS1 {
         appCompatEditText2.perform(click());
 
         ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.user_input_uid), withText("test"),
+                allOf(withId(R.id.user_input_name), withText("test"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -102,7 +102,7 @@ public class EspressoTestUS1 {
         appCompatEditText3.perform(replaceText("test37"));
 
         ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.user_input_uid), withText("test37"),
+                allOf(withId(R.id.user_input_name), withText("test37"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),

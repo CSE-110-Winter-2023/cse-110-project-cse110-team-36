@@ -201,4 +201,10 @@ public class MainActivity extends AppCompatActivity {
         TextView UIDView = this.findViewById(R.id.TextViewUID);
         UID = UIDView.getText().toString();
     }
+
+    public void onLaunchMyInfoClicked(View view) {
+        Intent intent = new Intent(this, MyInfoActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

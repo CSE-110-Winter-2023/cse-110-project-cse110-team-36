@@ -119,4 +119,10 @@ public class TwoZoomActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    public void onLaunchMyInfoClicked(View view) {
+        Intent intent = new Intent(this, DisplayUserActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

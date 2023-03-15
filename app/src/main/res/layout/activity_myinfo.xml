@@ -4,38 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AddFriendActivity">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle_user"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layoutManager="LinearLayoutManager"
-        app:layout_constraintVertical_bias="0.0" />
-
+    tools:context=".activity.MyInfoActivity">
 
     <EditText
         android:id="@+id/user_input_name"
         android:layout_width="280dp"
         android:layout_height="56dp"
         android:autofillHints=""
-        android:hint="@string/uid"
+        android:hint="NAME"
         android:inputType="text"
         android:maxLines="1"
-        app:layout_constraintBottom_toBottomOf="@+id/recycle_user"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.825" />
+        app:layout_constraintVertical_bias="0.816" />
 
     <Button
-        android:id="@+id/user_add_btn"
+        android:id="@+id/add_btn"
         android:layout_width="118dp"
         android:layout_height="52dp"
         android:text="@string/add"
@@ -47,16 +34,29 @@
         app:layout_constraintVertical_bias="0.917" />
 
     <Button
-        android:id="@+id/user_exit_btn"
+        android:id="@+id/clear_btn"
         android:layout_width="118dp"
         android:layout_height="52dp"
-        android:onClick="onExitClicked"
-        android:text="@string/exit"
+        android:onClick="onClearClicked"
+        android:text="clear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.774"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.917" />
+
+    <Button
+        android:id="@+id/exit_button"
+        android:layout_width="50dp"
+        android:layout_height="53dp"
+        android:text="x"
+        android:onClick="onExitClicked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

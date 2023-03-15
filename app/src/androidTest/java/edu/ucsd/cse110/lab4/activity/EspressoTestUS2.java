@@ -79,7 +79,7 @@ public class EspressoTestUS2 {
         materialButton.perform(click());
 
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.user_input_uid),
+                allOf(withId(R.id.user_input_name),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -133,7 +133,7 @@ public class EspressoTestUS2 {
         materialButton4.perform(click());
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.user_input_uid),
+                allOf(withId(R.id.user_input_name),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),

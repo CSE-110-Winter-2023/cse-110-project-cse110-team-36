@@ -59,7 +59,7 @@ public class MS2US1Tests {
         scenario.onActivity(activity -> {
             List<User> before =  dao.getAllLocal();
 
-            EditText public_code = activity.findViewById(R.id.user_input_uid);
+            EditText public_code = activity.findViewById(R.id.user_input_name);
             Button addBtn = activity.findViewById(R.id.user_add_btn);
 
             public_code.setText(newUID);
