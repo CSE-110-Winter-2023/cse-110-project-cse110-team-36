@@ -36,7 +36,7 @@ public class ListViewModel extends AndroidViewModel {
 
     public LiveData<User> getOrCreateUser(String public_code) {
         if (!repo.existsLocal(public_code)) {
-            User user = new  User(public_code," ", "0", "0");
+            User user = new  User(public_code, "0", "0");
             Log.d("getOrCreate", user.toString());
             repo.upsertLocal(user);
         }

@@ -118,7 +118,7 @@ public class OneZoomActivity extends AppCompatActivity {
     }
 
     public void onLaunchMyInfoClicked(View view) {
-        Intent intent = new Intent(this, MyInfoActivity.class);
+        Intent intent = new Intent(this, DisplayUserActivity.class);
         startActivity(intent);
         finish();
     }

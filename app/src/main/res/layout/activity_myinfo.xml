@@ -25,7 +25,7 @@
         android:id="@+id/add_btn"
         android:layout_width="118dp"
         android:layout_height="52dp"
-        android:text="@string/add"
+        android:text="Create"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.221"

@@ -89,9 +89,8 @@ public class User {
 ////        this.friends = friends;
 //    }
 
-    public User(@NotNull String uniqueID, String label, @NotNull String latitude, @NotNull String longitude) {
+    public User(@NotNull String uniqueID, @NotNull String latitude, @NotNull String longitude) {
         this.uniqueID = uniqueID;
-        this.label = label;
         this.latitude = latitude;
         this.longitude = longitude;
         this.updatedAt = 0;

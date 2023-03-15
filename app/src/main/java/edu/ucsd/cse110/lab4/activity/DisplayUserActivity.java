@@ -28,49 +28,56 @@ import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
 public class DisplayUserActivity extends AppCompatActivity {
 
-    private LiveData<User> user;
+    public LiveData<User> user;
     TextView nameTextView;
     TextView uidTextView;
-
-    static String name;
-
-    String id;
+    String label;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_displayuser);
 
-        nameTextView = findViewById(R.id.user_input_name);
+        nameTextView = findViewById(R.id.user_name);
         uidTextView = findViewById(R.id.user_uid);
 
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//        id = preferences.getString("myUUID","");
-//        name = preferences.getString("myName", "");
-//
-//        display(name, id);
+        loadProfile();
+        disabledEdit();
 
         String uuid = getIntent().getStringExtra("UUID");
-        display(name, uuid);
         var viewModel = setupViewModel();
-        user = viewModel.getUser(uuid);
 
-        user.observe(this, this::onUserChanged);
+        user = viewModel.getUser(uuid);
     }
 
-    private void onUserChanged(User user) {
-        name = user.label;
+
+    private void loadProfile() {
+        SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
+        String id = preferences.getString("myUUID","");
+        String name = preferences.getString("myName", "");
+        display(name, id);
     }
 
     @SuppressLint("SetTextI18n")
     private void display(String name, String uuid) {
-        nameTextView.setText("Name: " + name);
-        uidTextView.setText("UID : " + uuid);
+        nameTextView.setText(name);
+        uidTextView.setText(uuid);
+    }
+
+    private void disabledEdit() {
+        uidTextView.setFocusable(false);
+        uidTextView.setCursorVisible(false);
+        uidTextView.setKeyListener(null);
+
+        nameTextView.setFocusable(false);
+        nameTextView.setCursorVisible(false);
+        nameTextView.setKeyListener(null);
     }
 
     private UserViewModel setupViewModel() {
         return new ViewModelProvider(this).get(UserViewModel.class);
     }
+
     public void onExitClicked (View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -83,10 +90,9 @@ public class DisplayUserActivity extends AppCompatActivity {
         finish();
     }
 
-    public static Intent intentFor(Context context, User user, String label) {
+    public static Intent intentFor(Context context, User user) {
         var intent = new Intent(context, DisplayUserActivity.class);
         intent.putExtra("UUID", user.uniqueID);
-        name = label;
         return intent;
     }
 

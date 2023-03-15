@@ -62,14 +62,18 @@ public class MyInfoActivity extends AppCompatActivity {
             String name = userInput.getText().toString();
             String uuid = UUID.randomUUID().toString();
 
-            // Save preferences
-//            editor.putString("myUUID", uuid);
-//            editor.putString("myName", name);
-//            editor.commit();
+            SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            //Save preferences
+            editor.putString("myUUID", uuid);
+            editor.putString("myName", name);
+            editor.apply();
 
             var user = viewModel.getOrCreateUser(uuid);
             user.observe(this, userEntity -> {
                 userEntity.label = name;
+                userEntity.longitude = "10";
+                userEntity.latitude ="10";
 //                locationService.getLocation().observe(this, coords -> {
 //                    String latitude = Double.toString(coords.first);
 //                    String longitude = Double.toString(coords.second);
@@ -90,7 +94,7 @@ public class MyInfoActivity extends AppCompatActivity {
 
 
                 //user.removeObservers(this);
-                var intent = DisplayUserActivity.intentFor(this, userEntity, userEntity.label);
+                var intent = DisplayUserActivity.intentFor(this, userEntity);
                 startActivity(intent);
             });
 

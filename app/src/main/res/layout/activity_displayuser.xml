@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/user_input_name"
+        android:id="@+id/user_name"
         android:layout_width="280dp"
         android:layout_height="56dp"
         android:autofillHints=""
@@ -21,13 +21,14 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.408" />
 
     <EditText
         android:id="@+id/user_uid"
         android:layout_width="280dp"
         android:layout_height="56dp"
         android:autofillHints=""
+        android:clickable="false"
         android:hint="@string/uid"
         android:inputType="text"
         android:maxLines="1"
@@ -35,8 +36,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_input_name"
-        app:layout_constraintVertical_bias="0.07" />
+        app:layout_constraintTop_toBottomOf="@+id/user_name"
+        app:layout_constraintVertical_bias="0.191" />
 
     <Button
         android:id="@+id/edit_button"
@@ -76,6 +77,35 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="82dp"
+        android:layout_height="35dp"
+        android:text="Name"
+        android:textAllCaps="true"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/user_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/UID"
+        android:layout_width="82dp"
+        android:layout_height="35dp"
+        android:text="UUID"
+        android:textAllCaps="true"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/user_uid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_name"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
