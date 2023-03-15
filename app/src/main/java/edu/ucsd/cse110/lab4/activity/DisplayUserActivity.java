@@ -66,11 +66,11 @@ public class DisplayUserActivity extends AppCompatActivity {
 
     private void disabledEdit() {
         uidTextView.setFocusable(false);
-        uidTextView.setCursorVisible(false);
+        uidTextView.setTextIsSelectable(true);
         uidTextView.setKeyListener(null);
 
         nameTextView.setFocusable(false);
-        nameTextView.setCursorVisible(false);
+
         nameTextView.setKeyListener(null);
     }
 
@@ -79,7 +79,7 @@ public class DisplayUserActivity extends AppCompatActivity {
     }
 
     public void onExitClicked (View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, TwoZoomActivity.class);
         startActivity(intent);
         finish();
     }

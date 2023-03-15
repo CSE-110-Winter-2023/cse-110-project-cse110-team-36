@@ -72,8 +72,8 @@ public class MyInfoActivity extends AppCompatActivity {
             var user = viewModel.getOrCreateUser(uuid);
             user.observe(this, userEntity -> {
                 userEntity.label = name;
-                userEntity.longitude = "10";
-                userEntity.latitude ="10";
+//                userEntity.longitude = "10";
+//                userEntity.latitude ="10";
 //                locationService.getLocation().observe(this, coords -> {
 //                    String latitude = Double.toString(coords.first);
 //                    String longitude = Double.toString(coords.second);

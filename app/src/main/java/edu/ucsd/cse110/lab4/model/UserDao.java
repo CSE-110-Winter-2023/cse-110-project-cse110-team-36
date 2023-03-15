@@ -21,6 +21,9 @@ public abstract class UserDao {
     @Query("SELECT * FROM `users` WHERE `uniqueID` = :uniqueID")
     public abstract LiveData<User> get(String uniqueID);
 
+    @Query("SELECT * FROM `users` WHERE `uniqueID` = :uniqueID")
+    public abstract User getLocal(String uniqueID);
+
     @Query("SELECT * FROM `users` ORDER BY `uniqueID`")
     public abstract LiveData<List<User>> getAll();
 

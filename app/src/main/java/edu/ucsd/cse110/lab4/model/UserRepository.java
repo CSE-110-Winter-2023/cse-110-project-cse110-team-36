@@ -94,4 +94,8 @@ public class UserRepository {
     public void deleteLocal(User user) {
         dao.delete(user);
     }
+
+    public User getUserLocal(String uniqueID) {
+        return dao.getLocal(uniqueID);
+    }
 }

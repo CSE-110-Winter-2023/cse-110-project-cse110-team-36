@@ -17,6 +17,7 @@ import edu.ucsd.cse110.lab4.model.UserRepository;
 
 public class UserViewModel extends AndroidViewModel {
     private LiveData<User> user;
+    private User userLocal;
     private LiveData<List<User>> users;
     private final UserRepository repo;
 
@@ -38,6 +39,13 @@ public class UserViewModel extends AndroidViewModel {
 
     public void add(User user) {
         repo.upsertSynced(user);
+    }
+
+    public User getUserLocal (String public_code) {
+        if (userLocal == null) {
+            userLocal = repo.getUserLocal(public_code);
+        }
+        return userLocal;
     }
 
 }
