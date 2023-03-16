@@ -31,7 +31,6 @@ public class DisplayUserActivity extends AppCompatActivity {
     public LiveData<User> user;
     TextView nameTextView;
     TextView uidTextView;
-    String label;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

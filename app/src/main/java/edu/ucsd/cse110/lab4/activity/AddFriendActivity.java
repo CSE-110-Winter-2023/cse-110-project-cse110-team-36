@@ -31,7 +31,6 @@ import edu.ucsd.cse110.lab4.viewmodel.ListViewModel;
 import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
 public class AddFriendActivity extends AppCompatActivity {
-    //String label;
     String uniqueId;
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
@@ -41,10 +40,6 @@ public class AddFriendActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addfriend);
-
-        // This one is for testing purpose
-//        List<User> users = User.loadJSON(this, "db_demo.json");
-//        Log.d("UserActivity", users.toString());
 
         var viewModel = setupViewModel();
         var adapter = setupAdapter(viewModel);
@@ -64,7 +59,6 @@ public class AddFriendActivity extends AppCompatActivity {
     private UsersAdapter setupAdapter(ListViewModel viewModel) {
         UsersAdapter adapter = new UsersAdapter();
         adapter.setHasStableIds(true);
-        //adapter.setOnLabelClickedHandler(note -> onLabelClicked(note, viewModel));
         adapter.setOnUserDeleteClickListener(note -> onUserDeleteClicked(note, viewModel));
         viewModel.getUsers().observe(this, adapter::setUsers);
         return adapter;
@@ -97,6 +91,7 @@ public class AddFriendActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 userLiveData.observe(this, this::onUserChanged);
+
                 // Display friend's name and uid
                 displayUser(uniqueId);
             });
@@ -105,14 +100,11 @@ public class AddFriendActivity extends AppCompatActivity {
     }
 
     private void onUserChanged(User user) {
-       //label = user.label;
         uniqueId = user.uniqueID;
     }
 
     private void displayUser(String uid) {
-        //TextView labelView = findViewById(R.id.user_item_label);
         TextView uidView = findViewById(R.id.user_item_uid);
-        //labelView.setText(label);
         uidView.setText(uid);
     }
 
