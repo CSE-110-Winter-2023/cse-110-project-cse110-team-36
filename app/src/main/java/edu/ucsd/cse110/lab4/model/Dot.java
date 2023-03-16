@@ -103,9 +103,8 @@ public class Dot {
                     //else, return fraction w/in circle.
                     if (distance > ONE_MILE) {
                         distance = ONE_MILE;
-                    } else {
-                        distanceVal = (distance/ONE_MILE) * OUTER;
                     }
+                    distanceVal = (distance/ONE_MILE) * OUTER;
                     break;
                 case 2:
                     //if 0-1 miles away, put w/in first circle
@@ -136,7 +135,6 @@ public class Dot {
                 default:
                     distanceVal = OUTER;
             }
-            distanceVal = OUTER;
             updateDot();
         });
     }
