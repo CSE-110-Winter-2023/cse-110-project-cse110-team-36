@@ -48,22 +48,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getPermissions();
 
         // User open the app for the first time
         firstTimeOpenApp();
-
-        Intent intent = new Intent(this, TwoZoomActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-
-    private void getPermissions() {
-        if ((ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-                && (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 200);
-        }
     }
 
     public void firstTimeOpenApp() {
@@ -75,8 +62,14 @@ public class MainActivity extends AppCompatActivity {
         if (!isAccessed) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean(getString(R.string.is_accessed), Boolean.TRUE);
-            editor.apply();
+            editor.commit();
             startActivity(new Intent(this, MyInfoActivity.class));
+        }
+
+        if (isAccessed) {
+            Intent intent = new Intent(this, TwoZoomActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

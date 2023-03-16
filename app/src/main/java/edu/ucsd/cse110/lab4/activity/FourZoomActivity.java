@@ -63,6 +63,7 @@ public class FourZoomActivity extends AppCompatActivity {
         compass = new Compass(locationService, orientationService, this, 4, compass1);
         addUsers();
         updateMyLocation();
+        checkMyStatus();
     }
 
 
