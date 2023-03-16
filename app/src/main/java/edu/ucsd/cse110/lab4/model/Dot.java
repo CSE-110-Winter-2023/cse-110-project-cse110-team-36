@@ -123,11 +123,13 @@ public class Dot {
                     //10+, put on outer (and dont show name)
                     if (distance < ONE_MILE) {
                         distanceVal = (distance/ONE_MILE) * TWOZ_FIRST;
+                        labelVis = true;
                     } else if (distance > TEN_MILE) {
                         distanceVal = OUTER;
                         labelVis = false;
                     } else {
                         distanceVal = distance/TEN_MILE * (OUTER-TWOZ_FIRST) + TWOZ_FIRST;
+                        labelVis = true;
                     }
                     break;
                 case 3:
@@ -137,10 +139,13 @@ public class Dot {
                     //500+, put on outer (and dont show name)
                     if (distance < ONE_MILE) {
                         distanceVal = (distance/ONE_MILE) * THREEZ_FIRST;
+                        labelVis = true;
                     } else if ((distance > ONE_MILE) && (distance < TEN_MILE)) {
                         distanceVal = ((distance/TEN_MILE) * (THREEZ_SECOND - THREEZ_FIRST)) + THREEZ_FIRST;
+                        labelVis = true;
                     } else if ((distance > TEN_MILE) && (distance < FIVEHUN_MILE)) {
                         distanceVal = ((distance/FIVEHUN_MILE) * (OUTER - THREEZ_SECOND)) + THREEZ_SECOND;
+                        labelVis = true;
                     } else {
                         distanceVal = OUTER;
                         labelVis = false;
@@ -153,16 +158,21 @@ public class Dot {
                     //500+, put on outer (and dont show name)
                     if (distance < ONE_MILE) {
                         distanceVal = (distance/ONE_MILE) * THREEZ_FIRST;
+                        labelVis = true;
                     } else if ((distance > ONE_MILE) && (distance < TEN_MILE)) {
                         distanceVal = ((distance/TEN_MILE) * (THREEZ_SECOND - THREEZ_FIRST)) + THREEZ_FIRST;
+                        labelVis = true;
                     } else if ((distance > TEN_MILE) && (distance < FIVEHUN_MILE)) {
                         distanceVal = ((distance/FIVEHUN_MILE) * (OUTER - THREEZ_SECOND)) + THREEZ_SECOND;
+                        labelVis = true;
                     } else {
                         distanceVal = OUTER;
+                        labelVis = true;
                     }
                     break;
                 default:
                     distanceVal = OUTER;
+                    labelVis = true;
             }
             updateDot();
         });
