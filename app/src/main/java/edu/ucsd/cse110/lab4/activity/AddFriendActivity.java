@@ -37,10 +37,6 @@ public class AddFriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addfriend);
 
-        // This one is for testing purpose
-//        List<User> users = User.loadJSON(this, "db_demo.json");
-//        Log.d("UserActivity", users.toString());
-
         var viewModel = setupViewModel();
         var adapter = setupAdapter(viewModel);
 
@@ -59,12 +55,10 @@ public class AddFriendActivity extends AppCompatActivity {
     private UsersAdapter setupAdapter(ListViewModel viewModel) {
         UsersAdapter adapter = new UsersAdapter();
         adapter.setHasStableIds(true);
-        //adapter.setOnLabelClickedHandler(note -> onLabelClicked(note, viewModel));
         adapter.setOnUserDeleteClickListener(note -> onUserDeleteClicked(note, viewModel));
         viewModel.getUsers().observe(this, adapter::setUsers);
         return adapter;
     }
-
 
     private void setupViews(ListViewModel viewModel, UsersAdapter adapter) {
         setupRecycler(adapter);
@@ -94,10 +88,9 @@ public class AddFriendActivity extends AppCompatActivity {
                 userLiveData.observe(this, this::onUserChanged);
 
                 // Display friend's name and uid
-                displayUser(label, uniqueId);
+                displayUser();
             });
         });
-
     }
 
     private void onUserChanged(User user) {
@@ -105,7 +98,7 @@ public class AddFriendActivity extends AppCompatActivity {
         uniqueId = user.uniqueID;
     }
 
-    private void displayUser(String name, String uid) {
+    private void displayUser() {
         TextView labelView = findViewById(R.id.user_item_label);
         TextView uidView = findViewById(R.id.user_item_uid);
         labelView.setText(label);
@@ -131,6 +124,4 @@ public class AddFriendActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-
 }

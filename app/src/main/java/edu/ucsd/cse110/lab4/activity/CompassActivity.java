@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -41,7 +40,7 @@ public class CompassActivity extends AppCompatActivity {
     float dotRotateVal;
     boolean mockedOrientation = false;
 
-    String userlabel;
+    String userLabel;
     String UID;
     LiveData<User> user;
     UserViewModel viewModel;
@@ -89,16 +88,16 @@ public class CompassActivity extends AppCompatActivity {
     private void onUserChanged(User user) {
         latVal = Float.parseFloat(user.latitude);
         longVal = Float.parseFloat(user.longitude);
-        userlabel = user.label;
+        userLabel = user.label;
         TextView labelView = this.findViewById(R.id.labelView2);
-        labelView.setText(userlabel);
+        labelView.setText(userLabel);
 
     }
 
     private void locationUpdate(ConstraintLayout.LayoutParams layoutParams,
                                 ConstraintLayout.LayoutParams layoutParams1,
                                 ImageView redDot, TextView label) {
-        locationService.getLocation().observe(this, coords -> {
+        locationService.getLocation().observe(this, coordinates -> {
             // get "bearing" - angle between phone's location and destination
             dotRotateVal = locationService.getBearing(latVal, longVal);
             // update red dot's rotation by north's rotation + bearing
@@ -109,8 +108,8 @@ public class CompassActivity extends AppCompatActivity {
             if (distance > 160934) {
                 distance = 160934;
             }
-            float distanceFrac = distance / 160934;
-            layoutParams.circleRadius = (int) ((distanceFrac) * 350);
+            float distanceFraction = distance / 160934;
+            layoutParams.circleRadius = (int) ((distanceFraction) * 350);
             // end calc distance
             redDot.setLayoutParams(layoutParams);
             layoutParams1.circleAngle = (northRotateVal + dotRotateVal);
@@ -197,7 +196,6 @@ public class CompassActivity extends AppCompatActivity {
         orientationService.unregisterSensorListeners();
     }
 
-
     /*
      * Begins profileActivity when "list" is clicked
      */
@@ -220,12 +218,6 @@ public class CompassActivity extends AppCompatActivity {
 
         image = findViewById(R.id.compass_base2);
         image.startAnimation(animationZoomIn);
-
-//        image = findViewById(R.id.compass_base3);
-//        image.startAnimation(animationZoomIn);
-//
-//        image = findViewById(R.id.compass_base4);
-//        image.startAnimation(animationZoomIn);
     }
 
 
@@ -237,11 +229,5 @@ public class CompassActivity extends AppCompatActivity {
 
         image = findViewById(R.id.compass_base2);
         image.startAnimation(animationZoomOut);
-
-//        image = findViewById(R.id.compass_base3);
-//        image.startAnimation(animationZoomOut);
-//
-//        image = findViewById(R.id.compass_base4);
-//        image.startAnimation(animationZoomOut);
     }
 }

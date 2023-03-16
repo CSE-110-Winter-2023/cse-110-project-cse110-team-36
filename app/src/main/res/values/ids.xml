@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="status_main" type="id" />
+    <item name="offline_main" type="id" />
+    <item name="online_main" type="id" />
+</resources>
