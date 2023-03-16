@@ -53,22 +53,27 @@ public class ThreeZoomActivity extends AppCompatActivity {
         locationService = new LocationService(this);
         ImageView compass1 = findViewById(R.id.compass_base);
 
-        Compass compass = new Compass(locationService, orientationService, this, 3, compass1);
-        //addUsers();
+        compass = new Compass(locationService, orientationService, this, 3, compass1);
+        addUsers();
     }
 
 
     private void addUsers() {
-        LiveData<List<User>> userList = viewModel.getUsers();
-        List<User> users = userList.getValue();
-        if (users == null) {
+        List<User> userList = viewModel.getAllUsers();
+
+        if (userList == null) {
             return;
         }
-        for (User thisUser : users) {
+
+        ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
+        LayoutInflater inflater = getLayoutInflater();
+
+
+
+        for (User thisUser : userList) {
             String UID = thisUser.uniqueID;
-            LiveData<User> currUser = userViewModel.getUser(UID);
-            ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
-            LayoutInflater inflater = getLayoutInflater();
+            UserViewModel currViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+            LiveData<User> currUser = currViewModel.getUser(UID);
             View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
             ImageView dotID = myLayout.findViewById(R.id.coordDot);
             TextView label = myLayout.findViewById(R.id.labelView);

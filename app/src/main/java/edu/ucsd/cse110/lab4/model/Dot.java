@@ -27,7 +27,7 @@ public class Dot {
     private final float ONE_MILE = 1609.34f;
     private final float TEN_MILE = 16093.4f;
     private final float FIVEHUN_MILE = 804672f;
-    private final float OUTER = 350;
+    private final float OUTER = 425;
     private final float TWOZ_FIRST = 50;
     private final float THREEZ_FIRST = 20;
     private final float THREEZ_SECOND = 50;

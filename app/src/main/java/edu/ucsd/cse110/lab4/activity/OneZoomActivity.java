@@ -43,8 +43,6 @@ public class OneZoomActivity extends AppCompatActivity {
     ListViewModel viewModel;
     UserViewModel userViewModel;
     Compass compass;
-    //List<Dot> dotList;
-    //List<UserViewModel> viewModels;
 
     /*
      * Updates compass according to orientation, location, and entered values on profileActivity
@@ -56,9 +54,6 @@ public class OneZoomActivity extends AppCompatActivity {
 
 
         getPermissions();
-
-        //dotList = new ArrayList<Dot>();
-        //viewModels = new ArrayList<UserViewModel>();
 
         viewModel = new ViewModelProvider(this).get(ListViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
@@ -73,42 +68,28 @@ public class OneZoomActivity extends AppCompatActivity {
 
 
     private void addUsers() {
-//        viewModel.getUsers().observe(this, users -> {
-//            userList = viewModel.getUsers().getValue();
-//        });
         List<User> userList = viewModel.getAllUsers();
 
         if (userList == null) {
             return;
         }
-//        try {
-//            TimeUnit.SECONDS.sleep(5);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+
         ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
         LayoutInflater inflater = getLayoutInflater();
 
-//
+
 
         for (User thisUser : userList) {
             String UID = thisUser.uniqueID;
             UserViewModel currViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-            //viewModels.add(currViewModel);
             LiveData<User> currUser = currViewModel.getUser(UID);
             View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
             ImageView dotID = myLayout.findViewById(R.id.coordDot);
             TextView label = myLayout.findViewById(R.id.labelView);
             Dot dot = new Dot(currUser, locationService, compass, this, dotID, label);
-            //dotList.add(dot);
-            //currUser.observe(this, this::onUserChanged);
             mainLayout.addView(myLayout);
         }
         return;
-    }
-
-    private void onUserChanged(User user) {
-        Log.v("zoom", "changed");
     }
 
     private void getPermissions() {
