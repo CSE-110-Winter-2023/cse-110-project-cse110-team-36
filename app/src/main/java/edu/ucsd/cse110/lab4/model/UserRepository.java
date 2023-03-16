@@ -1,5 +1,6 @@
 package edu.ucsd.cse110.lab4.model;
 
+import android.app.Activity;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -13,11 +14,14 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import edu.ucsd.cse110.lab4.activity.AddFriendActivity;
+
 public class UserRepository {
     private final UserDao dao;
     private UserAPI api;
     private ScheduledExecutorService scheduler;
     private ScheduledFuture<?> scheduledFuture = null;
+    Activity AddFriendActivity;
 
     public UserRepository(UserDao dao) {
         this.dao = dao;
@@ -29,11 +33,11 @@ public class UserRepository {
         MediatorLiveData<User> user = new MediatorLiveData<User>();
 
         Observer<User> updateFromRemote = theirUser -> {
-//            if (theirUser == null) return;
-              User ourUser = user.getValue();
-              if (ourUser == null)  {
+            if (theirUser == null) return;
+            User ourUser = user.getValue();
+            if (ourUser == null && theirUser.uniqueID != null)  {
                 upsertLocal(theirUser);
-              }
+            }
         };
 
         // If we get a local update, pass it on.

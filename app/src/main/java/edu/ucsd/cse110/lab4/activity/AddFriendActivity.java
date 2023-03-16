@@ -84,6 +84,7 @@ public class AddFriendActivity extends AppCompatActivity {
             user.observe(this, userEntity -> {
                 user.removeObservers(this);
                 UserViewModel userViewModel = setupUserViewModel();
+
                 LiveData<User> userLiveData = userViewModel.getUser(uid);
                 // Wait for the data to update from remote
                 try {
@@ -91,6 +92,7 @@ public class AddFriendActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 userLiveData.observe(this, this::onUserChanged);
 
                 // Display friend's name and uid
@@ -101,8 +103,13 @@ public class AddFriendActivity extends AppCompatActivity {
     }
 
     private void onUserChanged(User user) {
-        label = user.label;
+        if (user.label != null) {
+            label = user.label;
+        } else  {
+            label = " ";
+        }
         uniqueId = user.uniqueID;
+
     }
 
     private void displayUser(String name, String uid) {
