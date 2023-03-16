@@ -15,12 +15,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -41,7 +43,8 @@ public class OneZoomActivity extends AppCompatActivity {
     ListViewModel viewModel;
     UserViewModel userViewModel;
     Compass compass;
-    List<User> userList;
+    //List<Dot> dotList;
+    //List<UserViewModel> viewModels;
 
     /*
      * Updates compass according to orientation, location, and entered values on profileActivity
@@ -53,6 +56,9 @@ public class OneZoomActivity extends AppCompatActivity {
 
 
         getPermissions();
+
+        //dotList = new ArrayList<Dot>();
+        //viewModels = new ArrayList<UserViewModel>();
 
         viewModel = new ViewModelProvider(this).get(ListViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
@@ -75,11 +81,6 @@ public class OneZoomActivity extends AppCompatActivity {
         if (userList == null) {
             return;
         }
-//        String UID = "test36";
-//        String UID2 = "test37";
-//        LiveData<User> testUser = userViewModel.getUser(UID);
-//        UserViewModel userViewModel2 = new ViewModelProvider(this).get(UserViewModel.class);
-//        LiveData<User> testUser2 = userViewModel2.getUser(UID2);
 //        try {
 //            TimeUnit.SECONDS.sleep(5);
 //        } catch (InterruptedException e) {
@@ -87,38 +88,27 @@ public class OneZoomActivity extends AppCompatActivity {
 //        }
         ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.include);
         LayoutInflater inflater = getLayoutInflater();
-//        View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
-//        TextView labelID = myLayout.findViewById(R.id.labelView);
-//        ImageView dotID = myLayout.findViewById(R.id.coordDot);
-//        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) dotID.getLayoutParams();
-//        labelID.setText("two");
-//        layoutParams.circleRadius = 350;
-//        layoutParams.circleAngle = 180;
-//        dotID.setLayoutParams(layoutParams);
-//        Dot dot = new Dot(testUser, locationService, compass, this, dotID, labelID);
-//        mainLayout.addView(myLayout);
+
 //
-//        View myLayout2 = inflater.inflate(R.layout.dot_layout, mainLayout, false);
-//        ImageView dotID2 = myLayout2.findViewById(R.id.coordDot);
-//        TextView labelID2 = myLayout2.findViewById(R.id.labelView);
-//        ConstraintLayout.LayoutParams layoutParams2 = (ConstraintLayout.LayoutParams) dotID2.getLayoutParams();
-//        layoutParams2.circleRadius = 350;
-//        layoutParams2.circleAngle = 100;
-//        dotID2.setLayoutParams(layoutParams2);
-//        Dot dot2 = new Dot(testUser2, locationService, compass, this, dotID2, labelID2);
-//        mainLayout.addView(myLayout2);
+
         for (User thisUser : userList) {
             String UID = thisUser.uniqueID;
             UserViewModel currViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+            //viewModels.add(currViewModel);
             LiveData<User> currUser = currViewModel.getUser(UID);
             View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
             ImageView dotID = myLayout.findViewById(R.id.coordDot);
             TextView label = myLayout.findViewById(R.id.labelView);
             Dot dot = new Dot(currUser, locationService, compass, this, dotID, label);
-            //currUser.observe(this, dot::onUserChanged);
+            //dotList.add(dot);
+            //currUser.observe(this, this::onUserChanged);
             mainLayout.addView(myLayout);
         }
         return;
+    }
+
+    private void onUserChanged(User user) {
+        Log.v("zoom", "changed");
     }
 
     private void getPermissions() {

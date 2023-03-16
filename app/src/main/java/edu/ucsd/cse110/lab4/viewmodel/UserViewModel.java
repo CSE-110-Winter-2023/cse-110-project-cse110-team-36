@@ -16,22 +16,24 @@ import edu.ucsd.cse110.lab4.model.UserDatabase;
 import edu.ucsd.cse110.lab4.model.UserRepository;
 
 public class UserViewModel extends AndroidViewModel {
-    private LiveData<User> user;
+    //private LiveData<User> user;
     private LiveData<List<User>> users;
     private final UserRepository repo;
+    private UserDao dao;
 
 
     public UserViewModel(@NonNull Application application) {
         super(application);
         Context context = application.getApplicationContext();
         UserDatabase db = UserDatabase.provide(context);
-        UserDao dao = db.getDao();
+        dao = db.getDao();
         this.repo = new UserRepository(dao);
     }
 
     public LiveData<User> getUser(String public_code) {
         //if (user == null) {
-            user = repo.getSynced(public_code);
+        UserRepository newRepo = new UserRepository(dao);
+        LiveData<User> user = newRepo.getSynced(public_code);
         //}
         return user;
     }
