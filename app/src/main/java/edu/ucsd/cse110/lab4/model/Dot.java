@@ -38,6 +38,8 @@ public class Dot {
     private float latVal;
     private float longVal;
     private String userlabel;
+    private boolean labelVis;
+    private long inactiveNum;
 
 
     public Dot(LiveData<User> user, LocationService locationService, Compass compass, AppCompatActivity activity, ImageView dot, TextView label) {
@@ -49,6 +51,7 @@ public class Dot {
         this.label = label;
         this.listenAngle();
         this.listenDistance(compass.zoomLevel);
+        this.labelVis = true;
         layoutParams = (ConstraintLayout.LayoutParams) dot.getLayoutParams();
 
         user.observe(activity, this::onUserChanged);
@@ -59,6 +62,7 @@ public class Dot {
         latVal = Float.parseFloat(userInstance.latitude);
         longVal = Float.parseFloat(userInstance.longitude);
         userlabel = userInstance.label;
+        //inactiveNum = inactiveDuration(userInstance.updatedAt);
         updateDot();
     }
 
@@ -70,9 +74,17 @@ public class Dot {
         label.setRotation(getAngle());
         label.setText(userlabel);
 
+        if (labelVis) {
+            label.setVisibility(View.VISIBLE);
+        } else {
+            label.setVisibility(View.INVISIBLE);
+        }
+
         //if inactive for more than 10 minutes, make dot invisible
-//        if(inactiveDuration() > 10){
+//        if(inactiveNum > 10){
 //            dot.setVisibility(View.INVISIBLE);
+//        } else {
+//            dot.setVisibility(View.VISIBLE);
 //        }
 
     }
@@ -103,6 +115,7 @@ public class Dot {
                     //else, return fraction w/in circle.
                     if (distance > ONE_MILE) {
                         distance = ONE_MILE;
+                        labelVis = false;
                     }
                     distanceVal = (distance/ONE_MILE) * OUTER;
                     break;
@@ -114,11 +127,27 @@ public class Dot {
                         distanceVal = (distance/ONE_MILE) * TWOZ_FIRST;
                     } else if (distance > TEN_MILE) {
                         distanceVal = OUTER;
+                        labelVis = false;
                     } else {
                         distanceVal = distance/TEN_MILE * (OUTER-TWOZ_FIRST) + TWOZ_FIRST;
                     }
                     break;
                 case 3:
+                    //if 0-1 miles away, put w/in first circle
+                    //1-10, put within second
+                    //10-500, put within third
+                    //500+, put on outer (and dont show name)
+                    if (distance < ONE_MILE) {
+                        distanceVal = (distance/ONE_MILE) * THREEZ_FIRST;
+                    } else if ((distance > ONE_MILE) && (distance < TEN_MILE)) {
+                        distanceVal = ((distance/TEN_MILE) * (THREEZ_SECOND - THREEZ_FIRST)) + THREEZ_FIRST;
+                    } else if ((distance > TEN_MILE) && (distance < FIVEHUN_MILE)) {
+                        distanceVal = ((distance/FIVEHUN_MILE) * (OUTER - THREEZ_SECOND)) + THREEZ_SECOND;
+                    } else {
+                        distanceVal = OUTER;
+                        labelVis = false;
+                    }
+                    break;
                 case 4:
                     //if 0-1 miles away, put w/in first circle
                     //1-10, put within second
@@ -142,12 +171,7 @@ public class Dot {
     }
 
     //function to track how long user has been inactive
-    public long inactiveDuration(){
-        //first get date from updatedAt
-        //get epoch time to string
-        String updatedAtString = valueOf(user.getValue().updatedAt);
-        //covert seconds to milliseconds
-        long seconds = Long.parseLong(updatedAtString);
+    public long inactiveDuration(Long seconds){
         //make date
         Date dateUpdatedAt = new Date(seconds * 1000);
         //simple date format
