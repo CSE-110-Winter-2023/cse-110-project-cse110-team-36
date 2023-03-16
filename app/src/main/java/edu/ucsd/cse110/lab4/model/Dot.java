@@ -81,9 +81,9 @@ public class Dot {
         }
 
         //if inactive for more than 10 minutes, make dot invisible
-        if(inactiveDuration(inactiveNum) > 10){
-            dot.setVisibility(View.INVISIBLE);
-        }
+        //if(inactiveDuration(inactiveNum) > 10){
+        //    dot.setVisibility(View.INVISIBLE);
+        //}
 
     }
 

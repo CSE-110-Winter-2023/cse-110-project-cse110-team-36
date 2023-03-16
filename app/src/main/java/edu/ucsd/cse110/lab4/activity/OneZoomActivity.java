@@ -73,9 +73,12 @@ public class OneZoomActivity extends AppCompatActivity {
         addUsers();
         //Compass compass = new Compass(locationService, orientationService, this, 1, compass1);
         //addUsers();
-
-        updateMyLocation();
-        checkMyStatus();
+        SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
+        String id = preferences.getString("myUUID","");
+        //if (userViewModel.getUserLocal(id) != null) {
+            updateMyLocation();
+            checkMyStatus();
+        //}
     }
 
     @SuppressLint("SetTextI18n")

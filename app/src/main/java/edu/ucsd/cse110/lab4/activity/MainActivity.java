@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getPermissions();
+
+        // User open the app for the first time
+        firstTimeOpenApp();
         Intent intent = new Intent(this, TwoZoomActivity.class);
         startActivity(intent);
         finish();
@@ -211,5 +216,19 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MyInfoActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void firstTimeOpenApp() {
+        // Create sharedPreferences to check if user opens app before
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isAccessed = sharedPreferences.getBoolean(getString(R.string.is_accessed), false);
+
+        //on first start up, go to profileActivity
+        if (!isAccessed) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(getString(R.string.is_accessed), Boolean.TRUE);
+            editor.apply();
+            startActivity(new Intent(this, MyInfoActivity.class));
+        }
     }
 }

@@ -59,7 +59,7 @@ public class TwoZoomActivity extends AppCompatActivity {
         getPermissions();
 
         // User open the app for the first time
-        firstTimeOpenApp();
+        //firstTimeOpenApp();
 
         viewModel = new ViewModelProvider(this).get(ListViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
@@ -72,8 +72,12 @@ public class TwoZoomActivity extends AppCompatActivity {
         addUsers();
         //Compass compass = new Compass(locationService, orientationService, this, 2, compass1);
         //addUsers();
-        updateMyLocation();
-        checkMyStatus();
+        SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
+        String id = preferences.getString("myUUID","");
+        //if (userViewModel.getUserLocal(id) != null) {
+            updateMyLocation();
+            checkMyStatus();
+        //}
     }
 
 
@@ -159,9 +163,12 @@ public class TwoZoomActivity extends AppCompatActivity {
         ImageView online = findViewById(R.id.online_two_zoom);
 
         var myUser = userViewModel.getUserLocal(id);
+        //if (myUser == null) {
+        //    myUser = new User("0","0","0",0);
+        //}
 
-        Log.d("MY USER", myUser.toString());
-        Log.d("MY USER UPDATE AT", String.valueOf(myUser.updatedAt));
+        //Log.d("MY USER", myUser.toString());
+        //Log.d("MY USER UPDATE AT", String.valueOf(myUser.updatedAt));
 
         long time = lastUpdate(myUser.updatedAt);
 
@@ -206,19 +213,7 @@ public class TwoZoomActivity extends AppCompatActivity {
         return inactiveDurationMinutes;
     }
 
-    public void firstTimeOpenApp() {
-        // Create sharedPreferences to check if user opens app before
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isAccessed = sharedPreferences.getBoolean(getString(R.string.is_accessed), false);
 
-        //on first start up, go to profileActivity
-        if (!isAccessed) {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean(getString(R.string.is_accessed), Boolean.TRUE);
-            editor.apply();
-            startActivity(new Intent(this, MyInfoActivity.class));
-        }
-    }
 
     public void updateMyLocation() {
         SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
