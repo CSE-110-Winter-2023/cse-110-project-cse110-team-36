@@ -39,6 +39,4 @@ public abstract class UserDao {
     //start
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract void insertUser(User user);
-
-
 }
