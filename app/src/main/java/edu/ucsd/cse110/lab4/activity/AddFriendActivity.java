@@ -87,14 +87,13 @@ public class AddFriendActivity extends AppCompatActivity {
                 LiveData<User> userLiveData = userViewModel.getUser(uid);
                 // Wait for the data to update from remote
                 try {
-                    TimeUnit.SECONDS.sleep(3);
+                    TimeUnit.SECONDS.sleep(5);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 userLiveData.observe(this, this::onUserChanged);
-
                 // Display friend's name and uid
-                displayUser(label, uniqueId);
+                //displayUser(label, uniqueId);
             });
         });
 
