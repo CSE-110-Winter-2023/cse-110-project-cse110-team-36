@@ -49,6 +49,8 @@ public class UserDatabaseTest {
         long id2 = dao.upsert(user2);
 
         assertNotEquals(id1, id2);
+
+
     }
 
     @Test
