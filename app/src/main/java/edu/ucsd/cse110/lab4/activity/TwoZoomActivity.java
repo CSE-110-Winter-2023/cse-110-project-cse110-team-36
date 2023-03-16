@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,9 @@ import edu.ucsd.cse110.lab4.model.User;
 import edu.ucsd.cse110.lab4.viewmodel.ListViewModel;
 import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
+/**
+ * Default activity when app launch
+ */
 public class TwoZoomActivity extends AppCompatActivity {
 
     public OrientationService orientationService;
@@ -50,6 +54,8 @@ public class TwoZoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two_zoom);
 
+        // User open the app for the first time
+        firtTimeOpenApp();
 
         getPermissions();
 
@@ -188,5 +194,19 @@ public class TwoZoomActivity extends AppCompatActivity {
         Log.d("inactive minutes", valueOf(inactiveDurationMinutes));
 
         return inactiveDurationMinutes;
+    }
+
+    public void firtTimeOpenApp() {
+        // Create sharedPreferences to check if user opens app before
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isAccessed = sharedPreferences.getBoolean(getString(R.string.is_accessed), false);
+
+        //on first start up, go to profileActivity
+        if (!isAccessed) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(getString(R.string.is_accessed), Boolean.TRUE);
+            editor.apply();
+            startActivity(new Intent(this, MyInfoActivity.class));
+        }
     }
 }

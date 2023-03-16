@@ -60,7 +60,7 @@ public class MyInfoActivity extends AppCompatActivity {
         addBtn.setOnClickListener((View v) -> {
             EditText userInput = findViewById(R.id.user_input_name);
             String name = userInput.getText().toString();
-            String uuid = UUID.randomUUID().toString();
+            String uuid = UUID.randomUUID().toString().substring(0,12);
 
             SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
