@@ -19,6 +19,7 @@ import java.util.List;
 
 public class LocationService implements LocationListener {
 
+    private static final int PERMISSIONS_REQUEST_LOCATION = 100;
     public static LocationService instance;
     Activity activity;
 
@@ -27,12 +28,14 @@ public class LocationService implements LocationListener {
 
     final LocationManager locationManager;
 
+
     public LocationService singleton(Activity activity) {
         if (instance == null) {
             instance = new LocationService(activity);
         }
         return instance;
     }
+
 
     /**
      * Constructor for LocationService
@@ -71,6 +74,15 @@ public class LocationService implements LocationListener {
 
         this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 0, 0, this);
+
+        // get the last location
+        Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (loc_Current != null) {
+            double cur_lat = loc_Current.getLatitude();
+            double cur_lon = loc_Current.getLongitude();
+            this.locationValue.postValue(new Pair<Double, Double>(cur_lat, cur_lon));
+            this.realLocation = loc_Current;
+        }
     }
 
     private void unregisterLocationListener() {locationManager.removeUpdates(this);}
@@ -80,6 +92,14 @@ public class LocationService implements LocationListener {
     public void setMockOrientationSource(MutableLiveData<Pair<Double, Double>> mockDataSource) {
         unregisterLocationListener();
         this.locationValue = mockDataSource;
+    }
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSIONS_REQUEST_LOCATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, register location listener
+                registerLocationListener();
+            }
+        }
     }
 
     @Override

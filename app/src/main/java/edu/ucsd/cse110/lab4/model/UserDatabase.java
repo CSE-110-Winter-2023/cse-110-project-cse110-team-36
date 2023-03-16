@@ -38,8 +38,4 @@ public abstract class UserDatabase extends RoomDatabase {
         instance = testDatabase;
     }
 
-    /*start*/
-
-    /*end*/
-
 }
