@@ -80,7 +80,7 @@ public class AddFriendActivity extends AppCompatActivity {
         var addBtn = findViewById(R.id.user_add_btn);
 
         addBtn.setOnClickListener((View v) -> {
-            var input = (EditText) findViewById(R.id.user_input_name);
+            var input = (EditText) findViewById(R.id.user_input_uid);
             assert input != null;
             var uid = input.getText().toString();
 
@@ -89,37 +89,30 @@ public class AddFriendActivity extends AppCompatActivity {
             user.observe(this, userEntity -> {
                 user.removeObservers(this);
                 UserViewModel userViewModel = setupUserViewModel();
-
                 LiveData<User> userLiveData = userViewModel.getUser(uid);
                 // Wait for the data to update from remote
                 try {
-                    TimeUnit.SECONDS.sleep(3);
+                    TimeUnit.SECONDS.sleep(5);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
                 userLiveData.observe(this, this::onUserChanged);
-
                 // Display friend's name and uid
-                displayUser(uniqueId);
+                //displayUser(label, uniqueId);
             });
         });
 
     }
 
     private void onUserChanged(User user) {
-//        if (user.label != null) {
-//            label = user.label;
-//        } else  {
-//            label = " ";
-//        }
+        label = user.label;
         uniqueId = user.uniqueID;
     }
 
-    private void displayUser(String uid) {
-        //TextView labelView = findViewById(R.id.user_item_label);
+    private void displayUser(String name, String uid) {
+        TextView labelView = findViewById(R.id.user_item_label);
         TextView uidView = findViewById(R.id.user_item_uid);
-        //labelView.setText(label);
+        labelView.setText(label);
         uidView.setText(uniqueId);
     }
 
@@ -138,8 +131,10 @@ public class AddFriendActivity extends AppCompatActivity {
     }
 
     public void onExitClicked (View view) {
-        Intent intent = new Intent(this, TwoZoomActivity.class);
+        Intent intent = new Intent(this, OneZoomActivity.class);
         startActivity(intent);
         finish();
     }
+
+
 }

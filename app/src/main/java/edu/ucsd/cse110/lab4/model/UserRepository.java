@@ -33,11 +33,11 @@ public class UserRepository {
         MediatorLiveData<User> user = new MediatorLiveData<User>();
 
         Observer<User> updateFromRemote = theirUser -> {
-            if (theirUser == null) return;
-            User ourUser = user.getValue();
-            if (ourUser == null && theirUser.uniqueID != null)  {
+//            if (theirUser == null) return;
+              //User ourUser = user.getValue();
+              //if (ourUser == null)  {
                 upsertLocal(theirUser);
-            }
+              //}
         };
 
         // If we get a local update, pass it on.
@@ -61,8 +61,16 @@ public class UserRepository {
         return dao.getAll();
     }
 
+    public List<User> getAllLocalUsers() {
+        return dao.getAllLocal();
+    }
+
+
     public void upsertLocal(User user) {
         user.updatedAt = Instant.now().getEpochSecond();
+        if (user.uniqueID == null) {
+            return;
+        }
         dao.upsert(user);
     }
 

@@ -20,20 +20,22 @@ public class UserViewModel extends AndroidViewModel {
     private User userLocal;
     private LiveData<List<User>> users;
     private final UserRepository repo;
+    private UserDao dao;
 
 
     public UserViewModel(@NonNull Application application) {
         super(application);
         Context context = application.getApplicationContext();
         UserDatabase db = UserDatabase.provide(context);
-        UserDao dao = db.getDao();
+        dao = db.getDao();
         this.repo = new UserRepository(dao);
     }
 
     public LiveData<User> getUser(String public_code) {
-        if (user == null) {
-            user = repo.getSynced(public_code);
-        }
+        //if (user == null) {
+        UserRepository newRepo = new UserRepository(dao);
+        LiveData<User> user = newRepo.getSynced(public_code);
+        //}
         return user;
     }
 
