@@ -131,11 +131,6 @@ public class TwoZoomActivity extends AppCompatActivity {
         finish();
     }
 
-    public void onLaunchViewClicked(View view) {
-        TextView UIDView = this.findViewById(R.id.TextViewUID);
-        UID = UIDView.getText().toString();
-    }
-
     public void onZoomInClicked(View view) {
         Intent intent = new Intent(this, OneZoomActivity.class);
         startActivity(intent);

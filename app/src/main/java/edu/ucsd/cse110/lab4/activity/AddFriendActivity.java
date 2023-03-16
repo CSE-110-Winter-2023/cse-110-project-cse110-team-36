@@ -31,7 +31,7 @@ import edu.ucsd.cse110.lab4.viewmodel.ListViewModel;
 import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
 public class AddFriendActivity extends AppCompatActivity {
-    String label;
+    //String label;
     String uniqueId;
 
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
@@ -98,22 +98,22 @@ public class AddFriendActivity extends AppCompatActivity {
                 }
                 userLiveData.observe(this, this::onUserChanged);
                 // Display friend's name and uid
-                //displayUser(label, uniqueId);
+                displayUser(uniqueId);
             });
         });
 
     }
 
     private void onUserChanged(User user) {
-        label = user.label;
+       //label = user.label;
         uniqueId = user.uniqueID;
     }
 
-    private void displayUser(String name, String uid) {
-        TextView labelView = findViewById(R.id.user_item_label);
+    private void displayUser(String uid) {
+        //TextView labelView = findViewById(R.id.user_item_label);
         TextView uidView = findViewById(R.id.user_item_uid);
-        labelView.setText(label);
-        uidView.setText(uniqueId);
+        //labelView.setText(label);
+        uidView.setText(uid);
     }
 
     @SuppressLint("RestrictedApi")
@@ -131,7 +131,7 @@ public class AddFriendActivity extends AppCompatActivity {
     }
 
     public void onExitClicked (View view) {
-        Intent intent = new Intent(this, OneZoomActivity.class);
+        Intent intent = new Intent(this, TwoZoomActivity.class);
         startActivity(intent);
         finish();
     }

@@ -62,6 +62,7 @@ public class FourZoomActivity extends AppCompatActivity {
 
         compass = new Compass(locationService, orientationService, this, 4, compass1);
         addUsers();
+        updateMyLocation();
     }
 
 
@@ -113,11 +114,6 @@ public class FourZoomActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddFriendActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    public void onLaunchViewClicked(View view) {
-        TextView UIDView = this.findViewById(R.id.TextViewUID);
-        UID = UIDView.getText().toString();
     }
 
     public void onZoomInClicked(View view) {
