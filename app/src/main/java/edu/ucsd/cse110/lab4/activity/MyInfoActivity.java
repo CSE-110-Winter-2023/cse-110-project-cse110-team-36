@@ -86,27 +86,11 @@ public class MyInfoActivity extends AppCompatActivity {
                 UserViewModel userViewModel = setupUserViewModel();
                 userViewModel.add(userEntity);
 
-//                //create an intent to launch the new activity
-//                Intent intent = new Intent(this, DisplayUserActivity.class);
-//                // pass the name and uid as extras in the intent
-//                intent.putExtra("UUID", uuid);
-//                // start the new activity
-//                startActivity(intent);
-
-
-                //user.removeObservers(this);
                 var intent = DisplayUserActivity.intentFor(this, userEntity);
                 startActivity(intent);
             });
 
-//            // create an intent to launch the new activity
-//            Intent intent = new Intent(this, DisplayUserActivity.class);
-//            // pass the name and uid as extras in the intent
-//            intent.putExtra("NAME", name);
-//            // start the new activity
-//            startActivity(intent);
         });
-//        Log.d("MyInfoActivity", "onAddClicked called");
     }
 
     public void onExitClicked(View view) {

@@ -37,7 +37,6 @@ public class ThreeZoomActivity extends AppCompatActivity {
 
     public OrientationService orientationService;
     LocationService locationService;
-    String UID;
     ListViewModel viewModel;
     UserViewModel userViewModel;
     Compass compass;
@@ -61,15 +60,10 @@ public class ThreeZoomActivity extends AppCompatActivity {
         ImageView compass1 = findViewById(R.id.compass_base);
 
         compass = new Compass(locationService, orientationService, this, 3, compass1);
+
         addUsers();
-        //Compass compass = new Compass(locationService, orientationService, this, 3, compass1);
-        //addUsers();
-        SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
-        String id = preferences.getString("myUUID","");
-        //if (userViewModel.getUserLocal(id) != null) {
-            updateMyLocation();
-            checkMyStatus();
-        //}
+        updateMyLocation();
+        checkMyStatus();
     }
 
 

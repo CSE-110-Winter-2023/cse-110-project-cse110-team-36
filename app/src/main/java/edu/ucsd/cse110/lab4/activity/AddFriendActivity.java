@@ -92,7 +92,7 @@ public class AddFriendActivity extends AppCompatActivity {
                 LiveData<User> userLiveData = userViewModel.getUser(uid);
                 // Wait for the data to update from remote
                 try {
-                    TimeUnit.SECONDS.sleep(5);
+                    TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

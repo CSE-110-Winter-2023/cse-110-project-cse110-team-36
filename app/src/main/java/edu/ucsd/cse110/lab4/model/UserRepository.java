@@ -90,7 +90,7 @@ public class UserRepository {
                 //Note currData = api.getByTitle(title);
                 remoteUser.postValue(api.getByPublicCode(public_code));
             }
-        }, 0, 3000, TimeUnit.MILLISECONDS);
+        }, 0, 1000, TimeUnit.MILLISECONDS);
         return remoteUser;
     }
 

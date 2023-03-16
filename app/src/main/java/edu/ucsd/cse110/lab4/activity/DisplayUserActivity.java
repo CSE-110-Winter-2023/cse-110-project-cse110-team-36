@@ -84,12 +84,6 @@ public class DisplayUserActivity extends AppCompatActivity {
         finish();
     }
 
-    public void onLaunchCreateClicked(View view) {
-        Intent intent = new Intent(this, MyInfoActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
     public static Intent intentFor(Context context, User user) {
         var intent = new Intent(context, DisplayUserActivity.class);
         intent.putExtra("UUID", user.uniqueID);

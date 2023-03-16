@@ -37,7 +37,6 @@ public class FourZoomActivity extends AppCompatActivity {
 
     public OrientationService orientationService;
     LocationService locationService;
-    String UID;
     ListViewModel viewModel;
     UserViewModel userViewModel;
     Compass compass;
@@ -61,6 +60,7 @@ public class FourZoomActivity extends AppCompatActivity {
         ImageView compass1 = findViewById(R.id.compass_base);
 
         compass = new Compass(locationService, orientationService, this, 4, compass1);
+
         addUsers();
         updateMyLocation();
         checkMyStatus();

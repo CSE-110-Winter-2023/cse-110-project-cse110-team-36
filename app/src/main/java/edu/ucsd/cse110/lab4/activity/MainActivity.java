@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         if (!isAccessed) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean(getString(R.string.is_accessed), Boolean.TRUE);
-            editor.commit();
+            editor.apply();
             startActivity(new Intent(this, MyInfoActivity.class));
         }
 

@@ -42,7 +42,6 @@ public class TwoZoomActivity extends AppCompatActivity {
 
     public OrientationService orientationService;
     LocationService locationService;
-    String UID;
     ListViewModel viewModel;
     UserViewModel userViewModel;
     Compass compass;
@@ -58,9 +57,6 @@ public class TwoZoomActivity extends AppCompatActivity {
 
         getPermissions();
 
-        // User open the app for the first time
-        //firstTimeOpenApp();
-
         viewModel = new ViewModelProvider(this).get(ListViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
@@ -69,15 +65,10 @@ public class TwoZoomActivity extends AppCompatActivity {
         ImageView compass1 = findViewById(R.id.compass_base);
 
         compass = new Compass(locationService, orientationService, this, 2, compass1);
+
         addUsers();
-        //Compass compass = new Compass(locationService, orientationService, this, 2, compass1);
-        //addUsers();
-        SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
-        String id = preferences.getString("myUUID","");
-        //if (userViewModel.getUserLocal(id) != null) {
-            updateMyLocation();
-            checkMyStatus();
-        //}
+        updateMyLocation();
+        checkMyStatus();
     }
 
 
@@ -158,12 +149,6 @@ public class TwoZoomActivity extends AppCompatActivity {
         ImageView online = findViewById(R.id.online_two_zoom);
 
         var myUser = userViewModel.getUserLocal(id);
-        //if (myUser == null) {
-        //    myUser = new User("0","0","0",0);
-        //}
-
-        //Log.d("MY USER", myUser.toString());
-        //Log.d("MY USER UPDATE AT", String.valueOf(myUser.updatedAt));
 
         long time = lastUpdate(myUser.updatedAt);
 
