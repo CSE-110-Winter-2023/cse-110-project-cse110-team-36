@@ -2,8 +2,10 @@ package edu.ucsd.cse110.lab4.activity;
 
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isNotClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -26,7 +28,7 @@ import edu.ucsd.cse110.lab4.R;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class ZoomActivityTest {
 
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityScenarioRule =
@@ -38,38 +40,52 @@ public class MainActivityTest {
                     "android.permission.ACCESS_FINE_LOCATION");
 
     @Test
-    public void mainActivityTest() {
-        ViewInteraction button = onView(
-                allOf(withId(R.id.ZoomInButton), withText("+"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.ZoomOutButton), withText("-"),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        button2.check(matches(isDisplayed()));
-
-        ViewInteraction imageView = onView(
+    public void zoomActivityTest() {
+        // First screen: 1 compass circle
+        ViewInteraction compass_base = onView(
                 allOf(withId(R.id.compass_base),
                         withParent(allOf(withId(R.id.include),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
-        imageView.check(matches(isDisplayed()));
+        compass_base.check(matches(isDisplayed()));
 
-        ViewInteraction imageView2 = onView(
-                allOf(withId(R.id.imageView3),
+        ViewInteraction zoomInBtn = onView(
+                allOf(withId(R.id.ZoomInButton), withText("+"),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        zoomInBtn.check(matches(isNotClickable()));
+
+        ViewInteraction zoomOutBtn = onView(
+                allOf(withId(R.id.ZoomOutButton), withText("-"),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        zoomOutBtn.perform(click());
+
+        // Second screen: 2 compass circles
+        ViewInteraction compass_base2 = onView(
+                allOf(withId(R.id.compass_base2),
                         withParent(allOf(withId(R.id.include),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
-        imageView2.check(matches(isDisplayed()));
+        compass_base2.check(matches(isDisplayed()));
 
-        ViewInteraction imageView3 = onView(
-                allOf(withId(R.id.imageView),
+        compass_base = onView(
+                allOf(withId(R.id.compass_base),
                         withParent(allOf(withId(R.id.include),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
-        imageView3.check(matches(isDisplayed()));
+        compass_base.check(matches(isDisplayed()));
+
+        zoomInBtn = onView(
+                allOf(withId(R.id.ZoomInButton), withText("+"),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        zoomInBtn.check(matches(isDisplayed()));
+
+        zoomOutBtn = onView(
+                allOf(withId(R.id.ZoomOutButton), withText("-"),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        zoomOutBtn.check(matches(isDisplayed()));
     }
 }
