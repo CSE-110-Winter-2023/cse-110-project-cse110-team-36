@@ -39,17 +39,17 @@
         app:layout_constraintTop_toBottomOf="@+id/user_name"
         app:layout_constraintVertical_bias="0.191" />
 
-    <Button
-        android:id="@+id/edit_button"
-        android:layout_width="110dp"
-        android:layout_height="52dp"
-        android:text="EDIT"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_uid"
-        app:layout_constraintVertical_bias="0.233" />
+<!--    <Button-->
+<!--        android:id="@+id/edit_button"-->
+<!--        android:layout_width="110dp"-->
+<!--        android:layout_height="52dp"-->
+<!--        android:text="EDIT"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.485"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/user_uid"-->
+<!--        app:layout_constraintVertical_bias="0.233" />-->
 
     <Button
         android:id="@+id/user_exit_btn"
