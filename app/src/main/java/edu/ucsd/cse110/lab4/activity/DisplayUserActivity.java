@@ -5,25 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 import edu.ucsd.cse110.lab4.R;
 import edu.ucsd.cse110.lab4.model.User;
-import edu.ucsd.cse110.lab4.model.UserDatabase;
-import edu.ucsd.cse110.lab4.viewmodel.ListViewModel;
 import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
 public class DisplayUserActivity extends AppCompatActivity {
@@ -49,7 +39,6 @@ public class DisplayUserActivity extends AppCompatActivity {
 
         user = viewModel.getUser(uuid);
     }
-
 
     private void loadProfile() {
         SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
@@ -95,5 +84,4 @@ public class DisplayUserActivity extends AppCompatActivity {
         intent.putExtra("UUID", user.uniqueID);
         return intent;
     }
-
 }

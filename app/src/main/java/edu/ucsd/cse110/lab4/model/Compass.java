@@ -1,13 +1,7 @@
 package edu.ucsd.cse110.lab4.model;
-import android.app.Activity;
-import android.app.AppComponentFactory;
+
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatCallback;
-
-import java.util.concurrent.TimeUnit;
-
 import edu.ucsd.cse110.lab4.LocationService;
 import edu.ucsd.cse110.lab4.OrientationService;
 
