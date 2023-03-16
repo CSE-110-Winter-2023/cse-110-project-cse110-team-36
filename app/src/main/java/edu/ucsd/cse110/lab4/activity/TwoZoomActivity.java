@@ -151,6 +151,8 @@ public class TwoZoomActivity extends AppCompatActivity {
         var myUser = userViewModel.getUserLocal(id);
         if (myUser == null) {
             offline.setVisibility(View.INVISIBLE);
+            status.setVisibility(View.INVISIBLE);
+            online.setVisibility(View.INVISIBLE);
             return;
         }
 
