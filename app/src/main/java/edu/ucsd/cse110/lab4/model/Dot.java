@@ -73,6 +73,7 @@ public class Dot {
         label.setLayoutParams(layoutParams);
         label.setRotation(getAngle());
         label.setText(userlabel);
+        dot.setVisibility(View.VISIBLE);
 
         if (labelVis) {
             label.setVisibility(View.VISIBLE);
@@ -114,6 +115,8 @@ public class Dot {
                     if (distance > ONE_MILE) {
                         distance = ONE_MILE;
                         labelVis = false;
+                    } else {
+                        labelVis = true;
                     }
                     distanceVal = (distance/ONE_MILE) * OUTER;
                     break;
