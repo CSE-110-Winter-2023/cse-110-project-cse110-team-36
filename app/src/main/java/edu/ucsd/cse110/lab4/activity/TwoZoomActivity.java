@@ -149,6 +149,10 @@ public class TwoZoomActivity extends AppCompatActivity {
         ImageView online = findViewById(R.id.online_two_zoom);
 
         var myUser = userViewModel.getUserLocal(id);
+        if (myUser == null) {
+            offline.setVisibility(View.INVISIBLE);
+            return;
+        }
 
         long time = lastUpdate(myUser.updatedAt);
 
@@ -198,13 +202,17 @@ public class TwoZoomActivity extends AppCompatActivity {
     public void updateMyLocation() {
         SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
         String id = preferences.getString("myUUID","");
+        String label = preferences.getString("myName","");
 
         var myUser = userViewModel.getUserLocal(id);
-        locationService.getLocation().observe(this, coords -> {
-            myUser.latitude = String.valueOf(coords.first);
-            myUser.longitude = String.valueOf(coords.second);
+        if (myUser != null) {
+            locationService.getLocation().observe(this, coords -> {
+                myUser.latitude = String.valueOf(coords.first);
+                myUser.longitude = String.valueOf(coords.second);
+                myUser.label = label;
 
-            userViewModel.add(myUser);
-        });
+                userViewModel.add(myUser);
+            });
+        }
     }
 }
