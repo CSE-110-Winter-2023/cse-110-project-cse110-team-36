@@ -54,10 +54,12 @@ public class Dot {
         user.observe(activity, this::onUserChanged);
     }
 
-    private void onUserChanged(User user) {
+    public void onUserChanged(User user) {
+        Log.v(this.userlabel, "change Dot.");
         latVal = Float.parseFloat(user.latitude);
         longVal = Float.parseFloat(user.longitude);
         userlabel = user.label;
+        updateDot();
     }
 
     public void updateDot() {

@@ -109,11 +109,13 @@ public class OneZoomActivity extends AppCompatActivity {
 //        mainLayout.addView(myLayout2);
         for (User thisUser : userList) {
             String UID = thisUser.uniqueID;
-            LiveData<User> currUser = userViewModel.getUser(UID);
+            UserViewModel currViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+            LiveData<User> currUser = currViewModel.getUser(UID);
             View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
             ImageView dotID = myLayout.findViewById(R.id.coordDot);
             TextView label = myLayout.findViewById(R.id.labelView);
             Dot dot = new Dot(currUser, locationService, compass, this, dotID, label);
+            //currUser.observe(this, dot::onUserChanged);
             mainLayout.addView(myLayout);
         }
         return;
