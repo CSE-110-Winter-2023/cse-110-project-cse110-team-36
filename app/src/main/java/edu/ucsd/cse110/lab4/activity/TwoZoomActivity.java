@@ -16,6 +16,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -54,10 +55,10 @@ public class TwoZoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two_zoom);
 
-        // User open the app for the first time
-        firtTimeOpenApp();
-
         getPermissions();
+
+        // User open the app for the first time
+        firstTimeOpenApp();
 
         viewModel = new ViewModelProvider(this).get(ListViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
@@ -68,6 +69,7 @@ public class TwoZoomActivity extends AppCompatActivity {
 
         Compass compass = new Compass(locationService, orientationService, this, 2, compass1);
         //addUsers();
+        updateMyLocation();
         checkMyStatus();
     }
 
@@ -196,7 +198,7 @@ public class TwoZoomActivity extends AppCompatActivity {
         return inactiveDurationMinutes;
     }
 
-    public void firtTimeOpenApp() {
+    public void firstTimeOpenApp() {
         // Create sharedPreferences to check if user opens app before
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isAccessed = sharedPreferences.getBoolean(getString(R.string.is_accessed), false);
@@ -208,5 +210,18 @@ public class TwoZoomActivity extends AppCompatActivity {
             editor.apply();
             startActivity(new Intent(this, MyInfoActivity.class));
         }
+    }
+
+    public void updateMyLocation() {
+        SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
+        String id = preferences.getString("myUUID","");
+
+        var myUser = userViewModel.getUserLocal(id);
+        locationService.getLocation().observe(this, coords -> {
+            myUser.latitude = String.valueOf(coords.first);
+            myUser.longitude = String.valueOf(coords.second);
+
+            userViewModel.add(myUser);
+        });
     }
 }
