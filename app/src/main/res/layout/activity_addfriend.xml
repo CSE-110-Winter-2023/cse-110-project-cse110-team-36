@@ -20,7 +20,7 @@
 
 
     <EditText
-        android:id="@+id/user_input_name"
+        android:id="@+id/user_input_uid"
         android:layout_width="280dp"
         android:layout_height="56dp"
         android:autofillHints=""
