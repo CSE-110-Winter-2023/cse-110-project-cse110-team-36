@@ -48,4 +48,11 @@ public class UserViewModel extends AndroidViewModel {
         return userLocal;
     }
 
+    public  LiveData<User>  getFromRemote (String public_code) {
+        if (user == null) {
+            user = repo.getRemote(public_code);
+        }
+        return user;
+    }
+
 }

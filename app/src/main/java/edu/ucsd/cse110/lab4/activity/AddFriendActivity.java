@@ -3,6 +3,7 @@ package edu.ucsd.cse110.lab4.activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -13,13 +14,17 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import edu.ucsd.cse110.lab4.R;
+import edu.ucsd.cse110.lab4.model.Dot;
 import edu.ucsd.cse110.lab4.model.User;
 import edu.ucsd.cse110.lab4.view.UsersAdapter;
 import edu.ucsd.cse110.lab4.viewmodel.ListViewModel;
@@ -96,26 +101,25 @@ public class AddFriendActivity extends AppCompatActivity {
                 userLiveData.observe(this, this::onUserChanged);
 
                 // Display friend's name and uid
-                displayUser(label, uniqueId);
+                displayUser(uniqueId);
             });
         });
 
     }
 
     private void onUserChanged(User user) {
-        if (user.label != null) {
-            label = user.label;
-        } else  {
-            label = " ";
-        }
+//        if (user.label != null) {
+//            label = user.label;
+//        } else  {
+//            label = " ";
+//        }
         uniqueId = user.uniqueID;
-
     }
 
-    private void displayUser(String name, String uid) {
-        TextView labelView = findViewById(R.id.user_item_label);
+    private void displayUser(String uid) {
+        //TextView labelView = findViewById(R.id.user_item_label);
         TextView uidView = findViewById(R.id.user_item_uid);
-        labelView.setText(label);
+        //labelView.setText(label);
         uidView.setText(uniqueId);
     }
 
@@ -138,6 +142,4 @@ public class AddFriendActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
-
 }

@@ -58,19 +58,19 @@ public class UsersAdapter  extends RecyclerView.Adapter<UsersAdapter.ViewHolder>
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView labelView;
+        //private final TextView labelView;
         private final TextView uidView;
         public final View deleteButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.labelView = itemView.findViewById(R.id.user_item_label);
+            //this.labelView = itemView.findViewById(R.id.user_item_label);
             this.uidView = itemView.findViewById(R.id.user_item_uid);
             this.deleteButton = itemView.findViewById(R.id.user_item_delete);
         }
 
         public void bind(User user) {
-            labelView.setText(user.label);
+            //labelView.setText(user.label);
             uidView.setText(user.uniqueID);
             deleteButton.setOnClickListener(v -> onDeleteClickedHandler.accept(user));
         }
