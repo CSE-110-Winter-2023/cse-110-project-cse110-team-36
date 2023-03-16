@@ -22,24 +22,26 @@
 
         <ImageView
             android:id="@+id/compass_base"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="341dp"
+            android:layout_height="347dp"
             android:rotation="0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.555"
             app:srcCompat="@drawable/compass_base" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="171dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="70dp"
+            android:id="@+id/compass_base2"
+            android:layout_width="263dp"
+            android:layout_height="317dp"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="43dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginBottom="43dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,13 +49,11 @@
             app:srcCompat="@drawable/circle" />
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="0dp"
+            android:id="@+id/compass_base3"
+            android:layout_width="171dp"
             android:layout_height="0dp"
-            android:layout_marginStart="55dp"
-            android:layout_marginTop="43dp"
-            android:layout_marginEnd="55dp"
-            android:layout_marginBottom="43dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
