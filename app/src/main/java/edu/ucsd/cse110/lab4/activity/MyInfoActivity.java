@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,10 +28,8 @@ import edu.ucsd.cse110.lab4.viewmodel.ListViewModel;
 import edu.ucsd.cse110.lab4.viewmodel.UserViewModel;
 
 public class MyInfoActivity extends AppCompatActivity {
-
     LocationService locationService;
-//    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//    SharedPreferences.Editor editor = preferences.edit();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +39,7 @@ public class MyInfoActivity extends AppCompatActivity {
         var viewModel = setupViewModel();
         setUpAddButton(viewModel);
 
-
-
+        locationService = new LocationService(this);
     }
 
     private ListViewModel setupViewModel() {
@@ -72,15 +70,13 @@ public class MyInfoActivity extends AppCompatActivity {
             var user = viewModel.getOrCreateUser(uuid);
             user.observe(this, userEntity -> {
                 userEntity.label = name;
-//                userEntity.longitude = "10";
-//                userEntity.latitude ="10";
-//                locationService.getLocation().observe(this, coords -> {
-//                    String latitude = Double.toString(coords.first);
-//                    String longitude = Double.toString(coords.second);
-//
-//                    userEntity.latitude = latitude;
-//                    userEntity.longitude = longitude;
-//                });
+                locationService.getLocation().observe(this, coords -> {
+                    String latitude = Double.toString(coords.first);
+                    String longitude = Double.toString(coords.second);
+
+                    userEntity.latitude = latitude;
+                    userEntity.longitude = longitude;
+                });
 
                 UserViewModel userViewModel = setupUserViewModel();
                 userViewModel.add(userEntity);

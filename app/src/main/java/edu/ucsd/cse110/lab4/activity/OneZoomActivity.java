@@ -68,6 +68,7 @@ public class OneZoomActivity extends AppCompatActivity {
         Compass compass = new Compass(locationService, orientationService, this, 1, compass1);
         //addUsers();
 
+        updateMyLocation();
         checkMyStatus();
     }
 
@@ -187,5 +188,18 @@ public class OneZoomActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DisplayUserActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void updateMyLocation() {
+        SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
+        String id = preferences.getString("myUUID","");
+
+        var myUser = userViewModel.getUserLocal(id);
+        locationService.getLocation().observe(this, coords -> {
+            myUser.latitude = String.valueOf(coords.first);
+            myUser.longitude = String.valueOf(coords.second);
+
+            userViewModel.add(myUser);
+        });
     }
 }

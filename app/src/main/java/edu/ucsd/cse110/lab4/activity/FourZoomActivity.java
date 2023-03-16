@@ -63,6 +63,7 @@ public class FourZoomActivity extends AppCompatActivity {
         Compass compass = new Compass(locationService, orientationService, this, 4, compass1);
         //addUsers();
 
+        updateMyLocation();
         checkMyStatus();
     }
 
@@ -183,5 +184,18 @@ public class FourZoomActivity extends AppCompatActivity {
         Log.d("inactive minutes", valueOf(inactiveDurationMinutes));
 
         return inactiveDurationMinutes;
+    }
+
+    public void updateMyLocation() {
+        SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
+        String id = preferences.getString("myUUID","");
+
+        var myUser = userViewModel.getUserLocal(id);
+        locationService.getLocation().observe(this, coords -> {
+            myUser.latitude = String.valueOf(coords.first);
+            myUser.longitude = String.valueOf(coords.second);
+
+            userViewModel.add(myUser);
+        });
     }
 }
