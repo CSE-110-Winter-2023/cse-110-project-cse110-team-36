@@ -50,7 +50,10 @@ public class UserAPI {
         //URLs cannot contain spaces, so we replace them with %20.
         String public_code = user.uniqueID;
         public_code = public_code.replace(" ", "%20");
-        String json = "{\"private_code\":\"" + UUID.randomUUID().toString().substring(0,12)
+        String private_code = UUID.randomUUID().toString().substring(0,3) + "-"
+                + UUID.randomUUID().toString().substring(0,3) + "-"
+                + UUID.randomUUID().toString().substring(0,4);
+        String json = "{\"private_code\":\"" + private_code
                 + "\",\"label\":\""  + user.label
                 + "\",\"latitude\":\"" + user.latitude
                 + "\",\"longitude\":\"" + user.longitude + "\"}";
