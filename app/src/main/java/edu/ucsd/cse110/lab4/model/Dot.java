@@ -59,6 +59,9 @@ public class Dot {
 
     public void onUserChanged(User userInstance) {
         Log.v(this.userlabel, "change Dot.");
+        if (userInstance == null || userInstance.latitude.isEmpty() || userInstance.longitude.isEmpty()) {
+            return;
+        }
         latVal = Float.parseFloat(userInstance.latitude);
         longVal = Float.parseFloat(userInstance.longitude);
         userlabel = userInstance.label;
@@ -71,7 +74,7 @@ public class Dot {
         layoutParams.circleRadius = (int) getDistanceVal();
         dot.setLayoutParams(layoutParams);
         label.setLayoutParams(layoutParams);
-        label.setRotation(getAngle());
+        //label.setRotation(getAngle());
         label.setText(userlabel);
         dot.setVisibility(View.VISIBLE);
 
