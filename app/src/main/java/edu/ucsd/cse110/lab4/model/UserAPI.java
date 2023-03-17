@@ -1,5 +1,6 @@
 package edu.ucsd.cse110.lab4.model;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.time.Instant;
@@ -15,6 +16,7 @@ public class UserAPI {
     private volatile static UserAPI instance = null;
     private OkHttpClient client;
     private UserDao userDao;
+    private String URL = "https://socialcompass.goto.ucsd.edu/location/";
 
     public UserAPI() {
         this.client = new OkHttpClient();
@@ -27,10 +29,15 @@ public class UserAPI {
         return instance;
     }
 
+    public void setURL(String newURL) {
+        this.URL = newURL;
+    }
+
+
     public User getByPublicCode (String public_code) {
         public_code = public_code.replace(" ", "%20");
         Request request = new Request.Builder()
-                .url("https://socialcompass.goto.ucsd.edu/location/" + public_code)
+                .url(URL + public_code)
                 .method("GET", null)
                 .build();
 
@@ -38,6 +45,7 @@ public class UserAPI {
             assert response.body() != null;
             String body = response.body().string();
             Log.i("GET BY PUBLIC CODE", body);
+            Log.i("GET BY PUBLIC CODE", URL);
             return User.fromJSON(body);
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,7 +67,7 @@ public class UserAPI {
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(json, JSON);
         Request request = new Request.Builder()
-                .url("https://socialcompass.goto.ucsd.edu/location/" + public_code)
+                .url(URL + public_code)
                 .method("PUT", body)
                 .build();
 
@@ -67,8 +75,10 @@ public class UserAPI {
             assert response.body() != null;
             String result = response.body().string();
             Log.i("PUT BY PUBLIC CODE", result);
+            Log.i("PUT BY PUBLIC CODE", URL);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

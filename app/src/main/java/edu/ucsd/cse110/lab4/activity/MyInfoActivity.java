@@ -48,11 +48,27 @@ public class MyInfoActivity extends AppCompatActivity {
     }
 
     private ListViewModel setupViewModel() {
-        return new ViewModelProvider(this).get(ListViewModel.class);
+        ListViewModel viewModel = new ViewModelProvider(this).get(ListViewModel.class);
+        SharedPreferences preferences = this.getSharedPreferences("MOCK", MODE_PRIVATE);
+        String URL = preferences.getString("mockURL", "");
+
+        if (!URL.isEmpty()) {
+            viewModel.setURL(URL);
+        }
+
+        return viewModel;
     }
 
     private UserViewModel setupUserViewModel() {
-        return new ViewModelProvider(this).get(UserViewModel.class);
+        UserViewModel viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        SharedPreferences preferences = this.getSharedPreferences("MOCK", MODE_PRIVATE);
+        String URL = preferences.getString("mockURL", "");
+
+        if (!URL.isEmpty()) {
+            viewModel.setURL(URL);
+        }
+
+        return viewModel;
     }
     public void onClearClicked (View view) {
         EditText userInput = findViewById(R.id.user_input_name);

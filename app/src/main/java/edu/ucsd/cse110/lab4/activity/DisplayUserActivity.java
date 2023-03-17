@@ -89,4 +89,11 @@ public class DisplayUserActivity extends AppCompatActivity {
         return intent;
     }
 
+    public void onMockClicked(View view) {
+        TextView mockURL = findViewById(R.id.mockURLView);
+        SharedPreferences preferences = this.getSharedPreferences("MOCK", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("mockURL", mockURL.getText().toString());
+        editor.apply();
+    }
 }

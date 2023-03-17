@@ -21,6 +21,7 @@ public class UserViewModel extends AndroidViewModel {
     private LiveData<List<User>> users;
     private final UserRepository repo;
     private UserDao dao;
+    private String mockURL = "https://socialcompass.goto.ucsd.edu/location/";
 
 
     public UserViewModel(@NonNull Application application) {
@@ -31,9 +32,15 @@ public class UserViewModel extends AndroidViewModel {
         this.repo = new UserRepository(dao);
     }
 
+    public void setURL(String URL) {
+        repo.setURL(URL);
+        mockURL = URL;
+    }
+
     public LiveData<User> getUser(String public_code) {
         //if (user == null) {
         UserRepository newRepo = new UserRepository(dao);
+        newRepo.setURL(mockURL);
         LiveData<User> user = newRepo.getSynced(public_code);
         //}
         return user;
