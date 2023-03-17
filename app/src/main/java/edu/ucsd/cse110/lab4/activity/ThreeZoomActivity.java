@@ -42,6 +42,9 @@ public class ThreeZoomActivity extends AppCompatActivity {
     Compass compass;
     String URL;
 
+    private final int TO_MILLI_SECS = 1000;
+    private final int ONE_HOUR = 60;
+
     /*
      * Updates compass according to orientation, location, and entered values on profileActivity
      */
@@ -180,8 +183,8 @@ public class ThreeZoomActivity extends AppCompatActivity {
 
             int minute;
             int hour;
-            hour = (int) time / 60;
-            minute = (int) time % 60;
+            hour = (int) time / ONE_HOUR;
+            minute = (int) time % ONE_HOUR;
 
             if (hour < 1) {
                 status.setText(minute + "m");
@@ -196,7 +199,7 @@ public class ThreeZoomActivity extends AppCompatActivity {
         //covert seconds to milliseconds
         long seconds = updateAt;
         //make date
-        Date dateUpdatedAt = new Date(seconds * 1000);
+        Date dateUpdatedAt = new Date(seconds * TO_MILLI_SECS);
         Date dateCurrent = new Date();
 
         //find time since this date
