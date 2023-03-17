@@ -136,4 +136,39 @@ public class User {
                 ", updatedAt=" + updatedAt +
                 '}';
     }
+    /*
+
+    @Ignore
+    public User() {
+    }
+
+    // For testing purpose
+    public static List<User> loadJSON (Context context, String path) {
+        try {
+            InputStream input = context.getAssets().open(path);
+            Reader reader = new InputStreamReader(input);
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<User>>(){}.getType();
+            return gson.fromJson(reader,type);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
+    public static User fromJSON(String json) {
+        return new Gson().fromJson(json, User.class);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uniqueID='" + uniqueID + '\'' +
+                ", label='" + label + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+     */
 }
