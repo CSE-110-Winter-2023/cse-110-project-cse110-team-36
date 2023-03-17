@@ -136,4 +136,50 @@ public class User {
                 ", updatedAt=" + updatedAt +
                 '}';
     }
+    /*
+    @SuppressLint("SetTextI18n")
+    private void checkMyStatus() {
+        SharedPreferences preferences = this.getSharedPreferences("UUID", MODE_PRIVATE);
+        String id = preferences.getString("myUUID","");
+        ImageView offline = findViewById(R.id.offline_four_zoom);
+        TextView status = findViewById(R.id.status_four_zoom);
+        ImageView online = findViewById(R.id.online_four_zoom);
+
+        var myUser = userViewModel.getUserLocal(id);
+        if (myUser == null) {
+            offline.setVisibility(View.INVISIBLE);
+            status.setVisibility(View.INVISIBLE);
+            online.setVisibility(View.INVISIBLE);
+            return;
+        }
+
+        Log.d("MY USER", myUser.toString());
+        Log.d("MY USER UPDATE AT", String.valueOf(myUser.updatedAt));
+
+        long time = lastUpdate(myUser.updatedAt);
+
+        if (time < 1) {
+            offline.setVisibility(View.INVISIBLE);
+            status.setVisibility(View.INVISIBLE);
+            online.setVisibility(View.VISIBLE);
+        } else {
+            offline.setVisibility(View.VISIBLE);
+            status.setVisibility(View.VISIBLE);
+            online.setVisibility(View.INVISIBLE);
+
+            int minute;
+            int hour;
+            hour = (int) time / 60;
+            minute = (int) time % 60;
+
+            if (hour < 1) {
+                status.setText(minute + "m");
+            } else {
+                status.setText(hour + "h"
+                        + minute + "m");
+            }
+
+        }
+    }
+     */
 }
