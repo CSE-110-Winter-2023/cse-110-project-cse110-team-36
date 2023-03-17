@@ -18,7 +18,7 @@
 
     <ImageView
         android:id="@+id/coordDot"
-        android:layout_width="32dp"
+        android:layout_width="80dp"
         android:layout_height="32dp"
         android:rotation="0"
         app:layout_constraintCircle="@+id/include"
