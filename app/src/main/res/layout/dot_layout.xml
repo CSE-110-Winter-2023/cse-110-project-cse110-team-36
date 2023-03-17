@@ -28,16 +28,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/coord_dot" />
 
+<!--    <TextView-->
+<!--        android:id="@+id/labelView"-->
+<!--        android:layout_width="32dp"-->
+<!--        android:layout_height="32dp"-->
+<!--        android:text="TextView"-->
+<!--        android:rotation="0"-->
+<!--        app:layout_constraintCircle="@+id/include"-->
+<!--        app:layout_constraintCircleAngle="0"-->
+<!--        app:layout_constraintCircleRadius="130dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
     <TextView
         android:id="@+id/labelView"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
         android:rotation="0"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:ellipsize="end"
         app:layout_constraintCircle="@+id/include"
-        app:layout_constraintCircleAngle="0"
+        app:layout_constraintCircleAngle="180"
         app:layout_constraintCircleRadius="130dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
