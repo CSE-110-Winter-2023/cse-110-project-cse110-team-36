@@ -209,27 +209,5 @@ public class Dot {
         return inactiveDurationMinutes;
     }
 
-//    public long lastUpdate(long updateAt){
-//        //first get date from updatedAt
-//        //get epoch time to string
-//        //String updatedAtString = String.valueOf(user.updatedAt);
-//        //covert seconds to milliseconds
-//        long seconds = updateAt;
-//        //make date
-//        Date dateUpdatedAt = new Date(seconds * 1000);
-//        Date dateCurrent = new Date();
-//        //String currentTimeString = dateObj.format(formatDateObj);
-//
-//        //find time since this date
-//        long diff = dateCurrent.getTime() - dateUpdatedAt.getTime();
-//
-//        //convert distance to minutes
-//        long inactiveDurationMinutes = TimeUnit.MINUTES.convert(diff, TimeUnit.MILLISECONDS);
-//
-//        Log.d("inactive minutes", valueOf(inactiveDurationMinutes));
-//
-//        return inactiveDurationMinutes;
-//    }
-
 
 }

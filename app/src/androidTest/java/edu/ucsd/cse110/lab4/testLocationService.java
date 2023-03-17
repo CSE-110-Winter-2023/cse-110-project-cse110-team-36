@@ -23,7 +23,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.GrantPermissionRule;
 
 import edu.ucsd.cse110.lab4.activity.MainActivity;
-import edu.ucsd.cse110.lab4.activity.ProfileActivity;
 
 @RunWith(AndroidJUnit4.class)
 public class testLocationService {
