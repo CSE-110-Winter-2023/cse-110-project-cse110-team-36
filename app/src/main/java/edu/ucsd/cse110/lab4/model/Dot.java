@@ -74,7 +74,6 @@ public class Dot {
         layoutParams.circleRadius = (int) getDistanceVal();
         dot.setLayoutParams(layoutParams);
         label.setLayoutParams(layoutParams);
-        //label.setRotation(getAngle());
         label.setText(userlabel);
         dot.setVisibility(View.VISIBLE);
 
@@ -83,16 +82,10 @@ public class Dot {
         } else {
             label.setVisibility(View.INVISIBLE);
         }
-
-        //if inactive for more than 10 minutes, make dot invisible
-        //if(inactiveDuration(inactiveNum) > 10){
-        //    dot.setVisibility(View.INVISIBLE);
-        //}
-
     }
 
     public float getAngle() {
-            //get "bearing" - angle between phone's location and destination
+            // get "bearing" - angle between phone's location and destination
             return dotRotateVal + compass.getAngle();
     }
 
@@ -110,11 +103,11 @@ public class Dot {
     private void listenDistance(int zoomLevel) {
         locationService.getLocation().observe(activity, coords -> {
             float distance = locationService.getDistance(latVal, longVal);
-            //100 miles in meters
+            // 100 miles in meters
             switch (zoomLevel) {
                 case 1:
-                    //if greater than 1 mile away, return outer circle. (and dont show name)
-                    //else, return fraction w/in circle.
+                    // if greater than 1 mile away, return outer circle. (and dont show name)
+                    // else, return fraction w/in circle.
                     if (distance > ONE_MILE) {
                         distance = ONE_MILE;
                         labelVis = false;
@@ -124,9 +117,9 @@ public class Dot {
                     distanceVal = (distance/ONE_MILE) * OUTER;
                     break;
                 case 2:
-                    //if 0-1 miles away, put w/in first circle
-                    //1-10, put within second
-                    //10+, put on outer (and dont show name)
+                    // if 0-1 miles away, put w/in first circle
+                    // 1-10, put within second
+                    // 10+, put on outer (and dont show name)
                     if (distance < ONE_MILE) {
                         distanceVal = (distance/ONE_MILE) * TWOZ_FIRST;
                         labelVis = true;
@@ -139,10 +132,10 @@ public class Dot {
                     }
                     break;
                 case 3:
-                    //if 0-1 miles away, put w/in first circle
-                    //1-10, put within second
-                    //10-500, put within third
-                    //500+, put on outer (and dont show name)
+                    // if 0-1 miles away, put w/in first circle
+                    // 1-10, put within second
+                    // 10-500, put within third
+                    // 500+, put on outer (and dont show name)
                     if (distance < ONE_MILE) {
                         distanceVal = (distance/ONE_MILE) * THREEZ_FIRST;
                         labelVis = true;
