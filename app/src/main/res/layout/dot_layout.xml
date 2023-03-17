@@ -18,7 +18,7 @@
 
     <ImageView
         android:id="@+id/coordDot"
-        android:layout_width="32dp"
+        android:layout_width="80dp"
         android:layout_height="32dp"
         android:rotation="0"
         app:layout_constraintCircle="@+id/include"
@@ -30,10 +30,14 @@
 
     <TextView
         android:id="@+id/labelView"
-        android:layout_width="32dp"
+        android:layout_width="80dp"
         android:layout_height="32dp"
-        android:text="TextView"
+        android:gravity="center_horizontal|center_vertical"
         android:rotation="0"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintCircle="@+id/include"
         app:layout_constraintCircleAngle="0"
         app:layout_constraintCircleRadius="130dp"
