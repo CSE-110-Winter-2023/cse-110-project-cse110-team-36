@@ -40,6 +40,7 @@ public class FourZoomActivity extends AppCompatActivity {
     ListViewModel viewModel;
     UserViewModel userViewModel;
     Compass compass;
+    String URL;
 
     /*
      * Updates compass according to orientation, location, and entered values on profileActivity
@@ -54,6 +55,14 @@ public class FourZoomActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(ListViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
+        SharedPreferences preferences = this.getSharedPreferences("MOCK", MODE_PRIVATE);
+        URL = preferences.getString("mockURL", "");
+
+        if (!URL.isEmpty()) {
+            viewModel.setURL(URL);
+            userViewModel.setURL(URL);
+        }
 
         orientationService = new OrientationService(this);
         locationService = new LocationService(this);
@@ -82,6 +91,9 @@ public class FourZoomActivity extends AppCompatActivity {
         for (User thisUser : userList) {
             String UID = thisUser.uniqueID;
             UserViewModel currViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+            if (!URL.isEmpty()) {
+                currViewModel.setURL(URL);
+            }
             LiveData<User> currUser = currViewModel.getUser(UID);
             View myLayout = inflater.inflate(R.layout.dot_layout, mainLayout, false);
             ImageView dotID = myLayout.findViewById(R.id.coordDot);

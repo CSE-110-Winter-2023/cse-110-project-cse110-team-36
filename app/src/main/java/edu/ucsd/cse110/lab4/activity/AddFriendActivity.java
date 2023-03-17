@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,11 +49,27 @@ public class AddFriendActivity extends AppCompatActivity {
     }
 
     private ListViewModel setupViewModel() {
-        return new ViewModelProvider(this).get(ListViewModel.class);
+        ListViewModel viewModel = new ViewModelProvider(this).get(ListViewModel.class);
+        SharedPreferences preferences = this.getSharedPreferences("MOCK", MODE_PRIVATE);
+        String URL = preferences.getString("mockURL", "");
+
+        if (!URL.isEmpty()) {
+            viewModel.setURL(URL);
+        }
+
+        return viewModel;
     }
 
     private UserViewModel setupUserViewModel() {
-        return new ViewModelProvider(this).get(UserViewModel.class);
+        UserViewModel viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        SharedPreferences preferences = this.getSharedPreferences("MOCK", MODE_PRIVATE);
+        String URL = preferences.getString("mockURL", "");
+
+        if (!URL.isEmpty()) {
+            viewModel.setURL(URL);
+        }
+
+        return viewModel;
     }
 
     @NonNull

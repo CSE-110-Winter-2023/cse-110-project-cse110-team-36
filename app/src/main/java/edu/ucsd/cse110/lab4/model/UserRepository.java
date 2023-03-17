@@ -29,6 +29,10 @@ public class UserRepository {
         this.api = new UserAPI();
     }
 
+    public void setURL(String URL) {
+        api.setURL(URL);
+    }
+
     public LiveData<User> getSynced(String public_code) {
         MediatorLiveData<User> user = new MediatorLiveData<User>();
 

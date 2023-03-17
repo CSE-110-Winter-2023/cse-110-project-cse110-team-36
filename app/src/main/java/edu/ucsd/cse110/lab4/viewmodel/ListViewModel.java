@@ -27,6 +27,10 @@ public class ListViewModel extends AndroidViewModel {
         this.repo = new UserRepository(dao);
     }
 
+    public void setURL(String URL) {
+        repo.setURL(URL);
+    }
+
     public LiveData<List<User>> getUsers() {
         if (users == null) {
             users = repo.getAllLocal();
